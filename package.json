@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/youngjun-jung/test/issues"
   },
-  "homepage": "https://github.com/youngjun-jung/test#readme"
+  "homepage": "https://github.com/youngjun-jung/test#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "figlet": "^1.8.0"
+  }
 }

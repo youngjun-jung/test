@@ -1,14 +1,25 @@
 const express = require('express');
 const oracledb = require('oracledb');
 
+//npm install oracledb - env 파일 읽기기
+require('dotenv').config();
+
+const oracleUser = process.env.ORACLE_USER;
+const oraclePassword = process.env.ORACLE_PASSWORD;
+const connectString = process.env.ORACLE_CONNECT_STRING;
+
+console.log(`Oracle User: ${oracleUser}`);
+console.log(`Oracle Password: ${oraclePassword}`);
+console.log(`connectString: ${connectString}`);
+
 const app = express();
 const PORT = 3000;
 
 // Oracle DB 설정
 const dbConfig = {
-    user: 'system', // DB 사용자 이름
-    password: 'jyj1845811!', // DB 비밀번호
-    connectString: 'localhost:1521/ORCL' // 호스트, 포트, 서비스 이름
+    user: oracleUser, // DB 사용자 이름
+    password: oraclePassword, // DB 비밀번호
+    connectString: connectString // 호스트, 포트, 서비스 이름
 };
 
 // 데이터 조회 함수
@@ -39,8 +50,11 @@ async function fetchData(query, binds = []) {
 
 // API 엔드포인트 정의
 app.get('/', async (req, res) => {
-  const query = 'SELECT * FROM dba_free_space WHERE tablespace_name = :id';
-  const binds = ['SYSTEM']; // 클라이언트에서 id를 쿼리 파라미터로 받음
+  //const query = 'SELECT * FROM T_JOB WHERE tablespace_name = :id';
+ // const binds = ['SYSTEM']; // 클라이언트에서 id를 쿼리 파라미터로 받음
+
+ const query = 'SELECT * FROM T_JOB';
+ const binds = [];
 
   try {
     const data = await fetchData(query, binds); // 데이터 조회

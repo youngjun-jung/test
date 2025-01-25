@@ -64,6 +64,37 @@ app.get('/', async (req, res) => {
   }
 });
 
+app.get('/user', async (req, res) => {
+    //const query = 'SELECT * FROM T_JOB WHERE tablespace_name = :id';
+   // const binds = ['SYSTEM']; // 클라이언트에서 id를 쿼리 파라미터로 받음
+  
+   const query = 'SELECT userid, username, passwd FROM adm_user';
+   const binds = [];
+  
+    try {
+      const data = await fetchData(query, binds); // 데이터 조회
+      res.json({ success: true, data }); // JSON 형식으로 응답
+    } catch (err) {
+      res.status(500).json({ success: false, message: '데이터 조회 실패', error: err.message });
+    }
+  });
+
+// API 엔드포인트 정의
+app.post('/', async (req, res) => {
+    //const query = 'SELECT * FROM T_JOB WHERE tablespace_name = :id';
+   // const binds = ['SYSTEM']; // 클라이언트에서 id를 쿼리 파라미터로 받음
+  
+   const query = 'SELECT * FROM T_JOB';
+   const binds = [];
+  
+    try {
+      const data = await fetchData(query, binds); // 데이터 조회
+      res.json({ success: true, data }); // JSON 형식으로 응답
+    } catch (err) {
+      res.status(500).json({ success: false, message: '데이터 조회 실패', error: err.message });
+    }
+  });
+
 // 서버 시작
 app.listen(PORT, () => {
   console.log(`서버가 http://localhost:${PORT} 에서 실행 중입니다.`);

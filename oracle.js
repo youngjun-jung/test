@@ -22,7 +22,7 @@ async function connectToDB() {
       try {
         await connection.close();
         console.log('DB 연결 종료');
-      } catch (err) {
+      } catch (closeErr) {
         console.error('DB 종료 실패:', err);
       }
     }

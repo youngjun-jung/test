@@ -751,3 +751,20 @@ Help: https://docs.oracle.com/error-help/db/ora-06550/
 2025-01-28 16:12:08 [ERROR] [500]Error calling stored procedure: ORA-06550: 줄 2, 열17:PLS-00905: EDU01.SP_LOGIN 오브젝트가 부당합니다
 ORA-06550: 줄 2, 열17:PL/SQL: Statement ignored
 Help: https://docs.oracle.com/error-help/db/ora-06550/
+2025-01-28 16:17:55 [INFO] Server is running on port:3000
+2025-01-28 16:17:55 [INFO]   _   _      _ _        __   __                      ____                         _ _ 
+ | | | | ___| | | ___   \ \ / /__  _   _ _ __   __ _|  _ \ ___   ___  _ __   __ _| | |
+ | |_| |/ _ \ | |/ _ \   \ V / _ \| | | | '_ \ / _` | |_) / _ \ / _ \| '_ \ / _` | | |
+ |  _  |  __/ | | (_) |   | | (_) | |_| | | | | (_| |  __/ (_) | (_) | | | | (_| |_|_|
+ |_| |_|\___|_|_|\___/    |_|\___/ \__,_|_| |_|\__, |_|   \___/ \___/|_| |_|\__, (_|_)
+                                               |___/                        |___/     
+2025-01-28 16:18:05 [INFO] Requested URL : /
+2025-01-28 16:18:05 [INFO] x-api-key : YP
+2025-01-28 16:18:05 [INFO] req id : 1
+2025-01-28 16:18:05 [INFO] req pw : 1111
+2025-01-28 16:18:05 [INFO] req data : [object Object]
+2025-01-28 16:18:11 [INFO] Requested URL : /
+2025-01-28 16:18:11 [INFO] x-api-key : YP
+2025-01-28 16:18:11 [INFO] req id : jminzzang
+2025-01-28 16:18:11 [INFO] req pw : 1111
+2025-01-28 16:18:11 [INFO] req data : [object Object]

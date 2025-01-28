@@ -1,21 +1,22 @@
 const oracledb = require('oracledb');
 const dbConfig = require('./dbconfig');
+const logger = require('../../logger'); 
 
 let connection;
 
 async function getConnection() {
   if (!connection) {
     connection = await oracledb.getConnection(dbConfig);
-    console.log("Oracle DB connected!");
+    logger.info("Oracle DB connected!");
   }
   return connection;
 }
 
 async function closeConnection() {
   if (connection) {
-    console.log("[start]Oracle DB connection closed!");
+    logger.info("[start]Oracle DB connection closed!");
     await connection.close();
-    console.log("[end]Oracle DB connection closed!");
+    logger.info("[end]Oracle DB connection closed!");
   }
 }
 

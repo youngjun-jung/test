@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\vscode\\yp\\logs\\.b3406ef730a1eb02dbe8db968299d4f42734d49b-audit.json",
+    "files": [
+        {
+            "date": 1737857868105,
+            "name": "D:\\vscode\\yp\\logs\\2025-01-26.log",
+            "hash": "7d254e5d23e7f78157f57edea72e7ffb9ec25c590785f4b3e99ee5fe8201dc62"
+        },
+        {
+            "date": 1737934686030,
+            "name": "D:\\vscode\\yp\\logs\\2025-01-27.log",
+            "hash": "24193ab65fcdabe75c86a5d3fce2582c93d80f4d62bcaca7f2584781820accb3"
+        },
+        {
+            "date": 1738036154089,
+            "name": "D:\\vscode\\yp\\logs\\2025-01-28.log",
+            "hash": "97e6735716c362e8d4e21502acfcbbcc20345eaea110d6fd25b8460e67eaaaa3"
+        }
+    ],
+    "hashType": "sha256"
+}

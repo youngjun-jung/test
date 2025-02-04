@@ -11,8 +11,9 @@ async function executeQuery(query, params = []) {
     connection = await oracledb.getConnection(dbConfig);
 
     logger.info(`start execute: ${query}`);
-    const result = await connection.execute(query, params, { outFormat: oracledb.OUT_FORMAT_OBJECT });
-    //logger.info(JSON.stringify(result.rows, null, 2));
+    const result = await connection.execute(query, params, { autoCommit: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+    //logger.info(JSON.stringify(result, null, 2));
+
     // 결과 반환 (JSON 형태로 변환)
     return result.rows;  
   } catch (err) {

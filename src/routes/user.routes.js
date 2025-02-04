@@ -8,6 +8,6 @@ router.get('/', checkApiKey, userController.getUser);
 router.post('/', checkApiKey, userController.postUser);
 router.delete('/:id', checkApiKey, userController.deleteUser);
 //router.put('/', checkApiKey, userController.putUser);
-//router.patch('/', checkApiKey, userController.patchUser);
+router.patch('/', checkApiKey, userController.patchUser);
 
 module.exports = router;

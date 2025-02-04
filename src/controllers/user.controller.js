@@ -60,23 +60,56 @@ exports.postUser = async (req, res) => {
  // 사용자 삭제 로직
 exports.deleteUser = async (req, res) => {
 
-  const id = req.params.id; // URL 경로에서 id 파라미터 추출
+  try {
+    const id = req.params.id; // URL 경로에서 id 파라미터 추출
+
+    console.log('userid:', id);
+
+    if (!id) {
+      res.status(400).json({ success: false, message: 'FIELD 오류(NULL)'});
+    }
+ 
+    // 삭제 프로시저 호출
+    const data = await executeProcedure.callUserproc("DEL", id, '', '', '');
+
+    if (!data || Object.keys(data).length === 0) {
+      res.status(404).json({ success: false, message: '사용자 삭제 실패', error: 'User delete error' });
+    }
+
+    res.json({ success: true, data }); // JSON 형식으로 응답
+
+  } catch (err) {
+    res.status(500).json({ success: false, message: '사용자 삭제 실패', error: err.message });
+  }
+ };
+
+  // 사용자 수정 로직
+exports.patchUser = async (req, res) => {
+
+  // 요청 본문에서 JSON 데이터 추출
+  const receivedData = req.body;
+
+  const id = receivedData.userid;
+  const wd = receivedData.passwd;
+  const cnt = receivedData.fail_cnt;
 
   console.log('userid:', id);
+  console.log('passwd:', wd);
+  console.log('fail_cnt:', cnt);
 
-  if (!id) {
+  if (!id || !wd || !cnt) {
     res.status(400).json({ success: false, message: 'FIELD 오류(NULL)'});
   }
  
-  const query = 'DELETE ADM_USER WHERE USERID = :userid';
+  const query = 'UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = TO_NUMBER(:fail_cnt) WHERE USERID = :userid';
 
-  const binds = {userid: id};
+  const binds = {userid: id, passwd: wd, fail_cnt: cnt};
  
    try {
      const data = await executeQuery(query, binds); // 데이터 조회
-     res.json({ success: true, message: '데이터 삭제 성공' }); // JSON 형식으로 응답
+     res.json({ success: true, message: '데이터 수정 성공' }); // JSON 형식으로 응답
 
    } catch (err) {
-     res.status(500).json({ success: false, message: '데이터 삭제 실패', error: err.message });
+     res.status(500).json({ success: false, message: '데이터 수정 실패', error: err.message });
    }
  };

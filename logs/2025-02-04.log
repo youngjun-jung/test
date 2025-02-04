@@ -551,3 +551,328 @@
                   WHERE A.GROUPID = B.GROUPID 
                   AND A.USERID LIKE :userid
                   ORDER BY A.GROUPID, USERID
+2025-02-04 09:23:15 [INFO] Requested URL : /
+2025-02-04 09:23:15 [INFO] x-api-key : YP
+2025-02-04 09:23:15 [INFO] req id : jminzzang
+2025-02-04 09:23:15 [INFO] req pw : 1111
+2025-02-04 09:23:15 [INFO] req data : [object Object]
+2025-02-04 09:23:15 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:23:15 [INFO] x-api-key : YP
+2025-02-04 09:23:15 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 09:23:21 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:23:21 [INFO] x-api-key : YP
+2025-02-04 09:23:21 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:23:22 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:23:22 [INFO] x-api-key : YP
+2025-02-04 09:23:22 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:32:23 [INFO] Server is running on port:3000
+2025-02-04 09:32:23 [INFO]   _   _      _ _        __   __                      ____                         _ _ 
+ | | | | ___| | | ___   \ \ / /__  _   _ _ __   __ _|  _ \ ___   ___  _ __   __ _| | |
+ | |_| |/ _ \ | |/ _ \   \ V / _ \| | | | '_ \ / _` | |_) / _ \ / _ \| '_ \ / _` | | |
+ |  _  |  __/ | | (_) |   | | (_) | |_| | | | | (_| |  __/ (_) | (_) | | | | (_| |_|_|
+ |_| |_|\___|_|_|\___/    |_|\___/ \__,_|_| |_|\__, |_|   \___/ \___/|_| |_|\__, (_|_)
+                                               |___/                        |___/     
+2025-02-04 09:35:07 [INFO] Requested URL : /
+2025-02-04 09:35:07 [INFO] x-api-key : YP
+2025-02-04 09:35:07 [INFO] req id : jminzzang
+2025-02-04 09:35:07 [INFO] req pw : 1111
+2025-02-04 09:35:08 [INFO] req data : [object Object]
+2025-02-04 09:35:08 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:35:08 [INFO] x-api-key : YP
+2025-02-04 09:35:08 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 09:35:11 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:35:11 [INFO] x-api-key : YP
+2025-02-04 09:35:11 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:35:13 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:35:13 [INFO] x-api-key : YP
+2025-02-04 09:35:13 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:35:16 [INFO] Requested URL : /
+2025-02-04 09:35:16 [INFO] x-api-key : YP
+2025-02-04 09:35:16 [INFO] start execute: UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = :fail_cnt WHERE USERID = :userid
+2025-02-04 09:36:43 [INFO] Server is running on port:3000
+2025-02-04 09:36:43 [INFO]   _   _      _ _        __   __                      ____                         _ _ 
+ | | | | ___| | | ___   \ \ / /__  _   _ _ __   __ _|  _ \ ___   ___  _ __   __ _| | |
+ | |_| |/ _ \ | |/ _ \   \ V / _ \| | | | '_ \ / _` | |_) / _ \ / _ \| '_ \ / _` | | |
+ |  _  |  __/ | | (_) |   | | (_) | |_| | | | | (_| |  __/ (_) | (_) | | | | (_| |_|_|
+ |_| |_|\___|_|_|\___/    |_|\___/ \__,_|_| |_|\__, |_|   \___/ \___/|_| |_|\__, (_|_)
+                                               |___/                        |___/     
+2025-02-04 09:36:45 [INFO] Requested URL : /
+2025-02-04 09:36:45 [INFO] x-api-key : YP
+2025-02-04 09:36:45 [INFO] start execute: UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = TO_NUMBER(:fail_cnt) WHERE USERID = :userid
+2025-02-04 09:36:51 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:36:51 [INFO] x-api-key : YP
+2025-02-04 09:36:51 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:37:16 [INFO] Requested URL : /
+2025-02-04 09:37:16 [INFO] x-api-key : YP
+2025-02-04 09:37:16 [INFO] req id : jminzzang
+2025-02-04 09:37:16 [INFO] req pw : 1111
+2025-02-04 09:37:16 [INFO] req data : [object Object]
+2025-02-04 09:37:39 [INFO] Requested URL : /
+2025-02-04 09:37:39 [INFO] x-api-key : YP
+2025-02-04 09:37:39 [INFO] req id : jminzzang
+2025-02-04 09:37:39 [INFO] req pw : 1111
+2025-02-04 09:37:39 [INFO] req data : [object Object]
+2025-02-04 09:37:39 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:37:39 [INFO] x-api-key : YP
+2025-02-04 09:37:39 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 09:37:43 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:37:43 [INFO] x-api-key : YP
+2025-02-04 09:37:43 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:37:45 [INFO] Requested URL : /?id=jminzzang1
+2025-02-04 09:37:45 [INFO] x-api-key : YP
+2025-02-04 09:37:45 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:37:52 [INFO] Requested URL : /
+2025-02-04 09:37:52 [INFO] x-api-key : YP
+2025-02-04 09:37:52 [INFO] start execute: UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = TO_NUMBER(:fail_cnt) WHERE USERID = :userid
+2025-02-04 09:37:52 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:37:52 [INFO] x-api-key : YP
+2025-02-04 09:37:52 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:38:30 [INFO] Requested URL : /
+2025-02-04 09:38:30 [INFO] x-api-key : YP
+2025-02-04 09:38:30 [INFO] req id : jminzzang
+2025-02-04 09:38:30 [INFO] req pw : 1111
+2025-02-04 09:38:30 [INFO] req data : [object Object]
+2025-02-04 09:38:30 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:38:30 [INFO] x-api-key : YP
+2025-02-04 09:38:30 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 09:40:01 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:40:01 [INFO] x-api-key : YP
+2025-02-04 09:40:01 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:40:26 [INFO] Requested URL : /
+2025-02-04 09:40:26 [INFO] x-api-key : YP
+2025-02-04 09:40:26 [INFO] req id : jminzzang
+2025-02-04 09:40:26 [INFO] req pw : 1111
+2025-02-04 09:40:26 [INFO] req data : [object Object]
+2025-02-04 09:40:26 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:40:26 [INFO] x-api-key : YP
+2025-02-04 09:40:26 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 09:43:52 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:43:52 [INFO] x-api-key : YP
+2025-02-04 09:43:52 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:43:53 [INFO] Requested URL : /?id=%
+2025-02-04 09:43:53 [INFO] x-api-key : YP
+2025-02-04 09:43:53 [INFO] start execute: SELECT A.GROUPID, A.GROUPNAME
+                  FROM ADM_GROUP A
+                  WHERE STAT = 'Y' 
+                  AND A.GROUPID LIKE :groupid
+                  ORDER BY A.GROUPID
+2025-02-04 09:43:56 [INFO] Requested URL : /
+2025-02-04 09:43:56 [INFO] x-api-key : YP
+2025-02-04 09:43:56 [INFO] req userid : 12321
+2025-02-04 09:43:56 [INFO] req username : 3123123
+2025-02-04 09:43:56 [INFO] req passwd : 123123
+2025-02-04 09:43:56 [INFO] req groupid : 00000000
+2025-02-04 09:43:56 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:43:56 [INFO] x-api-key : YP
+2025-02-04 09:43:56 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:44:00 [INFO] Requested URL : /12321
+2025-02-04 09:44:00 [INFO] x-api-key : YP
+2025-02-04 09:44:00 [INFO] start execute: DELETE ADM_USER WHERE USERID = :userid
+2025-02-04 09:44:01 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:44:01 [INFO] x-api-key : YP
+2025-02-04 09:44:01 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:58:29 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:58:29 [INFO] x-api-key : YP
+2025-02-04 09:58:29 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:58:56 [INFO] Requested URL : /
+2025-02-04 09:58:56 [INFO] x-api-key : YP
+2025-02-04 09:58:56 [INFO] req id : jminzzang
+2025-02-04 09:58:56 [INFO] req pw : 1111
+2025-02-04 09:58:56 [INFO] req data : [object Object]
+2025-02-04 09:58:57 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 09:58:57 [INFO] x-api-key : YP
+2025-02-04 09:58:57 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 09:59:00 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:59:00 [INFO] x-api-key : YP
+2025-02-04 09:59:00 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:59:02 [INFO] Requested URL : /?id=jminzzang1
+2025-02-04 09:59:02 [INFO] x-api-key : YP
+2025-02-04 09:59:02 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 09:59:04 [INFO] Requested URL : /
+2025-02-04 09:59:04 [INFO] x-api-key : YP
+2025-02-04 09:59:04 [INFO] start execute: UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = TO_NUMBER(:fail_cnt) WHERE USERID = :userid
+2025-02-04 09:59:05 [INFO] Requested URL : /?id=%%%
+2025-02-04 09:59:05 [INFO] x-api-key : YP
+2025-02-04 09:59:05 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 10:06:21 [INFO] Requested URL : /
+2025-02-04 10:06:21 [INFO] x-api-key : YP
+2025-02-04 10:06:21 [INFO] req id : jminzzang
+2025-02-04 10:06:21 [INFO] req pw : 1111
+2025-02-04 10:06:21 [INFO] req data : [object Object]
+2025-02-04 10:06:21 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 10:06:21 [INFO] x-api-key : YP
+2025-02-04 10:06:21 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 10:10:14 [INFO] Requested URL : /?id=%%%
+2025-02-04 10:10:14 [INFO] x-api-key : YP
+2025-02-04 10:10:15 [INFO] start execute: SELECT USERID, USERNAME, A.GROUPID, B.GROUPNAME, PASSWD, FAIL_CNT 
+                  FROM ADM_USER A, ADM_GROUP B
+                  WHERE A.GROUPID = B.GROUPID 
+                  AND A.USERID LIKE :userid
+                  ORDER BY A.GROUPID, USERID
+2025-02-04 10:11:06 [INFO] Requested URL : /
+2025-02-04 10:11:06 [INFO] x-api-key : YP
+2025-02-04 10:11:06 [INFO] req id : jminzzang
+2025-02-04 10:11:06 [INFO] req pw : 1111
+2025-02-04 10:11:06 [INFO] req data : [object Object]
+2025-02-04 10:11:06 [INFO] Requested URL : /?id=jminzzang
+2025-02-04 10:11:06 [INFO] x-api-key : YP
+2025-02-04 10:11:06 [INFO] start execute: SELECT A.USERID, P_MENUNAME, MENUNAME, P_MENUID, B.MENUID, NVL(SCREEN_ID, 'NOT') SCREEN_ID
+                , MENU_FUN1||MENU_FUN2||MENU_FUN3||MENU_FUN4||MENU_FUN5||MENU_FUN6||MENU_FUN7||MENU_FUN8||MENU_FUN9 MENU_FUN
+                    FROM ADM_USER_GRANTMENU A,   
+                        ADM_MENU_CS B  
+                  WHERE ( A.MENUID = B.MENUID ) 
+                  AND  ( 
+                          ( A.GRANTSTAT = '1' ) AND 
+                          ( B.STATE = '1' ) AND  
+                          ( B.MENU_DEPTH IN ('3')) AND   
+                          ( A.USERID = :userid)
+                      )    
+                  ORDER BY MENUID DESC, MENU_SEQ DESC
+2025-02-04 10:18:30 [INFO] Server is running on port:3000
+2025-02-04 10:18:30 [INFO]   _   _      _ _        __   __                      ____                         _ _ 
+ | | | | ___| | | ___   \ \ / /__  _   _ _ __   __ _|  _ \ ___   ___  _ __   __ _| | |
+ | |_| |/ _ \ | |/ _ \   \ V / _ \| | | | '_ \ / _` | |_) / _ \ / _ \| '_ \ / _` | | |
+ |  _  |  __/ | | (_) |   | | (_) | |_| | | | | (_| |  __/ (_) | (_) | | | | (_| |_|_|
+ |_| |_|\___|_|_|\___/    |_|\___/ \__,_|_| |_|\__, |_|   \___/ \___/|_| |_|\__, (_|_)
+                                               |___/                        |___/     

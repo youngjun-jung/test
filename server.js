@@ -9,7 +9,7 @@ var figlet = require("figlet");
 figlet("Hello YoungPoong!!", function (err, data) {
   if (err) {
     logger.info("Something went wrong...");
-    console.dir(err);
+    logger.error(err);
     return;
   }
   logger.info(data);

@@ -2,7 +2,7 @@ const { executeQuery, executeQueryMany } = require('../config/queries');
 const logger = require('../../logger'); 
 
   // 환율 관련 비즈니스 로직
-exports.getExchangechk = async (req, res) => {
+exports.getLmechk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
@@ -13,10 +13,10 @@ exports.getExchangechk = async (req, res) => {
   console.log("frdate: ", frdate);
   console.log("todate: ", todate);
 
-  const query = `SELECT CHECKDATE, USD, JPY, CNY, EUR, GBP, AUD
-                  FROM EXCHANGE_DAY
-                  WHERE CHECKDATE BETWEEN :frdate AND :todate
-                  ORDER BY CHECKDATE DESC`;                 
+  const query = `SELECT CORP_CODE, LME_TYPE, GUBUN, LMEDATE, METAL_CODE, MATERIAL_CODE, PRICE, PRICE_3M
+                  FROM LME_DAY
+                  WHERE LMEDATE BETWEEN :frdate AND :todate
+                  ORDER BY LMEDATE DESC`;                 
 
  const binds = {frdate: frdate, todate: todate};
 

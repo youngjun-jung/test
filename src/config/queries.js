@@ -12,7 +12,9 @@ async function executeQuery(query, params = []) {
 
     logger.info(`start execute: ${query}`);
     const result = await connection.execute(query, params, { autoCommit: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
-    //logger.info(JSON.stringify(result, null, 2));
+    //logger.info(JSON.stringify(result.rows, null, 2));
+
+    //logger.info(`result: ${result}`);
 
     // 결과 반환 (JSON 형태로 변환)
     return result.rows;  

@@ -46,6 +46,8 @@ exports.postUser = async (req, res) => {
     // 저장 프로시저 호출
     const data = await executeProcedure.callUserproc("ADD", userid, username, passwd, groupid);
 
+    logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
+
     if (!data || Object.keys(data).length === 0) {
       res.status(404).json({ success: false, message: '사용자 생성 실패', error: 'User insert error' });
     }

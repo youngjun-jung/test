@@ -35,7 +35,7 @@ exports.postLoginchk = async (req, res) => {
     // 저장 프로시저 호출
     const data = await executeProcedure.callLoginproc(id, pw);
 
-    logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
+    //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 
     if (!data || Object.keys(data).length === 0) {
       logger.error('[404]Error calling stored procedure:', error);

@@ -26,9 +26,6 @@ tags:
   - name: SAP 연동
     description: SAP 연동 Raw data API
   - name: 사업계획-제조원가
-    description: 사업계획 관리 원가 관련 API
-  - name: 사업계획- Raw
-    description: 종합 기타경비 관련 API
   - name: 관리자
     description: 관리자 기능 관련 API    
   - name: 자료이관

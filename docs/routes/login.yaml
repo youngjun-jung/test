@@ -1,0 +1,48 @@
+get:
+  tags:
+    - 사용자
+  summary: 로그인 정보 조회
+  description: 사용자 로그인 정보를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+
+  responses:
+    '200':
+      description: 로그인 정보 조회 성공
+      content:
+        application/json:
+          schema:
+            $ref: '../components/loginData.yaml#/components/schemas/getLoginchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'            
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+
+post:
+  tags:
+    - 사용자
+  summary: 로그인 처리
+  description: 사용자 인증을 처리합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/loginData.yaml#/components/schemas/postLoginchk_Body'
+  responses:
+    '200':
+      description: 성공적으로 로그인했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/loginData.yaml#/components/schemas/postLoginchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+
+ 

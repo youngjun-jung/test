@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 시스템
+  summary: 파일 다운로드
+  description: 파일을 다운로드합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #업데이트 - 파일명
+    - $ref: '../components/updateData.yaml#/components/parameters/getUpdate_fileName_Query'
+  responses:
+    '200':
+      description: 성공적으로 파일을 다운로드했습니다.
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+

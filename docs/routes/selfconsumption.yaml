@@ -1,0 +1,26 @@
+get:
+  tags:
+    - 사업계획-제조원가
+  summary: 자가소비 데이터 조회
+  description: 연도별 자가소비 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #자체소비 - 연도
+    - $ref: '../components/selfconsumptionData.yaml#/components/parameters/getSelfconsumptionchk_year_Query'
+    #자체소비 - 구분
+    - $ref: '../components/selfconsumptionData.yaml#/components/parameters/getSelfconsumptionchk_gubun_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/selfconsumptionData.yaml#/components/schemas/getSelfconsumptionchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+

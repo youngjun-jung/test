@@ -1,0 +1,62 @@
+components:
+  schemas:
+    Agbyproducts:
+      type: object
+      properties:
+        YEAR:
+          type: string
+          description: 연도
+        GUBUN:
+          type: string
+          description: 구분
+        GUBUN1:
+          type: string
+          description: 구분1
+        GUBUN2:
+          type: string
+          description: 구분2
+        MEASURE:
+          type: string
+          description: 측정 단위
+        MONTH_01:
+          type: number
+          description: 1월 데이터
+        MONTH_02:
+          type: number
+          description: 2월 데이터
+        MONTH_03:
+          type: number
+          description: 3월 데이터
+        MONTH_04:
+          type: number
+          description: 4월 데이터
+        MONTH_05:
+          type: number
+          description: 5월 데이터
+        MONTH_06:
+          type: number
+          description: 6월 데이터
+        MONTH_07:
+          type: number
+          description: 7월 데이터
+        MONTH_08:
+          type: number
+          description: 8월 데이터
+        MONTH_09:
+          type: number
+          description: 9월 데이터
+        MONTH_10:
+          type: number
+          description: 10월 데이터
+        MONTH_11:
+          type: number
+          description: 11월 데이터
+        MONTH_12:
+          type: number
+          description: 12월 데이터
+        USE_YN:
+          type: string
+          description: 사용 여부
+        IDX:
+          type: number
+          description: 인덱스 

@@ -1,0 +1,90 @@
+components:
+  parameters:
+    ApiKeyHeader:
+      name: x-api-key
+      in: header
+      description: API 인증을 위한 키
+      required: true
+      schema:
+        type: string
+  responses:
+    InvalidKey:
+      description: 'API Key가 없거나 맞지 않음'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: 'API 처리결과'
+                type: boolean
+                example: false
+              message:
+                description: '에러 타이틀'
+                type: string
+                example: 'Invalid API Key'
+              error:
+                description: 'Exception 메세지'
+                type: string
+                example: 'System exception message'
+
+    QueryFieldError:
+      description: 'Query 파라미터가 없거나 맞지 않음'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: 'API 처리결과'
+                type: boolean
+                example: false
+              message:
+                description: '에러 타이틀'
+                type: string
+                example: 'Field error'
+              error:
+                description: 'Exception 메세지'
+                type: string
+                example: 'System exception message'
+
+    InternalServerError:
+      description: 서버 내부 오류
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: 'API 처리결과'
+                type: boolean
+                example: false
+              message:
+                description: '에러 타이틀'
+                type: string
+                example: 'Internal Server Error'
+              error:
+                description: 'Exception 메세지'
+                type: string
+                example: 'System exception message'   
+                         
+    NotFound:
+      description: 요청한 리소스를 찾을 수 없음
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                description: 'API 처리결과'
+                type: boolean
+                example: false
+              message:
+                description: '에러 타이틀'
+                type: string
+                example: 'Resource not found'
+              error:
+                description: '메세지 상세'
+                type: string
+                example: 'Data not found'    
+              

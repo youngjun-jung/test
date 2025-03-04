@@ -1,0 +1,103 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getCogmchk_frdate_Query:
+      name: frdate
+      in: query
+      description: "시작 날짜"
+      required: true
+      schema:
+        type: string
+        example: "20240301"
+    getCogmchk_todate_Query:
+      name: todate
+      in: query
+      description: "종료 날짜"
+      required: true
+      schema:
+        type: string
+        example: "20240331"
+    getCogmchk_class_code_Query:
+      name: class_code
+      in: query
+      description: "분류 코드"
+      required: true
+      schema:
+        type: string
+        example: "01"
+
+  # Response 정의 모음
+  schemas:
+    getCogmchk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '제조원가 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              CLASS_CODE:
+                description: '분류 코드'
+                type: string
+                example: '01'
+              CODENM:
+                description: '분류명'
+                type: string
+                example: '원재료'
+              LCODE:
+                description: '대분류 코드'
+                type: string
+                example: 'L001'
+              LCODENM:
+                description: '대분류명'
+                type: string
+                example: '아연'
+              MCODE:
+                description: '중분류 코드'
+                type: string
+                example: 'M001'
+              MCODENM:
+                description: '중분류명'
+                type: string
+                example: '아연정광'
+              SCODE:
+                description: '소분류 코드'
+                type: string
+                example: 'S001'
+              MAT_CODE:
+                description: '자재 코드'
+                type: string
+                example: 'MAT001'
+              SNAME:
+                description: '자재명'
+                type: string
+                example: '아연정광'
+              MEASURE:
+                description: '단위'
+                type: string
+                example: 'MT'
+              WEIGHT:
+                description: '수량'
+                type: number
+                example: 1000.5
+              UNIT_COST:
+                description: '단가'
+                type: number
+                example: 2500.75
+              AMOUNT_TOT:
+                description: '총금액'
+                type: number
+                example: 2500750.25
+              AMOUNT_DIRECT:
+                description: '직접금액'
+                type: number
+                example: 2000600.20
+              AMOUNT_INDIRECT:
+                description: '간접금액'
+                type: number
+                example: 500150.05 

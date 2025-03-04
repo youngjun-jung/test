@@ -1,0 +1,79 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getSaleledgerchk_frdate_Query:
+      name: frdate
+      in: query
+      description: "조회 시작일자 (YYYYMMDD)"
+      required: true
+      schema:
+        type: string
+        example: "20240101"
+    getSaleledgerchk_todate_Query:
+      name: todate
+      in: query
+      description: "조회 종료일자 (YYYYMMDD)"
+      required: true
+      schema:
+        type: string
+        example: "20240331"
+    getSaleledgerchk_mcode_Query:
+      name: mcode
+      in: query
+      description: "제품 코드"
+      required: true
+      schema:
+        type: string
+        example: "A01"
+
+  # Response 정의 모음
+  schemas:
+    getSaleledgerchk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '매출원장 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              SALEDATE:
+                description: '판매일자'
+                type: string
+                example: '2024/03/15'
+              INSERT_ID:
+                description: '등록자 ID'
+                type: string
+                example: 'user123'
+              PATH_NAME:
+                description: '경로명'
+                type: string
+                example: '국내'
+              PRODUCT_CODE:
+                description: '제품 코드'
+                type: string
+                example: 'A01001'
+              PRODUCT_NAME:
+                description: '제품명'
+                type: string
+                example: '아연괴'
+              MEASURE:
+                description: '단위'
+                type: string
+                example: 'KG'
+              WEIGHT:
+                description: '중량'
+                type: number
+                example: 1000
+              AMOUNT_WON:
+                description: '금액(원)'
+                type: number
+                example: 5000000
+              VAT:
+                description: '부가세'
+                type: number
+                example: 500000 

@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 실적-매출관리
+  summary: 기간 별 매출현황 데이터 조회
+  description: 기간 별 매출현황 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #기간 별 매출현황 - 시작 날짜
+    - $ref: '../components/saleData.yaml#/components/parameters/getSalechk_frdate_Query'
+    #기간 별 매출현황 - 종료 날짜
+    - $ref: '../components/saleData.yaml#/components/parameters/getSalechk_todate_Query'    
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/saleData.yaml#/components/schemas/getSalechk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

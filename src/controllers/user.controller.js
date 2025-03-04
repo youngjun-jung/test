@@ -4,7 +4,6 @@ const logger = require('../../logger');
 
   // 사용자 조회 로직
 exports.getUser = async (req, res) => {
- 
    const receivedData = req.query;
 
    const id = receivedData.id;
@@ -63,9 +62,9 @@ exports.postUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
 
   try {
-    const id = req.params.id; // URL 경로에서 id 파라미터 추출
+    const receivedData = req.query;
 
-    console.log('userid:', id);
+    const id = receivedData.id;
 
     if (!id) {
       res.status(400).json({ success: false, message: 'FIELD 오류(NULL)'});

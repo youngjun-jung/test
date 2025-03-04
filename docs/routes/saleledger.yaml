@@ -1,0 +1,28 @@
+get:
+  tags:
+    - 실적-매출관리
+  summary: 품목 별 상세 데이터 조회
+  description: 품목 별 상세 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #품목 별 상세 - 시작일자
+    - $ref: '../components/saleledgerData.yaml#/components/parameters/getSaleledgerchk_frdate_Query'
+    #품목 별 상세 - 종료일자
+    - $ref: '../components/saleledgerData.yaml#/components/parameters/getSaleledgerchk_todate_Query'
+    #매출원장 - 제품코드
+    - $ref: '../components/saleledgerData.yaml#/components/parameters/getSaleledgerchk_mcode_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/saleledgerData.yaml#/components/schemas/getSaleledgerchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+

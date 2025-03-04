@@ -1,0 +1,103 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getAgbyproductschk_Query:
+      name: year
+      in: query
+      description: "조회할 연도"
+      required: true
+      schema:
+        type: string
+        example: "2024"
+
+  # Response 정의 모음
+  schemas:
+    getAgbyproductschk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              YEAR:
+                description: '연도'
+                type: string
+                example: '2024'
+              GUBUN:
+                description: '구분'
+                type: string
+                example: 'Pb Residue Calculation'
+              GUBUN1:
+                description: '구분1'
+                type: string
+                example: 'LME'
+              GUBUN2:
+                description: '구분2'
+                type: string
+                example: 'TC'
+              MEASURE:
+                description: '측정 단위'
+                type: string
+                example: 'USD/DMT'
+              MONTH_01:
+                description: '1월 데이터'
+                type: number
+                example: 100.5
+              MONTH_02:
+                description: '2월 데이터'
+                type: number
+                example: 101.2
+              MONTH_03:
+                description: '3월 데이터'
+                type: number
+                example: 102.3
+              MONTH_04:
+                description: '4월 데이터'
+                type: number
+                example: 103.4
+              MONTH_05:
+                description: '5월 데이터'
+                type: number
+                example: 104.5
+              MONTH_06:
+                description: '6월 데이터'
+                type: number
+                example: 105.6
+              MONTH_07:
+                description: '7월 데이터'
+                type: number
+                example: 106.7
+              MONTH_08:
+                description: '8월 데이터'
+                type: number
+                example: 107.8
+              MONTH_09:
+                description: '9월 데이터'
+                type: number
+                example: 108.9
+              MONTH_10:
+                description: '10월 데이터'
+                type: number
+                example: 109.0
+              MONTH_11:
+                description: '11월 데이터'
+                type: number
+                example: 110.1
+              MONTH_12:
+                description: '12월 데이터'
+                type: number
+                example: 111.2
+              USE_YN:
+                description: '사용 여부'
+                type: string
+                example: 'Y'
+              IDX:
+                description: '인덱스'
+                type: number
+                example: 1 

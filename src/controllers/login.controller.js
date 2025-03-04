@@ -4,7 +4,6 @@ const logger = require('../../logger');
 
 // 로그인 관련 비즈니스 로직
 exports.getLoginchk = async (req, res) => {
-  
    const query = 'select userid, username, passwd FROM adm_user where userid = :userid';
    //const binds = {userid: 'jminzzang'};
    const binds = ['jminzzang1'];
@@ -18,8 +17,8 @@ exports.getLoginchk = async (req, res) => {
     }
   };
 
-  // 로그인 관련 비즈니스 로직
-exports.postLoginchk = async (req, res) => {
+// 로그인 관련 비즈니스 로직
+exports.postLoginchk = async (req, res) => { 
   try {
     // 요청 본문에서 JSON 데이터 추출
     const receivedData = req.body;

@@ -1,0 +1,11 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getUpdate_fileName_Query:
+      name: fileName
+      in: query
+      description: "다운로드할 파일명"
+      required: true
+      schema:
+        type: string
+        example: "example.xlsx" 

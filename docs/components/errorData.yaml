@@ -1,0 +1,63 @@
+components:
+  # Request body 정의 모음
+  schemas:
+    postError_Body:
+      type: object
+      required:
+        - errnumber
+        - errmenu
+        - errobject
+        - errevent
+        - errline
+        - errtext
+        - userid
+      properties:
+        errnumber:
+          type: string
+          description: '오류 번호'
+          example: 'E001'
+        errmenu:
+          type: string
+          description: '오류 발생 메뉴'
+          example: '로그인'
+        errobject:
+          type: string
+          description: '오류 발생 객체'
+          example: 'loginButton'
+        errevent:
+          type: string
+          description: '오류 발생 이벤트'
+          example: 'onClick'
+        errline:
+          type: string
+          description: '오류 발생 라인'
+          example: '123'
+        errtext:
+          type: string
+          description: '오류 메시지'
+          example: '로그인 실패'
+        userid:
+          type: string
+          description: '사용자 ID'
+          example: 'user123'
+
+    # Response 정의 모음
+    postError_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '오류 저장 결과'
+          type: object
+          properties:
+            errorId:
+              description: '오류 ID'
+              type: string
+              example: 'ERR001'
+            timestamp:
+              description: '저장 시간'
+              type: string
+              example: '2024-03-19 10:00:00' 

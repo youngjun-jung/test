@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 기초자료-제조원가
+  summary: 종합 수선비 데이터 조회
+  description: 연도별 종합 수선비 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #종합 수선비 - 연도
+    - $ref: '../components/repairexpensestData.yaml#/components/parameters/getRepairexpensestchk_year_Query'
+    #종합 수선비 - 구분
+    - $ref: '../components/repairexpensestData.yaml#/components/parameters/getRepairexpensestchk_gubun_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/repairexpensestData.yaml#/components/schemas/getRepairexpensestchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

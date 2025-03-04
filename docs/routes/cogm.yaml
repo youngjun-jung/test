@@ -1,0 +1,27 @@
+get:
+  tags:
+    - 실적-제조원가
+  summary: 제조원가 데이터 조회
+  description: 기간별 제조원가 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #제조원가 - 시작 날짜
+    - $ref: '../components/cogmData.yaml#/components/parameters/getCogmchk_frdate_Query'
+    #제조원가 - 종료 날짜
+    - $ref: '../components/cogmData.yaml#/components/parameters/getCogmchk_todate_Query'
+    #제조원가 - 분류 코드
+    - $ref: '../components/cogmData.yaml#/components/parameters/getCogmchk_class_code_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/cogmData.yaml#/components/schemas/getCogmchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

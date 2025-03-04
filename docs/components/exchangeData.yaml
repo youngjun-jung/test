@@ -1,0 +1,63 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getExchangechk_frdate_Query:
+      name: frdate
+      in: query
+      description: "시작 날짜"
+      required: true
+      schema:
+        type: string
+        example: "20240301"
+    getExchangechk_todate_Query:
+      name: todate
+      in: query
+      description: "종료 날짜"
+      required: true
+      schema:
+        type: string
+        example: "20240331"
+
+  # Response 정의 모음
+  schemas:
+    getExchangechk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              CHECKDATE:
+                description: '기준일자'
+                type: string
+                example: '20240301'
+              USD:
+                description: '미국 달러 환율'
+                type: number
+                example: 1320.5
+              JPY:
+                description: '일본 엔화 환율'
+                type: number
+                example: 880.25
+              CNY:
+                description: '중국 위안화 환율'
+                type: number
+                example: 183.45
+              EUR:
+                description: '유로 환율'
+                type: number
+                example: 1430.8
+              GBP:
+                description: '영국 파운드 환율'
+                type: number
+                example: 1670.3
+              AUD:
+                description: '호주 달러 환율'
+                type: number
+                example: 860.7 

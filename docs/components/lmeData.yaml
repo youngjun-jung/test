@@ -1,0 +1,163 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getLmechk_year_Query:
+      name: year
+      in: query
+      description: "조회할 연도"
+      required: true
+      schema:
+        type: string
+        example: "2024"
+    getLmechk_gubun_Query:
+      name: gubun
+      in: query
+      description: "구분 (0: 전체, 1: 개별)"
+      required: true
+      schema:
+        type: string
+        example: "1"
+
+  # Response 정의 모음
+  schemas:
+    getLmechk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: 'LME 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              GUBUN:
+                description: '구분'
+                type: string
+                example: '1'
+              YEAR:
+                description: '연도'
+                type: string
+                example: '2024'
+              MONTH:
+                description: '월'
+                type: string
+                example: '03'
+              NAME:
+                description: '항목명'
+                type: string
+                example: 'LME'
+              XA:
+                description: '1번 항목 합계'
+                type: number
+                example: 1200.5
+              XB:
+                description: '2번 항목 합계'
+                type: number
+                example: 1214.4
+              XC:
+                description: '3번 항목 합계'
+                type: number
+                example: 1227.6
+              XD:
+                description: '4번 항목 합계'
+                type: number
+                example: 1240.8
+              XE:
+                description: '5번 항목 합계'
+                type: number
+                example: 1254.0
+              XF:
+                description: '6번 항목 합계'
+                type: number
+                example: 1267.2
+              XG:
+                description: '7번 항목 합계'
+                type: number
+                example: 1280.4
+              XH:
+                description: '8번 항목 합계'
+                type: number
+                example: 1293.6
+              XI:
+                description: '9번 항목 합계'
+                type: number
+                example: 1306.8
+              XJ:
+                description: '10번 항목 합계'
+                type: number
+                example: 1320.0
+              XK:
+                description: '11번 항목 합계'
+                type: number
+                example: 1333.2
+              XL:
+                description: '12번 항목 합계'
+                type: number
+                example: 1346.4
+              XM:
+                description: '13번 항목 합계'
+                type: number
+                example: 1359.6
+              XN:
+                description: '14번 항목 합계'
+                type: number
+                example: 1372.8
+              XO:
+                description: '15번 항목 합계'
+                type: number
+                example: 1386.0
+              XP:
+                description: '16번 항목 합계'
+                type: number
+                example: 1399.2
+              XQ:
+                description: '17번 항목 합계'
+                type: number
+                example: 1412.4
+              XR:
+                description: '18번 항목 합계'
+                type: number
+                example: 1425.6
+              XS:
+                description: '19번 항목 합계'
+                type: number
+                example: 1438.8
+              XT:
+                description: '20번 항목 합계'
+                type: number
+                example: 1452.0
+              XU:
+                description: '21번 항목 합계'
+                type: number
+                example: 1465.2
+              XV:
+                description: '22번 항목 합계'
+                type: number
+                example: 1478.4
+              XW:
+                description: '23번 항목 합계'
+                type: number
+                example: 1491.6
+              XX:
+                description: '24번 항목 합계'
+                type: number
+                example: 1504.8
+              XY:
+                description: '25번 항목 합계'
+                type: number
+                example: 1518.0
+              XZ:
+                description: '26번 항목 합계'
+                type: number
+                example: 1531.2
+              XAA:
+                description: '27번 항목 합계'
+                type: number
+                example: 1544.4
+              IDX:
+                description: '인덱스'
+                type: number
+                example: 1 

@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 기초자료-제조원가
+  summary: 보조재료비 데이터 조회
+  description: 연도별 보조재료비 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #보조재료비 - 연도
+    - $ref: '../components/submaterialData.yaml#/components/parameters/getSubmaterialchk_year_Query'
+    #보조재료비 - 구분
+    - $ref: '../components/submaterialData.yaml#/components/parameters/getSubmaterialchk_gubun_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/submaterialData.yaml#/components/schemas/getSubmaterialchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

@@ -1,0 +1,55 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getMenuchk_id_Query:
+      name: id
+      in: query
+      description: "사용자 ID"
+      required: true
+      schema:
+        type: string
+        example: "user123"
+
+  # Response 정의 모음
+  schemas:
+    getMenuchk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '메뉴 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              USERID:
+                description: '사용자 ID'
+                type: string
+                example: 'user123'
+              P_MENUNAME:
+                description: '상위 메뉴명'
+                type: string
+                example: '시스템 관리'
+              MENUNAME:
+                description: '메뉴명'
+                type: string
+                example: '사용자 관리'
+              P_MENUID:
+                description: '상위 메뉴 ID'
+                type: string
+                example: 'SYS'
+              MENUID:
+                description: '메뉴 ID'
+                type: string
+                example: 'SYS_USER'
+              SCREEN_ID:
+                description: '화면 ID'
+                type: string
+                example: 'SCR_001'
+              MENU_FUN:
+                description: '메뉴 기능 권한'
+                type: string
+                example: '111000000' 

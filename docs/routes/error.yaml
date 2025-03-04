@@ -1,0 +1,24 @@
+post:
+  tags:
+    - 시스템
+  summary: 오류 정보 저장
+  description: 시스템 오류 정보를 저장합니다.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/errorData.yaml#/components/schemas/postError_Body'
+  responses:
+    '200':
+      description: 성공적으로 오류 정보를 저장했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/errorData.yaml#/components/schemas/postError_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

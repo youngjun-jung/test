@@ -1,0 +1,69 @@
+components:
+  # Request body 정의 모음
+  schemas:
+    postLoginchk_Body:
+      type: object
+      required:
+        - id
+        - pw
+      properties:
+        id:
+          description: '아이디'
+          type: string
+          example: 'ypzinc'
+        pw:
+          description: '비밀번호'
+          type: string
+          format: password
+          example: 'test123!'
+
+    # Response 정의 모음
+    postLoginchk_Res:
+      type: object
+      properties:
+        returncode:
+          description: 'api 처리결과(공통 = Y)'
+          type: string
+          example: 'Y'
+        username:
+          description: '사용자이름'
+          type: string
+          example: '김영풍'
+        userid:
+          description: '로그인 아이디'
+          type: string
+          example: 'ypzinc'
+        groupnm: 
+          description: '그룹명'
+          type: string
+          example: '개발자'
+        groupid:
+          description: '그룹고유아이디'
+          type: string
+          example: '00000000'
+
+    getLoginchk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '사용자 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              userid:
+                description: '사용자 ID'
+                type: string
+                example: 'ypzinc'
+              username:
+                description: '사용자명'
+                type: string
+                example: '김영풍'
+              passwd:
+                description: '비밀번호'
+                type: string
+                example: 'encrypted_password'

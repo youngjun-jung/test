@@ -1,0 +1,35 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getGroup_id_Query:
+      name: id
+      in: query
+      description: "그룹 ID"
+      required: true
+      schema:
+        type: string
+        example: "00000000"
+
+  # Response 정의 모음
+  schemas:
+    getGroup_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              GROUPID:
+                description: '그룹 ID'
+                type: string
+                example: '00000000'
+              GROUPNAME:
+                description: '그룹명'
+                type: string
+                example: '개발자' 

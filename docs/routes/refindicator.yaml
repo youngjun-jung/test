@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 기초자료-제조원가
+  summary: 기준지표 데이터 조회
+  description: 연도별 기준지표 데이터를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #기준지표 - 연도
+    - $ref: '../components/refindicatorData.yaml#/components/parameters/getRefindicatorchk_year_Query'
+    #기준지표 - 구분
+    - $ref: '../components/refindicatorData.yaml#/components/parameters/getRefindicatorchk_gubun_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/refindicatorData.yaml#/components/schemas/getRefindicatorchk_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

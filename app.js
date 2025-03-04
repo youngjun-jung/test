@@ -1,6 +1,11 @@
 const express = require('express');
 const logger = require('./logger'); 
 const bodyParser = require('body-parser');
+const swaggerUi = require("swagger-ui-express");
+const SwaggerParser = require('swagger-parser');
+const fs = require('fs');
+const yaml = require('js-yaml');
+const path = require('path');
 const loginRoutes = require('./src/routes/login.routes');
 const updateRoutes = require('./src/routes/update.routes');
 const menuRoutes = require('./src/routes/menu.routes');
@@ -38,6 +43,20 @@ const app = express();
 
 // 미들웨어 설정
 app.use(bodyParser.json());
+    // Swagger(Autogen) 
+    //app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    // 메인 Swagger 파일의 경로 설정
+    const swaggerFilePath = path.join(__dirname, 'docs', 'mainSwagger.yaml');
+    // YAML 파일 로드 및 파싱
+    //const swaggerDocument = yaml.load(fs.readFileSync('./docs/mainSwagger.yaml', 'utf8'));
+    // swagger.yaml 파일의 외부 $ref를 모두 병합한 후 사용
+    SwaggerParser.bundle(swaggerFilePath)
+        .then(apiSpec => {
+            // Swagger UI 설정 및 제공 경로 지정 (/api-docs)
+            app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiSpec));
+
+        });
+
 
 // 라우트 설정
     // 시스템

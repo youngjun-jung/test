@@ -1,0 +1,116 @@
+openapi: '3.0.0'
+info: 
+  title: 'YP Project API Documentation'
+  version: '1.0.0'
+  description: '사업 계획 및 원가 분석 프로젝트에서 개발된 API 명세입니다 API Key가 있어야 호출이 가능합니다.'
+
+servers:
+    - url: 'http://localhost:3000'
+      description: YP Project API Server
+
+tags:
+  - name: 사용자
+    description: 사용자 정보 관련 API
+  - name: 관리자
+    description: 시스템 관련 API
+  - name: 실적-매출관리
+    description: 매출 관련 API    
+  - name: 실적-제조원가
+    description: 실적 제조원가 관련 API    
+  - name: 기초자료
+    description: 주요지표 관련 API
+  - name: 생산원가
+    description: 생산원가 관련 API
+  - name: 기초자료-제조원가
+    description: 제조원가 기초자료 항목 API
+  - name: SAP 연동
+    description: SAP 연동 Raw data API
+  - name: 사업계획-제조원가
+    description: 사업계획 관리 원가 관련 API
+  - name: 사업계획- Raw
+    description: 종합 기타경비 관련 API
+  - name: 관리자
+    description: 관리자 기능 관련 API    
+  - name: 자료이관
+    description: 소스 배포 관련 API
+
+
+paths:
+  /api/login:
+    $ref: './routes/login.yaml'
+  /api/agbyproducts:
+    $ref: './routes/agbyproducts.yaml'
+  /api/cogm:
+    $ref: './routes/cogm.yaml'
+  /api/depreciation:
+    $ref: './routes/depreciation.yaml'
+  /api/depreciationt:
+    $ref: './routes/depreciationt.yaml'
+  /api/eleccost:
+    $ref: './routes/eleccost.yaml'
+  /api/eleccostt:
+    $ref: './routes/eleccostt.yaml'
+  /api/exchange:
+    $ref: './routes/exchange.yaml'
+  /api/file:
+    $ref: './routes/file.yaml'
+  /api/group:
+    $ref: './routes/group.yaml'
+  /api/laborcost:
+    $ref: './routes/laborcost.yaml'
+  /api/laborcostt:
+    $ref: './routes/laborcostt.yaml'
+  /api/lme:
+    $ref: './routes/lme.yaml'
+  /api/menu:
+    $ref: './routes/menu.yaml'
+  /api/otherexpenses:
+    $ref: './routes/otherexpenses.yaml'
+  /api/otherexpensest:
+    $ref: './routes/otherexpensest.yaml'
+  /api/plug:
+    $ref: './routes/plug.yaml'
+  /api/ref1:
+    $ref: './routes/ref1.yaml'
+  /api/ref2:
+    $ref: './routes/ref2.yaml'
+  /api/refindicator:
+    $ref: './routes/refindicator.yaml'
+  /api/repairexpenses:
+    $ref: './routes/repairexpenses.yaml'
+  /api/repairexpensest:
+    $ref: './routes/repairexpensest.yaml'
+  /api/sale:
+    $ref: './routes/sale.yaml'
+  /api/saleledger:
+    $ref: './routes/saleledger.yaml'
+  /api/selfconsumption:
+    $ref: './routes/selfconsumption.yaml'
+  /api/submaterial:
+    $ref: './routes/submaterial.yaml'
+  /api/submaterialt:
+    $ref: './routes/submaterialt.yaml'
+  /api/tc:
+    $ref: './routes/tc.yaml'
+  /api/user:
+    $ref: './routes/user.yaml'
+  /api/zincconcentrate:
+    $ref: './routes/zincconcentrate.yaml'
+  /api/update:
+    $ref: './routes/update.yaml'
+  /api/error:
+    $ref: './routes/error.yaml'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key 
+      
+  #schemas:
+    #description: '모델'
+    #$ref: './components/loginData.yaml#/components/schemas'
+
+security:
+  - ApiKeyAuth: []

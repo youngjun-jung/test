@@ -1,0 +1,94 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getFilechk_fileid_Query:
+      name: fileid
+      in: query
+      description: "조회할 파일 ID"
+      required: true
+      schema:
+        type: string
+        example: "FILE001"
+
+  # Request body 정의 모음
+  schemas:
+    postFileUpload_Body:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          format: binary
+          description: '업로드할 파일'
+
+    # Response 정의 모음
+    postFileUpload_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '파일 정보'
+          type: object
+          properties:
+            filename:
+              description: '파일명'
+              type: string
+              example: 'example.xlsx'
+            path:
+              description: '저장 경로'
+              type: string
+              example: '/uploads/example.xlsx'
+            size:
+              description: '파일 크기'
+              type: number
+              example: 1024
+            mimetype:
+              description: '파일 타입'
+              type: string
+              example: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
+    getFilechk_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '파일 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              GUBUN:
+                description: '구분'
+                type: string
+                example: '1'
+              FILEID:
+                description: '파일 ID'
+                type: string
+                example: 'FILE001'
+              FILESIZE:
+                description: '파일 크기'
+                type: number
+                example: 1024
+              VER:
+                description: '버전'
+                type: string
+                example: '1.0'
+              CREATED_DT:
+                description: '생성일시'
+                type: string
+                example: '2024-03-19 10:00:00'
+              MODIFIED_DT:
+                description: '수정일시'
+                type: string
+                example: '2024-03-19 10:00:00'
+              ACCESSED_DT:
+                description: '접근일시'
+                type: string
+                example: '2024-03-19 10:00:00' 

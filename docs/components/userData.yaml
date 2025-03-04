@@ -1,0 +1,174 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getUser_id_Query:
+      name: id
+      in: query
+      description: "사용자 ID"
+      required: true
+      schema:
+        type: string
+        example: "admin"
+    deleteUser_id_Param:
+      name: id
+      in: path
+      description: "삭제할 사용자 ID"
+      required: true
+      schema:
+        type: string
+        example: "user123"
+
+  # Request body 정의 모음
+  requestBodies:
+    postUser_Req:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - userid
+              - username
+              - passwd
+              - groupid
+            properties:
+              userid:
+                description: '사용자 ID'
+                type: string
+                example: 'admin'
+              username:
+                description: '사용자 이름'
+                type: string
+                example: '김영풍풍'
+              passwd:
+                description: '비밀번호'
+                type: string
+                example: 'password123'
+              groupid:
+                description: '그룹 ID'
+                type: string
+                example: 'G001'
+    patchUser_Req:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - userid
+              - passwd
+              - fail_cnt
+            properties:
+              userid:
+                description: '사용자 ID'
+                type: string
+                example: 'admin'
+              passwd:
+                description: '비밀번호'
+                type: string
+                example: 'newpassword123'
+              fail_cnt:
+                description: '로그인 실패 횟수'
+                type: string
+                example: '0'
+
+  # Response 정의 모음
+  schemas:
+    getUser_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '사용자 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              USERID:
+                description: '사용자 ID'
+                type: string
+                example: 'admin'
+              USERNAME:
+                description: '사용자 이름'
+                type: string
+                example: '관리자'
+              GROUPID:
+                description: '그룹 ID'
+                type: string
+                example: 'G001'
+              GROUPNAME:
+                description: '그룹 이름'
+                type: string
+                example: '관리자그룹'
+              PASSWD:
+                description: '비밀번호'
+                type: string
+                example: '********'
+              FAIL_CNT:
+                description: '로그인 실패 횟수'
+                type: number
+                example: 0
+    postUser_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '생성된 사용자 데이터'
+          type: object
+          properties:
+            USERID:
+              description: '사용자 ID'
+              type: string
+              example: 'admin'
+            USERNAME:
+              description: '사용자 이름'
+              type: string
+              example: '김영풍'
+            GROUPID:
+              description: '그룹 ID'
+              type: string
+              example: 'G001'
+            GROUPNAME:
+              description: '그룹 이름'
+              type: string
+              example: '관리자그룹'
+            PASSWD:
+              description: '비밀번호'
+              type: string
+              example: '********'
+            FAIL_CNT:
+              description: '로그인 실패 횟수'
+              type: number
+              example: 0
+    deleteUser_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '삭제된 사용자 데이터'
+          type: object
+          properties:
+            USERID:
+              description: '사용자 ID'
+              type: string
+              example: 'admin'
+    patchUser_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        message:
+          description: '처리 결과 메시지'
+          type: string
+          example: '데이터 수정 성공' 

@@ -1,0 +1,113 @@
+
+get:
+  tags:
+    - 관리자
+  summary: 사용자 데이터 조회
+  description: 사용자 ID로 사용자 정보를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #사용자 - ID
+    - $ref: '../components/userData.yaml#/components/parameters/getUser_id_Query'
+  responses:
+    '200':
+      description: 성공적으로 데이터를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/userData.yaml#/components/schemas/getUser_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+
+post:
+  tags:
+    - 관리자
+  summary: 사용자 생성
+  description: 새로운 사용자를 생성합니다.
+  requestBody:
+    $ref: '../components/userData.yaml#/components/requestBodies/postUser_Req'
+  responses:
+    '200':
+      description: 성공적으로 사용자를 생성했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/userData.yaml#/components/schemas/postUser_Res'
+          example:
+            success: true
+            data:
+              USERID: "admin"
+              USERNAME: "관리자"
+              GROUPID: "G001"
+              GROUPNAME: "관리자그룹"
+              PASSWD: "********"
+              FAIL_CNT: 0
+    '400':
+      $ref: '../components/commonData.yaml#/components/responses/QueryFieldError'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+
+delete:
+  tags:
+    - 관리자
+  summary: 사용자 삭제
+  description: 사용자 ID로 사용자를 삭제합니다.
+  parameters:
+    - name: id
+      in: query
+      description: "삭제할 사용자 ID"
+      required: true
+      schema:
+        type: string
+        example: "admin"
+  responses:
+    '200':
+      description: 성공적으로 사용자를 삭제했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/userData.yaml#/components/schemas/deleteUser_Res'
+          example:
+            success: true
+            data:
+              USERID: "admin"
+    '400':
+      $ref: '../components/commonData.yaml#/components/responses/QueryFieldError'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'
+
+patch:
+  tags:
+    - 관리자
+  summary: 사용자 정보 수정
+  description: 사용자의 비밀번호와 로그인 실패 횟수를 수정합니다.
+  requestBody:
+    $ref: '../components/userData.yaml#/components/requestBodies/patchUser_Req'
+  responses:
+    '200':
+      description: 성공적으로 사용자 정보를 수정했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/userData.yaml#/components/schemas/patchUser_Res'
+          example:
+            success: true
+            message: "데이터 수정 성공"
+    '400':
+      $ref: '../components/commonData.yaml#/components/responses/QueryFieldError'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError'

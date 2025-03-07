@@ -22,7 +22,7 @@ exports.getLaborcosttchk = async (req, res) => {
                     , SUM(XK) XK, SUM(XL) XL, SUM(XM) XM, SUM(XN) XN, SUM(XO) XO, SUM(XP) XP, SUM(XQ) XQ, SUM(XR) XR, SUM(XS) XS, SUM(XT) XT, SUM(XU) XU, SUM(XV) XV, SUM(XW) XW, SUM(XX) XX
                     , SUM(XY) XY, SUM(XZ) XZ, SUM(XAA) XAA, IDX
                     FROM (SELECT DISTINCT X.*, A.*
-                        FROM PLAN_LABOR_COST_CODE X
+                        FROM (SELECT SCODE, SNAME, IDX FROM PLAN_LABOR_COST_CODE WHERE YEAR = :year) X
                         LEFT JOIN (SELECT * FROM PLAN_LABOR_COST WHERE YEAR = :year AND GUBUN = :gubun) A
                         ON X.SNAME = A.NAME
                         )
@@ -41,7 +41,7 @@ exports.getLaborcosttchk = async (req, res) => {
                 , A.XJ*B.XJ XJ, A.XK*B.XK XK, A.XL*B.XL XL, A.XM*B.XM XM, A.XN*B.XN XN, A.XO*B.XO XO
                 , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
                 , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
-                    FROM PLAN_LABOR_COST_CODE X
+                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_LABOR_COST_CODE WHERE YEAR = :year) X
                     , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '1') A
                     , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '2') B
                     WHERE X.SNAME = A.NAME(+)

@@ -22,7 +22,7 @@ exports.getEleccosttchk = async (req, res) => {
                     , SUM(XK) XK, SUM(XL) XL, SUM(XM) XM, SUM(XN) XN, SUM(XO) XO, SUM(XP) XP, SUM(XQ) XQ, SUM(XR) XR, SUM(XS) XS, SUM(XT) XT, SUM(XU) XU, SUM(XV) XV, SUM(XW) XW, SUM(XX) XX
                     , SUM(XY) XY, SUM(XZ) XZ, SUM(XAA) XAA, IDX
                     FROM (SELECT DISTINCT X.*, A.*
-                        FROM PLAN_ELEC_COST_CODE X
+                        FROM (SELECT SCODE, SNAME, IDX FROM PLAN_ELEC_COST_CODE WHERE YEAR = :year) X
                         LEFT JOIN (SELECT * FROM PLAN_ELEC_COST WHERE YEAR = :year AND GUBUN = :gubun) A
                         ON X.SNAME = A.NAME
                         )

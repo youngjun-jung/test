@@ -11,7 +11,7 @@ exports.getZincconcentratechk = async (req, res) => {
 
   console.log("year: ", year);
 
-  const query = `SELECT DECODE(GUBUN, '1', '수입', '0', '국내', '기타') GUBUN, YEAR, SNAME, IDX
+  const query = `SELECT DECODE(GUBUN, '1', '수입', '0', '국내', '기타') GUBUN, X.YEAR, SNAME, IDX
                 , SUM(DECODE(MONTH, '01', CNT, 0)) CNT_01
                 , SUM(DECODE(MONTH, '01', UNIT_COST, 0)) UNIT_COST_01
                 , SUM(DECODE(MONTH, '01', AMT, 0)) AMT_01
@@ -48,12 +48,11 @@ exports.getZincconcentratechk = async (req, res) => {
                 , SUM(DECODE(MONTH, '12', CNT, 0)) CNT_12
                 , SUM(DECODE(MONTH, '12', UNIT_COST, 0)) UNIT_COST_12
                 , SUM(DECODE(MONTH, '12', AMT, 0)) AMT_12
-                FROM PLAN_ZINC_CONCENTRATE_CODE X
-                , PLAN_ZINC_CONCENTRATE A
+                FROM (SELECT * FROM PLAN_ZINC_CONCENTRATE_CODE WHERE YEAR = :year) X
+                , (SELECT * FROM PLAN_ZINC_CONCENTRATE WHERE YEAR = :year) A
                 WHERE X.SNAME = A.NAME(+)
-                AND YEAR = :year
-                GROUP BY GUBUN, YEAR, SNAME, IDX
-                ORDER BY YEAR, IDX`;                 
+                GROUP BY GUBUN, X.YEAR, SNAME, IDX
+                ORDER BY X.YEAR, IDX`;                 
 
    const binds = {year: year};
 

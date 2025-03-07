@@ -20,7 +20,7 @@ exports.getEleccostchk = async (req, res) => {
   {
       query = `SELECT GUBUN, YEAR, MONTH, SNAME NAME, XA, XB, XC, XD, XE, XF, XF1, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
-                    FROM PLAN_ELEC_COST_CODE X, PLAN_ELEC_COST A
+                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_ELEC_COST_CODE WHERE YEAR = :year) X, PLAN_ELEC_COST A
                     WHERE X.SNAME = A.NAME(+)
                     AND YEAR(+) = :year
                     AND GUBUN(+) = :gubun

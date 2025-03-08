@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\vscode\\yp_project\\logs\\.6b15e7e7f1f5ee01a61e809bb06dcce11a613918-audit.json",
+    "files": [
+        {
+            "date": 1741405493994,
+            "name": "D:\\vscode\\yp_project\\logs\\2025-03-08.log",
+            "hash": "617e59eff063994298cb98563e1cf8fa4b282d87fee34bf89576756d1579477a"
+        }
+    ],
+    "hashType": "sha256"
+}

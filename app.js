@@ -38,6 +38,10 @@ const depreciationtRoutes = require('./src/routes/depreciationt.routes');
 const zincconcentrateRoutes = require('./src/routes/zincconcentrate.routes');
 const agbyproductsRoutes = require('./src/routes/agbyproducts.routes');
 const selfconsumptionRoutes = require('./src/routes/selfconsumption.routes');
+const zincconcentratemanualRoutes = require('./src/routes/zincconcentratemanual.routes');
+const zincconcentrateunitcostRoutes = require('./src/routes/zincconcentrateunitcost.routes');
+const zincautoRoutes = require('./src/routes/zincauto.routes');
+const productsRoutes = require('./src/routes/products.routes');
 
 const app = express();
 
@@ -100,5 +104,9 @@ app.use('/api/depreciationt', depreciationtRoutes); // 종합 감가상각비 �
 app.use('/api/zincconcentrate', zincconcentrateRoutes); // 월별 아연 정광 구매 계획 정보 경로
 app.use('/api/agbyproducts', agbyproductsRoutes); // 월별 은부산물 정보 경로
 app.use('/api/selfconsumption', selfconsumptionRoutes); // 월별 자가소비 정보 경로
+app.use('/api/zincconcentratemanual', zincconcentratemanualRoutes); // 고품위 아연정광 정보 경로
+app.use('/api/zincconcentrateunitcost', zincconcentrateunitcostRoutes); // 월별 아연정광 단가 정보 경로
+app.use('/api/zincauto', zincautoRoutes); // 월별 정광 정보 경로
+app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
 
 module.exports = app;

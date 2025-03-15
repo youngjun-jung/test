@@ -96,11 +96,6 @@ app.use('/api/selfconsumption', selfconsumptionRoutes); // 월별 자가소비 �
 app.use('/api/zincconcentratemanual', zincconcentratemanualRoutes); // 고품위 아연정광 정보 경로
 app.use('/api/zincconcentrateunitcost', zincconcentrateunitcostRoutes); // 월별 아연정광 단가 정보 경로
 app.use('/api/zincauto', zincautoRoutes); // 월별 정광 정보 경로
-<<<<<<< HEAD
-app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
-
-module.exports = app;
-=======
 
     // 계획종합
 app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
@@ -116,5 +111,3 @@ app.use('/api/repairexpensesaia', repairexpensesaiaRoutes); // (간접부문 배
 app.use('/api/depreciationaia', depreciationaiaRoutes); // (간접부문 배부후) 감가상각비 정보 경로
 
 module.exports = app;
-
->>>>>>> 7a973e55e7982aae62183334d6555fcd160ef5e0

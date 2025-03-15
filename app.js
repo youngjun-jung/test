@@ -37,6 +37,14 @@ const zincconcentratemanualRoutes = require('./src/routes/zincconcentratemanual.
 const zincconcentrateunitcostRoutes = require('./src/routes/zincconcentrateunitcost.routes');
 const zincautoRoutes = require('./src/routes/zincauto.routes');
 const productsRoutes = require('./src/routes/products.routes');
+const distributiontableRoutes = require('./src/routes/distributiontable.routes');
+const submaterialaiaRoutes = require('./src/routes/submaterialaia.routes');
+const laborcostaiaRoutes = require('./src/routes/laborcostaia.routes');
+const eleccostaiaRoutes = require('./src/routes/eleccostaia.routes');
+const otherexpensesaiaRoutes = require('./src/routes/otherexpensesaia.routes');
+const products_dtlRoutes = require('./src/routes/products_dtl.routes');
+const repairexpensesaiaRoutes = require('./src/routes/repairexpensesaia.routes');
+const depreciationaiaRoutes = require('./src/routes/depreciationaia.routes');
 
 const app = express();
 
@@ -88,6 +96,25 @@ app.use('/api/selfconsumption', selfconsumptionRoutes); // 월별 자가소비 �
 app.use('/api/zincconcentratemanual', zincconcentratemanualRoutes); // 고품위 아연정광 정보 경로
 app.use('/api/zincconcentrateunitcost', zincconcentrateunitcostRoutes); // 월별 아연정광 단가 정보 경로
 app.use('/api/zincauto', zincautoRoutes); // 월별 정광 정보 경로
+<<<<<<< HEAD
 app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
 
 module.exports = app;
+=======
+
+    // 계획종합
+app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
+app.use('/api/products_dtl', products_dtlRoutes); // 월별 계획종합(상세) 정보 경로
+
+    // 간접부문 배부후
+app.use('/api/distributiontable', distributiontableRoutes); // 배부표 정보 경로
+app.use('/api/submaterialaia', submaterialaiaRoutes); // (간접부문 배부후) 보조재료비 정보 경로
+app.use('/api/laborcostaia', laborcostaiaRoutes); // (간접부문 배부후) 노무비 정보 경로
+app.use('/api/eleccostaia', eleccostaiaRoutes); // (간접부문 배부후) 전력비 정보 경로
+app.use('/api/otherexpensesaia', otherexpensesaiaRoutes); // (간접부문 배부후) 기타경비 정보 경로
+app.use('/api/repairexpensesaia', repairexpensesaiaRoutes); // (간접부문 배부후) 수선비 정보 경로
+app.use('/api/depreciationaia', depreciationaiaRoutes); // (간접부문 배부후) 감가상각비 정보 경로
+
+module.exports = app;
+
+>>>>>>> 7a973e55e7982aae62183334d6555fcd160ef5e0

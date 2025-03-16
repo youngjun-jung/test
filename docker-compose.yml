@@ -1,0 +1,49 @@
+version: '3.9'
+
+networks:
+  node-network:
+    driver: bridge
+
+services:
+  yp1:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    container_name: yp1
+    networks:
+      - node-network
+
+  yp2:
+    build: .
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+    container_name: yp2
+    networks:
+      - node-network
+
+  yp3:
+    build: .
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+    container_name: yp3
+    networks:
+      - node-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - yp1
+      - yp2
+      - yp3
+    networks:
+      - node-network

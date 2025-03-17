@@ -18,10 +18,12 @@ exports.getRepairexpenseschk = async (req, res) => {
 
   if(gubun != '0')
   {
-      query = `SELECT GUBUN, YEAR, MONTH, SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
+      query = `SELECT GUBUN, YEAR, MONTH, X.SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X, PLAN_REPAIR_EXPENSES A
+                    , (SELECT * FROM PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = '2025') C
                     WHERE X.SNAME = A.NAME(+)
+                    AND X.SNAME = C.SNAME(+)
                     AND YEAR(+) = :year
                     AND GUBUN(+) = :gubun
                     ORDER BY YEAR, MONTH, X.IDX`;  
@@ -30,19 +32,21 @@ exports.getRepairexpenseschk = async (req, res) => {
   }
   else
   {
-      query = `SELECT A.GUBUN, A.YEAR, A.MONTH, SNAME NAME, A.XA*B.XA XA, A.XB*B.XB XB, A.XC*B.XC XC
-                , A.XD*B.XD XD, A.XE*B.XE XE, A.XF*B.XF XF, A.XG*B.XG XG, A.XH*B.XH XH, A.XI*B.XI XI
-                , A.XJ*B.XJ XJ, A.XK*B.XK XK, A.XL*B.XL XL, A.XM*B.XM XM, A.XN*B.XN XN, A.XO*B.XO XO
-                , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
-                , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
+      query = `SELECT A.GUBUN, A.YEAR, A.MONTH, X.SNAME NAME, A.XA*B.XA*C.VALUE XA, A.XB*B.XB*C.VALUE XB, A.XC*B.XC*C.VALUE XC
+                , A.XD*B.XD*C.VALUE XD, A.XE*B.XE*C.VALUE XE, A.XF*B.XF*C.VALUE XF, A.XG*B.XG*C.VALUE XG, A.XH*B.XH*C.VALUE XH, A.XI*B.XI*C.VALUE XI
+                , A.XJ*B.XJ*C.VALUE XJ, A.XK*B.XK*C.VALUE XK, A.XL*B.XL*C.VALUE XL, A.XM*B.XM*C.VALUE XM, A.XN*B.XN*C.VALUE XN, A.XO*B.XO*C.VALUE XO
+                , A.XP*B.XP*C.VALUE XP, A.XQ*B.XQ*C.VALUE XQ, A.XR*B.XR*C.VALUE XR, A.XS*B.XS*C.VALUE XS, A.XT*B.XT*C.VALUE XT, A.XU*B.XU*C.VALUE XU
+                , A.XV*B.XV*C.VALUE XV, A.XW*B.XW*C.VALUE XW, A.XX*B.XX*C.VALUE XX, A.XY*B.XY*C.VALUE XY, A.XZ*B.XZ*C.VALUE XZ, A.XAA*B.XAA*C.VALUE XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X
                     , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '1') A
                     , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '2') B
+                    , (SELECT * FROM PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = :year) C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
                     AND A.YEAR = B.YEAR
                     AND A.MONTH = B.MONTH
                     AND A.NAME = B.NAME
+                    AND X.SNAME = C.SNAME(+)
                     AND A.YEAR = :year
                     ORDER BY YEAR, MONTH, X.IDX`;  
 

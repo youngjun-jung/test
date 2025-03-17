@@ -26,6 +26,9 @@ tags:
   - name: SAP 연동
     description: SAP 연동 Raw data API
   - name: 사업계획-제조원가
+    description: 사업계획 제조원가 관련 API
+  - name: 사업계획-종합
+    description: 사업계획 종합 관련 API
   - name: 관리자
     description: 관리자 기능 관련 API    
   - name: 자료이관
@@ -97,6 +100,30 @@ paths:
     $ref: './routes/update.yaml'
   /api/error:
     $ref: './routes/error.yaml'
+  /api/zincconcentratemanual:
+    $ref: './routes/zincconcentratemanual.yaml'
+  /api/zincconcentrateunitcost:
+    $ref: './routes/zincconcentrateunitcost.yaml'
+  /api/zincauto:
+    $ref: './routes/zincauto.yaml'
+  /api/products:
+    $ref: './routes/products.yaml'
+  /api/products_dtl:
+    $ref: './routes/products_dtl.yaml'
+  /api/distributiontable:
+    $ref: './routes/distributiontable.yaml'
+  /api/submaterialaia:
+    $ref: './routes/submaterialaia.yaml'
+  /api/laborcostaia:
+    $ref: './routes/laborcostaia.yaml'
+  /api/eleccostaia:
+    $ref: './routes/eleccostaia.yaml'
+  /api/otherexpensesaia:
+    $ref: './routes/otherexpensesaia.yaml'
+  /api/repairexpensesaia:
+    $ref: './routes/repairexpensesaia.yaml'
+  /api/depreciationaia:
+    $ref: './routes/depreciationaia.yaml'
 
 components:
   securitySchemes:

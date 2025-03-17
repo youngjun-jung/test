@@ -1,0 +1,59 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getDistributiontablechk_year_Query:
+      name: year
+      in: query
+      description: "조회할 연도"
+      required: true
+      schema:
+        type: string
+        example: "2023"
+    getDistributiontablechk_gubun_Query:
+      name: gubun
+      in: query
+      description: "구분 (0: 전체, 1: 개별)"
+      required: true
+      schema:
+        type: string
+        example: "1"
+
+  # Response 정의 모음
+  schemas:
+    getDistributiontable_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '배부표 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              GUBUN:
+                description: '구분'
+                type: string
+                example: '1'
+              YEAR:
+                description: '연도'
+                type: string
+                example: '2023'
+              DEP_CODE:
+                description: '부서 코드'
+                type: string
+                example: 'D001'
+              DEP_NAME:
+                description: '부서명'
+                type: string
+                example: '생산부'
+              RATE:
+                description: '배부율'
+                type: number
+                example: 30.5
+              AMOUNT:
+                description: '배부금액'
+                type: number
+                example: 150000 

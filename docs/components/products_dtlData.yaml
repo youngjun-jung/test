@@ -1,0 +1,71 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getProducts_dtlchk_year_Query:
+      name: year
+      in: query
+      description: "조회할 연도"
+      required: true
+      schema:
+        type: string
+        example: "2023"
+    getProducts_dtlchk_gubun_Query:
+      name: gubun
+      in: query
+      description: "구분 (0: 전체, 1: 개별)"
+      required: true
+      schema:
+        type: string
+        example: "1"
+
+  # Response 정의 모음
+  schemas:
+    getProducts_dtl_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '계획종합(상세) 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              GUBUN:
+                description: '구분'
+                type: string
+                example: '1'
+              YEAR:
+                description: '연도'
+                type: string
+                example: '2023'
+              MONTH:
+                description: '월'
+                type: string
+                example: '01'
+              CLASS_CODE:
+                description: '분류코드'
+                type: string
+                example: '01'
+              CLASS_NAME:
+                description: '분류명'
+                type: string
+                example: '제품'
+              ITEM_CODE:
+                description: '항목코드'
+                type: string
+                example: '0101'
+              ITEM_NAME:
+                description: '항목명'
+                type: string
+                example: '아연'
+              AMOUNT:
+                description: '금액'
+                type: number
+                example: 50000
+              RATE:
+                description: '비율'
+                type: number
+                example: 5.5 

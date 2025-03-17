@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 사업계획-종합
+  summary: 계획종합 정보 조회
+  description: 연도별 계획종합 정보를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #계획종합 - 연도
+    - $ref: '../components/productsData.yaml#/components/parameters/getProductschk_year_Query'
+    #계획종합 - 구분
+    - $ref: '../components/productsData.yaml#/components/parameters/getProductschk_gubun_Query'
+  responses:
+    '200':
+      description: 성공적으로 계획종합 정보를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/productsData.yaml#/components/schemas/getProducts_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError' 

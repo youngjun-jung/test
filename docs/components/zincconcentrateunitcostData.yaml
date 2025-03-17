@@ -1,0 +1,67 @@
+components:
+  # Query parameter 정의 모음
+  parameters:
+    getZincconcentrateunitcostchk_year_Query:
+      name: year
+      in: query
+      description: "조회할 연도"
+      required: true
+      schema:
+        type: string
+        example: "2023"
+    getZincconcentrateunitcostchk_gubun_Query:
+      name: gubun
+      in: query
+      description: "구분 (0: 전체, 1: 개별)"
+      required: true
+      schema:
+        type: string
+        example: "1"
+
+  # Response 정의 모음
+  schemas:
+    getZincconcentrateunitcost_Res:
+      type: object
+      properties:
+        success:
+          description: 'api 처리결과'
+          type: boolean
+          example: true
+        data:
+          description: '월별 아연정광 단가 데이터 Array'
+          type: array
+          items:
+            type: object
+            properties:
+              GUBUN:
+                description: '구분'
+                type: string
+                example: '1'
+              YEAR:
+                description: '연도'
+                type: string
+                example: '2023'
+              MONTH:
+                description: '월'
+                type: string
+                example: '01'
+              NAME:
+                description: '항목명'
+                type: string
+                example: '아연정광 단가'
+              UNIT:
+                description: '단위'
+                type: string
+                example: 'USD'
+              UNITPRICE:
+                description: '단가'
+                type: number
+                example: 1200
+              AMOUNT:
+                description: '수량'
+                type: number
+                example: 100
+              TOTAL:
+                description: '합계'
+                type: number
+                example: 120000 

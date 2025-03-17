@@ -1,0 +1,25 @@
+get:
+  tags:
+    - 사업계획-제조원가
+  summary: 간접부문 배부후 기타경비 정보 조회
+  description: 연도별 간접부문 배부후 기타경비 정보를 조회합니다.
+  parameters:
+    #공통 - API Key
+    - $ref: '../components/commonData.yaml#/components/parameters/ApiKeyHeader'
+    #기타경비(배부후) - 연도
+    - $ref: '../components/otherexpensesaiaData.yaml#/components/parameters/getOtherexpensesaiachk_year_Query'
+    #기타경비(배부후) - 구분
+    - $ref: '../components/otherexpensesaiaData.yaml#/components/parameters/getOtherexpensesaiachk_gubun_Query'
+  responses:
+    '200':
+      description: 성공적으로 간접부문 배부후 기타경비 정보를 조회했습니다.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/otherexpensesaiaData.yaml#/components/schemas/getOtherexpensesaia_Res'
+    '403':
+      $ref: '../components/commonData.yaml#/components/responses/InvalidKey'
+    '404':
+      $ref: '../components/commonData.yaml#/components/responses/NotFound'
+    '500':
+      $ref: '../components/commonData.yaml#/components/responses/InternalServerError' 

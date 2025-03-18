@@ -18,13 +18,13 @@ exports.getRepairexpenseschk = async (req, res) => {
 
   if(gubun != '0')
   {
-      query = `SELECT GUBUN, YEAR, MONTH, X.SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
+      query = `SELECT GUBUN, A.YEAR, MONTH, X.SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X, PLAN_REPAIR_EXPENSES A
                     , (SELECT * FROM PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = '2025') C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = C.SNAME(+)
-                    AND YEAR(+) = :year
+                    AND A.YEAR(+) = :year
                     AND GUBUN(+) = :gubun
                     ORDER BY YEAR, MONTH, X.IDX`;  
                     

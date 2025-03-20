@@ -25,4 +25,22 @@ jobs:
         docker tag yp:$TIMESTAMP ${{ secrets.DOCKER_USERNAME }}/yp:$TIMESTAMP
         docker push ${{ secrets.DOCKER_USERNAME }}/yp:$TIMESTAMP
 
+    - name: Deploy to Ubuntu Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DOCKER_SERVER_IP }}
+        username: ${{ secrets.DOCKER_SERVER_USERNAME }}
+        key: ${{ secrets.DOCKER_SERVER_SSH_KEY }}
+        script: |
+          # Docker 설치 및 권한 설정
+          sudo snap install docker
+          sudo snap connect docker:home
 
+          # Docker Hub에 로그인
+          echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+
+          # 이미지 Pull 및 컨테이너 실행
+          docker stop YPC || true
+          docker rm YPC || true
+          docker pull ${{ secrets.DOCKER_USERNAME }}/yp:$TIMESTAMP
+          docker run -d --name YPC -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/yp:$TIMESTAMP    

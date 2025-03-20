@@ -21,7 +21,6 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker build -t yp .
-        docker --tag yp:$(date +%s)
         docker tag yp:$(date +%s) ${{ secrets.DOCKER_USERNAME }}/yp:$(date +%s)
         docker push ${{ secrets.DOCKER_USERNAME }}/yp:$(date +%s)
 

@@ -20,7 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push Docker image
       run: |
-        docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-        docker tag my-image-name:$(date +%s) ${{ secrets.DOCKER_USERNAME }}/my-image-name:$(date +%s)
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-image-name:$(date +%s)
+        docker build . --file Dockerfile --tag yp:$(date +%s)
+        docker tag yp:$(date +%s) ${{ secrets.DOCKER_USERNAME }}/yp:$(date +%s)
+        docker push ${{ secrets.DOCKER_USERNAME }}/yp:$(date +%s)
 

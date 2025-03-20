@@ -30,7 +30,7 @@ jobs:
       with:
         host: ${{ secrets.DOCKER_SERVER_IP }}
         username: ${{ secrets.DOCKER_SERVER_USERNAME }}
-        key: ${{ secrets.DOCKER_SERVER_SSH_KEY }}
+        key: ${{ secrets.DOCKER_SERVER_KEY }}
         script: |
           # Docker 설치 및 권한 설정
           sudo snap install docker

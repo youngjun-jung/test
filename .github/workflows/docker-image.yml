@@ -22,5 +22,5 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag yp:$(date +%s)
         docker tag yp:$(date +%s) ${{ secrets.DOCKER_USERNAME }}/yp:$(date +%s)
-        docker push ${{ secrets.DOCKER_USERNAME }}/yp:$(date +%s)
+        
 

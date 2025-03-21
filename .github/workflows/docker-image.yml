@@ -25,10 +25,10 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/yp:latest
     - name: Run Docker Stop
       run: |
-        docker-compose stop   
+        docker compose stop   
     - name: Pull Docker Image
       run: |
         docker pull ${{ secrets.DOCKER_USERNAME }}/yp:latest
     - name: Run Docker Compose
       run: |
-        docker-compose up -d        
+        docker compose up -d        

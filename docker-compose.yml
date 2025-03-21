@@ -16,7 +16,7 @@ services:
       - node-network
 
   yp2:
-    build: .
+    image: yp_project-yp1
     ports:
       - "3001:3000"
     environment:
@@ -26,7 +26,7 @@ services:
       - node-network
 
   yp3:
-    build: .
+    image: yp_project-yp1
     ports:
       - "3002:3000"
     environment:

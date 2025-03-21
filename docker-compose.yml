@@ -1,4 +1,4 @@
-version: '3.9'
+#version: '3.9'
 
 networks:
   node-network:
@@ -6,7 +6,7 @@ networks:
 
 services:
   yp1:
-    build: jminzzang/yp
+    image: jminzzang/yp
     ports:
       - "3000:3000"
     environment:

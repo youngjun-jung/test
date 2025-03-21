@@ -647,3 +647,30 @@
                 AND A.YEAR = B.YEAR(+)
                 AND A.YEAR = :year
                 ORDER BY IDX
+2025-03-21 11:30:05 [INFO] Server is running on port:3000
+2025-03-21 11:30:05 [INFO]   _   _      _ _        __   __                      ____                         _ _ 
+ | | | | ___| | | ___   \ \ / /__  _   _ _ __   __ _|  _ \ ___   ___  _ __   __ _| | |
+ | |_| |/ _ \ | |/ _ \   \ V / _ \| | | | '_ \ / _` | |_) / _ \ / _ \| '_ \ / _` | | |
+ |  _  |  __/ | | (_) |   | | (_) | |_| | | | | (_| |  __/ (_) | (_) | | | | (_| |_|_|
+ |_| |_|\___|_|_|\___/    |_|\___/ \__,_|_| |_|\__, |_|   \___/ \___/|_| |_|\__, (_|_)
+                                               |___/                        |___/     
+2025-03-21 11:30:07 [INFO] Requested URL : /api/agbyproducts/?year=2025
+2025-03-21 11:30:07 [INFO] x-api-key : YP
+2025-03-21 11:30:08 [INFO] req data : {
+  "returncode": "0000"
+}
+2025-03-21 11:30:08 [INFO] start execute: SELECT YEAR, 'Pb Residue Calculation' GUBUN, GUBUN1, GUBUN2, MEASURE, MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06, MONTH_07
+                , MONTH_08, MONTH_09, MONTH_10, MONTH_11, MONTH_12, USE_YN, IDX
+                FROM PLAN_REF_INDICATOR
+                WHERE YEAR = :year 
+                AND GUBUN1 IN ('LME', 'T/C')
+                UNION ALL
+                SELECT A.YEAR, LNAME, MNAME, SNAME, A.MEASURE, MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06, MONTH_07
+                , MONTH_08, MONTH_09, MONTH_10, MONTH_11, MONTH_12, USE_YN, TO_NUMBER(A.IDX||'00')   
+                FROM PLAN_AG_BY_PRODUCTS_CODE A, PLAN_AG_BY_PRODUCTS B
+                WHERE A.LNAME = B.GUBUN(+)
+                AND A.MNAME = B.GUBUN1(+)
+                AND A.SNAME = B.GUBUN2(+)
+                AND A.YEAR = B.YEAR(+)
+                AND A.YEAR = :year
+                ORDER BY IDX

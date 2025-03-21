@@ -6,7 +6,7 @@ networks:
 
 services:
   yp1:
-    build: .
+    build: jminzzang/yp
     ports:
       - "3000:3000"
     environment:
@@ -16,7 +16,7 @@ services:
       - node-network
 
   yp2:
-    image: yp_project-yp1
+    image: jminzzang/yp
     ports:
       - "3001:3000"
     environment:
@@ -26,7 +26,7 @@ services:
       - node-network
 
   yp3:
-    image: yp_project-yp1
+    image: jminzzang/yp
     ports:
       - "3002:3000"
     environment:

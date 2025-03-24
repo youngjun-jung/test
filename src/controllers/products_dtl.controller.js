@@ -9,6 +9,7 @@ exports.getProducts_dtlchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const month = receivedData.month;
 
   console.log("year: ", year);
 
@@ -21,8 +22,8 @@ exports.getProducts_dtlchk = async (req, res) => {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
 
-  const query = `SELECT YEAR, NAME, LNAME, MNAME, SNAME, MEASURE
-                , SUM(DECODE(SCODE, 'DA0101', MONTH_01, 0)) DA0101
+  const query = `SELECT YEAR||:month, NAME, LNAME, MNAME, SNAME, MEASURE
+                , SUM(DECODE(SCODE, 'DA0101', MONTH_||:month, 0)) DA0101
                 , SUM(DECODE(SCODE, 'DA0102', MONTH_01, 0)) DA0102
                 , SUM(DECODE(SCODE, 'DA0103', MONTH_01, 0)) DA0103
                 , SUM(DECODE(SCODE, 'DA0201', MONTH_01, 0)) DA0201
@@ -112,7 +113,7 @@ exports.getProducts_dtlchk = async (req, res) => {
                 GROUP BY YEAR, NAME, LNAME, MNAME, SNAME, MEASURE, IDX    
                 ORDER BY IDX`;                 
 
- const binds = {year: year};
+ const binds = {year: year, month: month};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

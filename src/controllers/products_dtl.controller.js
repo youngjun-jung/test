@@ -23,7 +23,7 @@ exports.getProducts_dtlchk = async (req, res) => {
   }
 
   const query = `SELECT YEAR||:month, NAME, LNAME, MNAME, SNAME, MEASURE
-                , SUM(DECODE(SCODE, 'DA0101', MONTH_||:month, 0)) DA0101
+                , SUM(DECODE(SCODE, 'DA0101', MONTH_` + month + `, 0)) DA0101
                 , SUM(DECODE(SCODE, 'DA0102', MONTH_01, 0)) DA0102
                 , SUM(DECODE(SCODE, 'DA0103', MONTH_01, 0)) DA0103
                 , SUM(DECODE(SCODE, 'DA0201', MONTH_01, 0)) DA0201

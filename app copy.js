@@ -16,8 +16,6 @@ const saleRoutes = require('./src/routes/sale.routes');
 const saleledgerRoutes = require('./src/routes/saleledger.routes');
 const cogmRoutes = require('./src/routes/cogm.routes');
 const errorRoutes = require('./src/routes/error.routes');
-const checkversionRoutes = require('./src/routes/checkversion.routes');
-
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
 const tcRoutes = require('./src/routes/tc.routes');
@@ -77,13 +75,12 @@ app.use(bodyParser.json());
 // 라우트 설정
     // 시스템
 app.use('/api/login', loginRoutes); // 로그인 API 경로
+app.use('/api/update', updateRoutes); // 파일 업데이트 API 경로
 app.use('/api/menu', menuRoutes); // 메뉴 API 경로
 app.use('/api/user', userRoutes); // 사용자 정보 경로
 app.use('/api/group', groupRoutes); // 그룹 정보 경로
 app.use('/api/file', fileRoutes); // 소스 파일 정보 경로
 app.use('/api/error', errorRoutes); // 시스템 오류 정보 경로
-app.use('/api/program/update/:gubun', updateRoutes); // 파일 업데이트 API 경로
-app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
 
     // 실적 자료
 app.use('/api/sale', saleRoutes); // 판매량 정보 경로

@@ -20,7 +20,7 @@ exports.getOtherexpenseschk = async (req, res) => {
   {
       query = `SELECT GUBUN, YEAR, MONTH, SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX PLAN_OTHER_EXPENSES_CODE WHERE YEAR = :year) X, PLAN_OTHER_EXPENSES A
+                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_OTHER_EXPENSES_CODE WHERE YEAR = :year) X, PLAN_OTHER_EXPENSES A
                     WHERE X.SNAME = A.NAME(+)
                     AND YEAR(+) = :year
                     AND GUBUN(+) = :gubun
@@ -35,7 +35,7 @@ exports.getOtherexpenseschk = async (req, res) => {
                 , A.XJ*B.XJ XJ, A.XK*B.XK XK, A.XL*B.XL XL, A.XM*B.XM XM, A.XN*B.XN XN, A.XO*B.XO XO
                 , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
                 , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX PLAN_OTHER_EXPENSES_CODE WHERE YEAR = :year) X
+                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_OTHER_EXPENSES_CODE WHERE YEAR = :year) X
                     , (SELECT * FROM PLAN_OTHER_EXPENSES WHERE GUBUN = '1') A
                     , (SELECT * FROM PLAN_OTHER_EXPENSES WHERE GUBUN = '2') B
                     WHERE X.SNAME = A.NAME(+)

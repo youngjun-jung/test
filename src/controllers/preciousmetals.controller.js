@@ -21,7 +21,7 @@ exports.getPreciousmetalschk = async (req, res) => {
      res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
    }
 
-  const query = `SELECT A.YEAR, A.MNAME, A.SNAME, MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06
+  const query = `SELECT A.YEAR, A.MNAME, A.SNAME, MEASURE, MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06
                 , MONTH_07, MONTH_08, MONTH_09, MONTH_10, MONTH_11, MONTH_12
                             FROM PLAN_PRECIOUS_METALS_CODE A, PLAN_PRECIOUS_METALS B
                             WHERE A.YEAR = B.YEAR(+)

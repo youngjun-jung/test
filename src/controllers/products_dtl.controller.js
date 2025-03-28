@@ -110,6 +110,7 @@ exports.getProducts_dtlchk = async (req, res) => {
                       FROM PLAN_PRODUCTS_CODE X, PLAN_PRODUCTS A, PLAN_PRODUCTS_DIV_CODE P
                       WHERE X.SCODE = A.SCODE_1(+)
                       AND X.YEAR = A.YEAR(+)
+                      AND X.PLAN = 'Y'
                       AND A.SCODE_2 = P.SCODE
                       AND A.YEAR = P.YEAR
                       AND A.YEAR = :year

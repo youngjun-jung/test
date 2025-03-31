@@ -28,6 +28,7 @@ exports.getProductschk = async (req, res) => {
                       , A.IDX IDX_1, B.IDX IDX_2 
                       FROM PLAN_PRODUCTS_CODE A
                       , PLAN_PRODUCTS_DIV_CODE B
+                      WHERE A.PLAN = 'Y'
                       ) X
                       , PLAN_PRODUCTS A
                 WHERE X.YEAR = A.YEAR(+)

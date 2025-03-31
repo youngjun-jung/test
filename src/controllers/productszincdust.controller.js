@@ -25,7 +25,7 @@ exports.getProductszincdustchk = async (req, res) => {
                 FROM PLAN_PRODUCTS_CODE A, PLAN_PRODUCTS_ZINC_DUST B
                 WHERE A.SCODE = B.SCODE(+)
                 AND A.YEAR = B.YEAR(+)
-                AND A.YEAR = '2025'
+                AND A.YEAR = :year
                 AND A.ZINC_DUST = 'Y'
                 ORDER BY A.IDX`;                 
 

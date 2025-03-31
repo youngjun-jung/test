@@ -56,6 +56,7 @@ const productioninputsRoutes = require('./src/routes/productioninputs.routes');
 const preciousmetalsRoutes = require('./src/routes/preciousmetals.routes');
 const productszincRoutes = require('./src/routes/productszinc.routes');
 const productszincdustRoutes = require('./src/routes/productszincdust.routes');
+/*
 const productscadmiumRoutes = require('./src/routes/productscadmium.routes');
 const productscoppersulfateRoutes = require('./src/routes/productscoppersulfate.routes');
 const productssulfuricacidRoutes = require('./src/routes/productssulfuricacid.routes');
@@ -64,6 +65,7 @@ const productsplasterRoutes = require('./src/routes/productsplaster.routes');
 const productsgoldRoutes = require('./src/routes/productsgold.routes');
 const productssilverRoutes = require('./src/routes/productssilver.routes');
 const productstotalRoutes = require('./src/routes/productstotal.routes');
+*/
 
 const app = express();
 
@@ -140,6 +142,7 @@ app.use('/api/products_dtl', products_dtlRoutes); // 월별 계획종합(상세)
 // 계획종합(기타)
 app.use('/api/productszinc', productszincRoutes); // 월별 계획종합(아연) 정보 경로
 app.use('/api/productszincdust', productszincdustRoutes); // 월별 계획종합(아연말) 정보 경로
+/*
 app.use('/api/productscadmium', productscadmiumRoutes); // 월별 계획종합(카드뮴) 정보 경로
 app.use('/api/productscoppersulfate', productscoppersulfateRoutes); // 월별 계획종합(황산동) 정보 경로
 app.use('/api/productssulfuricacid', productssulfuricacidRoutes); // 월별 계획종합(황산) 정보 경로
@@ -148,6 +151,7 @@ app.use('/api/productsplaster', productsplasterRoutes); // 월별 계획종합(�
 app.use('/api/productsgold', productsgoldRoutes); // 월별 계획종합(금) 정보 경로
 app.use('/api/productssilver', productssilverRoutes); // 월별 계획종합(은) 정보 경로
 app.use('/api/productstotal', productstotalRoutes); // 월별 계획종합(총계) 정보 경로
+*/
 
     // 간접부문 배부후
 app.use('/api/distributiontable', distributiontableRoutes); // 배부표 정보 경로

@@ -1,5 +1,5 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/productszincdust.procedure');
+const executeProcedure = require('../procedures/productszinc.procedure');
 const logger = require('../../logger'); 
 
   // 참조 관련 비즈니스 로직

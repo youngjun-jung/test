@@ -131,7 +131,7 @@ app.use('/api/products_dtl', products_dtlRoutes); // 월별 계획종합(상세)
 
 // 계획종합(기타)
 app.use('/api/productszinc', productszincRoutes); // 월별 계획종합(아연) 정보 경로
-Wapp.use('/api/productszincdust', productszincdustRoutes); // 월별 계획종합(아연말) 정보 경로
+app.use('/api/productszincdust', productszincdustRoutes); // 월별 계획종합(아연말) 정보 경로
 
     // 간접부문 배부후
 app.use('/api/distributiontable', distributiontableRoutes); // 배부표 정보 경로

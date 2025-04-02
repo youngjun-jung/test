@@ -1,7 +1,7 @@
 const { executeQuery } = require('../config/queries');
 const logger = require('../../logger'); 
 
-// 판매량 관련 비즈니스 로직
+// 비즈니스 로직
 exports.getSaleledgerchk = async (req, res) => {
 
     // 요청 본문에서 JSON 데이터 추출

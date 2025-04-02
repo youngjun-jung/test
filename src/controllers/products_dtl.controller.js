@@ -2,7 +2,7 @@ const { executeQuery, executeQueryMany } = require('../config/queries');
 const executeProcedure = require('../procedures/products.procedure');
 const logger = require('../../logger'); 
 
-  // 참조 관련 비즈니스 로직
+  // 비즈니스 로직
 exports.getProducts_dtlchk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출

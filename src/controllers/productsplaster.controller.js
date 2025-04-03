@@ -3,7 +3,7 @@ const executeProcedure = require('../procedures/productszinc.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.getProductszincchk = async (req, res) => {
+exports.getProductsplasterchk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
@@ -22,11 +22,11 @@ exports.getProductszincchk = async (req, res) => {
     }
 
   const query = `SELECT LNAME, MNAME, SNAME, MEASURE, B.WON_CNT, B.WON_AMT, B.CNT, B.UNIT_COST, B.AMT
-                FROM PLAN_PRODUCTS_CODE A, PLAN_PRODUCTS_ZINC B
+                FROM PLAN_PRODUCTS_CODE A, PLAN_PRODUCTS_PLASTER B
                 WHERE A.SCODE = B.SCODE(+)
                 AND A.YEAR = B.YEAR(+)
                 AND A.YEAR = :year
-                AND A.ZINC = 'Y'
+                AND A.PLASTER = 'Y'
                 ORDER BY A.IDX`;                 
 
  const binds = {year: year};

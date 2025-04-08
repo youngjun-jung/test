@@ -11,7 +11,7 @@ exports.getDistributiontablechk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callDistributiontableproc(year);
 
@@ -20,7 +20,7 @@ exports.getDistributiontablechk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   const query = `SELECT X.SCODE, X.SNAME, X.IDX
                 , DECODE(SUM(SUM(DECODE(A.SCODE_2, NULL, 0, 'DTDC001', VALUE, 0))) OVER (), 0, 0, SUM(DECODE(A.SCODE_2, NULL, 0, 'DTDC001', VALUE, 0)) / SUM(SUM(DECODE(A.SCODE_2, NULL, 0, 'DTDC001', VALUE, 0))) OVER () * 100) AS DTDC001_PER
                 , SUM(DECODE(A.SCODE_2, NULL, 0, 'DTDC001', VALUE, 0)) AS DTDC001

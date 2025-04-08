@@ -11,7 +11,7 @@ exports.getZincconcplanchk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
    // 프로시저 호출
    const data1 = await executeProcedure.callZincconcplanproc(year);
 
@@ -20,7 +20,7 @@ exports.getZincconcplanchk = async (req, res) => {
    if (!data1 || Object.keys(data1).length === 0) {
      res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
    }
-
+*/
   const query = `SELECT A.YEAR, '정광수불' LNAME, A.MNAME, A.SNAME
                 , MONTH_01, MONTH_02, MONTH_03, MONTH_1
                 , MONTH_04, MONTH_05, MONTH_06, MONTH_2 

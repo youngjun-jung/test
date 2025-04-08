@@ -11,7 +11,7 @@ exports.getAgbyproductschk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
     const data1 = await executeProcedure.callAgbyproductsproc(year);
 
@@ -20,7 +20,7 @@ exports.getAgbyproductschk = async (req, res) => {
     if (!data1 || Object.keys(data1).length === 0) {
       res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
     }
-
+*/
   const query = `SELECT YEAR, 'Pb Residue Calculation' GUBUN, GUBUN1, GUBUN2, MEASURE, MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06, MONTH_07
                 , MONTH_08, MONTH_09, MONTH_10, MONTH_11, MONTH_12, USE_YN, IDX
                 FROM PLAN_REF_INDICATOR

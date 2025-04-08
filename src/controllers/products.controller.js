@@ -11,7 +11,7 @@ exports.getProductschk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callProductsproc(year);
 
@@ -20,7 +20,7 @@ exports.getProductschk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   const query = `SELECT X.YEAR, NAME_1, LNAME_1, MNAME_1, SNAME_1, LNAME_2, MNAME_2, SNAME_2
                 , MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06, MONTH_07, MONTH_08, MONTH_09, MONTH_10, MONTH_11, MONTH_12
                 FROM (SELECT A.YEAR, A.SCODE SCODE_1, B.SCODE SCODE_2, NAME NAME_1, A.LNAME LNAME_1

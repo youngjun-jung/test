@@ -11,7 +11,7 @@ exports.getProductscadmiumchk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
     const data1 = await executeProcedure.callProductszincproc(year);
 
@@ -20,7 +20,7 @@ exports.getProductscadmiumchk = async (req, res) => {
     if (!data1 || Object.keys(data1).length === 0) {
       res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
     }
-
+*/
   const query = `SELECT LNAME, MNAME, SNAME, MEASURE, B.WON_CNT, B.WON_AMT, B.CNT, B.UNIT_COST, B.AMT
                 FROM PLAN_PRODUCTS_CODE A, PLAN_PRODUCTS_CADMIUM B
                 WHERE A.SCODE = B.SCODE(+)

@@ -65,6 +65,16 @@ const productsgoldRoutes = require('./src/routes/productsgold.routes');
 const productssilverRoutes = require('./src/routes/productssilver.routes');
 const productstotalRoutes = require('./src/routes/productstotal.routes');
 
+const plestimationRoutes = require('./src/routes/plestimation.routes');
+
+const backupRoutes = require('./src/routes/backup.routes');
+const backupdeleteRoutes = require('./src/routes/backupdelete.routes');
+const backuprecRoutes = require('./src/routes/backuprec.routes');
+const backuplistRoutes = require('./src/routes/backuplist.routes');
+
+const procRoutes = require('./src/routes/proc.routes');
+const basicdataRoutes = require('./src/routes/basicdata.routes');
+
 const app = express();
 
 // 미들웨어 설정
@@ -103,6 +113,12 @@ app.use('/api/cogm', cogmRoutes); // 제조원가 정보 경로
 app.use('/api/exchange', exchangeRoutes); // 환율 정보 경로
 app.use('/api/lme', lmeRoutes); // LME 정보 경로
 app.use('/api/tc', tcRoutes); // TC 정보 경로
+
+    // 자료 백업
+app.use('/api/backup', backupRoutes); // 자료 백업 경로
+app.use('/api/backupdelete', backupdeleteRoutes); // 자료 백업 삭제 경로
+app.use('/api/backuprec', backuprecRoutes); // 자료 백업 원복 경로
+app.use('/api/backuplist', backuplistRoutes); // 백업 List 경로
 
     // 생산원가 계획
 app.use('/api/plug', plugRoutes); // plug 정보 경로
@@ -149,6 +165,8 @@ app.use('/api/productsgold', productsgoldRoutes); // 월별 계획종합(금) �
 app.use('/api/productssilver', productssilverRoutes); // 월별 계획종합(은) 정보 경로
 app.use('/api/productstotal', productstotalRoutes); // 월별 계획종합(총) 정보 경로
 
+app.use('/api/plestimation', plestimationRoutes); // 손익추정 정보 경로
+
     // 간접부문 배부후
 app.use('/api/distributiontable', distributiontableRoutes); // 배부표 정보 경로
 app.use('/api/submaterialaia', submaterialaiaRoutes); // (간접부문 배부후) 보조재료비 정보 경로
@@ -157,5 +175,9 @@ app.use('/api/eleccostaia', eleccostaiaRoutes); // (간접부문 배부후) 전�
 app.use('/api/otherexpensesaia', otherexpensesaiaRoutes); // (간접부문 배부후) 기타경비 정보 경로
 app.use('/api/repairexpensesaia', repairexpensesaiaRoutes); // (간접부문 배부후) 수선비 정보 경로
 app.use('/api/depreciationaia', depreciationaiaRoutes); // (간접부문 배부후) 감가상각비 정보 경로
+
+    // 시물레이션 처리
+app.use('/api/proc', procRoutes); // 전체 처리 경로
+app.use('/api/basicdata', basicdataRoutes); // 기초 자료 변경 경로
 
 module.exports = app;

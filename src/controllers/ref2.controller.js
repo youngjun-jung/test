@@ -11,7 +11,7 @@ exports.getRef2chk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callRefmanualproc(year);
 
@@ -20,7 +20,7 @@ exports.getRef2chk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   const query = `SELECT A.NUM, A.XA, A.XB, A.XC
               , B.MONTH_01, B.MONTH_02, B.MONTH_03, B.MONTH_01 + B.MONTH_02 + B.MONTH_03 MONTH_1
               , B.MONTH_04, B.MONTH_05, B.MONTH_06, B.MONTH_04 + B.MONTH_05 + B.MONTH_06 MONTH_2

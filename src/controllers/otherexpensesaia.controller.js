@@ -13,7 +13,7 @@ exports.getOtherexpensesaiachk = async (req, res) => {
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callOtherexpensesaiaproc(year);
 
@@ -22,7 +22,7 @@ exports.getOtherexpensesaiachk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   if(gubun != '0')
     {
         query = `SELECT YEAR, MONTH, NAME, XA, XB, XC, XD, XE, XF, XG, XH, ZN, XI, XJ, XK, XL, XM, XN, NUM

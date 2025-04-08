@@ -44,7 +44,7 @@ exports.getLaborcosttchk = async (req, res) => {
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_LABOR_COST_CODE WHERE YEAR = :year) X
                     , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '1') A
                     , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '2') B
-                    , (SELECT VALUE FROM PLAN_LABOR_COST_MANUAL WHERE YEAR = '2025') C
+                    , (SELECT VALUE FROM PLAN_LABOR_COST_MANUAL WHERE YEAR = :year) C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
                     AND A.YEAR = B.YEAR

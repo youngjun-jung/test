@@ -90,7 +90,7 @@ app.use(bodyParser.json());
     // swagger.yaml 파일의 외부 $ref를 모두 병합한 후 사용
     SwaggerParser.bundle(swaggerFilePath)
         .then(apiSpec => {
-            // Swagger UI 설정 및 제공 경로 지정 (/api-docs)
+            // Swagger UI 설정 및 제공 경로 지정 (/api-docs)1
             app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiSpec));
 
         });

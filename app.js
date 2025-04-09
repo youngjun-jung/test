@@ -17,7 +17,7 @@ const saleRoutes = require('./src/routes/sale.routes');
 const saleledgerRoutes = require('./src/routes/saleledger.routes');
 const cogmRoutes = require('./src/routes/cogm.routes');
 const errorRoutes = require('./src/routes/error.routes');
-const checkversionRoutes = require('./src/routes/checkversion.routes');
+//const checkversionRoutes = require('./src/routes/checkversion.routes');
 
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
@@ -105,7 +105,7 @@ app.use('/api/group', groupRoutes); // 그룹 정보 경로
 app.use('/api/file', fileRoutes); // 소스 파일 정보 경로
 app.use('/api/error', errorRoutes); // 시스템 오류 정보 경로
 app.use('/api/program/update/:gubun', updateRoutes); // 파일 업데이트 API 경로
-app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
+//app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
 
     // 실적 자료
 app.use('/api/sale', saleRoutes); // 판매량 정보 경로

@@ -67,6 +67,17 @@ const productsgoldRoutes = require('./src/routes/productsgold.routes');
 const productssilverRoutes = require('./src/routes/productssilver.routes');
 const productstotalRoutes = require('./src/routes/productstotal.routes');
 
+const productsmonthszincRoutes = require('./src/routes/productsmonthzinc.routes');
+const productsmonthzincdustRoutes = require('./src/routes/productsmonthzincdust.routes');
+const productsmonthcadmiumRoutes = require('./src/routes/productsmonthcadmium.routes');
+const productsmonthcoppersulfateRoutes = require('./src/routes/productsmonthcoppersulfate.routes');
+const productsmonthsulfuricacidRoutes = require('./src/routes/productsmonthsulfuricacid.routes');
+const productsmonthelcopperRoutes = require('./src/routes/productsmonthelcopper.routes');
+const productsmonthplasterRoutes = require('./src/routes/productsmonthplaster.routes');
+const productsmonthgoldRoutes = require('./src/routes/productsmonthgold.routes');
+const productsmonthsilverRoutes = require('./src/routes/productsmonthsilver.routes');
+const productsmonthtotalRoutes = require('./src/routes/productsmonthtotal.routes');
+
 const plestimationRoutes = require('./src/routes/plestimation.routes');
 
 const backupRoutes = require('./src/routes/backup.routes');
@@ -76,6 +87,10 @@ const backuplistRoutes = require('./src/routes/backuplist.routes');
 
 const procRoutes = require('./src/routes/proc.routes');
 const basicdataRoutes = require('./src/routes/basicdata.routes');
+
+    // 기획팀
+const plansalesRoutes = require('./src/routes/plansales.routes');
+const planrefindicatorRoutes = require('./src/routes/planrefindicator.routes');
 
 const app = express();
 
@@ -157,16 +172,28 @@ app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
 app.use('/api/products_dtl', products_dtlRoutes); // 월별 계획종합(상세) 정보 경로
 
 // 계획종합(기타)
-app.use('/api/productszinc', productszincRoutes); // 월별 계획종합(아연) 정보 경로
-app.use('/api/productszincdust', productszincdustRoutes); // 월별 계획종합(아연말) 정보 경로
-app.use('/api/productscadmium', productscadmiumRoutes); // 월별 계획종합(아연말) 정보 경로
-app.use('/api/productscoppersulfate', productscoppersulfateRoutes); // 월별 계획종합(황산동) 정보 경로
-app.use('/api/productssulfuricacid', productssulfuricacidRoutes); // 월별 계획종합(황산) 정보 경로
-app.use('/api/productselcopper', productselcopperRoutes); // 월별 계획종합(전기동) 정보 경로
-app.use('/api/productsplaster', productsplasterRoutes); // 월별 계획종합(석고) 정보 경로
-app.use('/api/productsgold', productsgoldRoutes); // 월별 계획종합(금) 정보 경로
-app.use('/api/productssilver', productssilverRoutes); // 월별 계획종합(은) 정보 경로
-app.use('/api/productstotal', productstotalRoutes); // 월별 계획종합(총) 정보 경로
+app.use('/api/productszinc', productszincRoutes); // 전체 계획종합(아연) 정보 경로
+app.use('/api/productszincdust', productszincdustRoutes); // 전체 계획종합(아연말) 정보 경로
+app.use('/api/productscadmium', productscadmiumRoutes); // 전체 계획종합(아연말) 정보 경로
+app.use('/api/productscoppersulfate', productscoppersulfateRoutes); // 전체 계획종합(황산동) 정보 경로
+app.use('/api/productssulfuricacid', productssulfuricacidRoutes); // 전체 계획종합(황산) 정보 경로
+app.use('/api/productselcopper', productselcopperRoutes); // 전체 계획종합(전기동) 정보 경로
+app.use('/api/productsplaster', productsplasterRoutes); // 전체 계획종합(석고) 정보 경로
+app.use('/api/productsgold', productsgoldRoutes); // 전체 계획종합(금) 정보 경로
+app.use('/api/productssilver', productssilverRoutes); // 전체 계획종합(은) 정보 경로
+app.use('/api/productstotal', productstotalRoutes); // 전체 계획종합(총) 정보 경로
+
+// 계획종합(기타 월별)
+app.use('/api/productsmonthzinc', productsmonthszincRoutes); // 월별 계획종합(아연) 정보 경로
+app.use('/api/productsmonthzincdust', productsmonthzincdustRoutes); // 월별 계획종합(아연말) 정보 경로
+app.use('/api/productsmonthcadmium', productsmonthcadmiumRoutes); // 월별 계획종합(아연말) 정보 경로
+app.use('/api/productsmonthcoppersulfate', productsmonthcoppersulfateRoutes); // 월별 계획종합(황산동) 정보 경로
+app.use('/api/productsmonthsulfuricacid', productsmonthsulfuricacidRoutes); // 월별 계획종합(황산) 정보 경로
+app.use('/api/productsmonthelcopper', productsmonthelcopperRoutes); // 월별 계획종합(전기동) 정보 경로
+app.use('/api/productsmonthplaster', productsmonthplasterRoutes); // 월별 계획종합(석고) 정보 경로
+app.use('/api/productsmonthgold', productsmonthgoldRoutes); // 월별 계획종합(금) 정보 경로
+app.use('/api/productsmonthsilver', productsmonthsilverRoutes); // 월별 계획종합(은) 정보 경로
+app.use('/api/productsmonthtotal', productsmonthtotalRoutes); // 월별 계획종합(총) 정보 경로
 
 app.use('/api/plestimation', plestimationRoutes); // 손익추정 정보 경로
 
@@ -182,5 +209,9 @@ app.use('/api/depreciationaia', depreciationaiaRoutes); // (간접부문 배부�
     // 시물레이션 처리
 app.use('/api/proc', procRoutes); // 전체 처리 경로
 app.use('/api/basicdata', basicdataRoutes); // 기초 자료 변경 경로
+
+    // (기획팀)
+app.use('/api/plansales', plansalesRoutes); // 월별 매출 계획 경로
+app.use('/api/planrefindicator', planrefindicatorRoutes); // 기준지표 정보 경로
 
 module.exports = app;

@@ -1,9 +1,9 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/basicdata.procedure');
+const executeProcedure = require('../procedures/planbasicdata.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.patchBasicdatachk = async (req, res) => { 
+exports.patchPlanbasicdatachk = async (req, res) => { 
   try {
     // 요청 본문에서 JSON 데이터 추출
     const receivedData = req.body;
@@ -14,16 +14,14 @@ exports.patchBasicdatachk = async (req, res) => {
     const zinccnt = receivedData.zinccnt;
     const zincin = receivedData.zincin;
     const zincout = receivedData.zincout;
-    const zinctrans = receivedData.zinctrans;
 
     logger.info(`req year : ${year}`);
     logger.info(`req zinccnt : ${zinccnt}`);
     logger.info(`req zincin : ${zincin}`);
     logger.info(`req zincout : ${zincout}`);
-    logger.info(`req zinctrans : ${zinctrans}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callBasicdataproc(year, zinccnt, zincin, zincout, zinctrans);
+    const data = await executeProcedure.callPlanbasicdataproc(year, zinccnt, zincin, zincout);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

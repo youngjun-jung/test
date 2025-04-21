@@ -3,21 +3,17 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callBasicdataproc = async (year, zinccnt, zincin, zincout, zinctrans) => {
+exports.callPlansellingexpensesproc = async (year) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_BASICDATA_PROC(:year, :zinccnt, :zincin, :zincout, :zinctrans, :returncode); 
+                SP_PLANNING_SELLING_EXPENSES_PROC(:year, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
-                zinccnt: zinccnt, // 매개변수
-                zincin: zincin, // 매개변수
-                zincout: zincout, // 매개변수
-                zinctrans: zinctrans, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

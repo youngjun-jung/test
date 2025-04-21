@@ -66,6 +66,7 @@ const productsplasterRoutes = require('./src/routes/productsplaster.routes');
 const productsgoldRoutes = require('./src/routes/productsgold.routes');
 const productssilverRoutes = require('./src/routes/productssilver.routes');
 const productstotalRoutes = require('./src/routes/productstotal.routes');
+const monthlyproductcostRoutes = require('./src/routes/monthlyproductcost.routes');
 
 const productsmonthszincRoutes = require('./src/routes/productsmonthzinc.routes');
 const productsmonthzincdustRoutes = require('./src/routes/productsmonthzincdust.routes');
@@ -91,6 +92,19 @@ const basicdataRoutes = require('./src/routes/basicdata.routes');
     // 기획팀
 const plansalesRoutes = require('./src/routes/plansales.routes');
 const planrefindicatorRoutes = require('./src/routes/planrefindicator.routes');
+const plansellingexpensesRoutes = require('./src/routes/plansellingexpenses.routes');
+const plangeneraladministrativeRoutes = require('./src/routes/plangeneraladministrative.routes');
+const plansellingexpensesdtlRoutes = require('./src/routes/plansellingexpensesdtl.routes');
+const planbyproductRoutes = require('./src/routes/planbyproduct.routes');
+const planmonthlyinventoryRoutes = require('./src/routes/planmonthlyinventory.routes');
+const planmonthlyinventorydtlRoutes = require('./src/routes/planmonthlyinventorydtl.routes');
+
+const planbackupRoutes = require('./src/routes/planbackup.routes');
+const planbackupdeleteRoutes = require('./src/routes/planbackupdelete.routes');
+const planbackuprecRoutes = require('./src/routes/planbackuprec.routes');
+const planbackuplistRoutes = require('./src/routes/planbackuplist.routes');
+const planprocRoutes = require('./src/routes/planproc.routes');
+const planbasicdataRoutes = require('./src/routes/planbasicdata.routes');
 
 const app = express();
 
@@ -166,6 +180,7 @@ app.use('/api/zincauto', zincautoRoutes); // 월별 정광 정보 경로
 app.use('/api/zincconcplan', zincconcplanRoutes); // 월별 정광수불(계획) 정보 경로
 app.use('/api/productioninputs', productioninputsRoutes); // 월별 생산, 부원료 정보 경로
 app.use('/api/preciousmetals', preciousmetalsRoutes); // 귀금속Conc 정보 경로
+app.use('/api/monthlyproductcost', monthlyproductcostRoutes); // 월별 제품별 정보 경로
 
     // 계획종합
 app.use('/api/products', productsRoutes); // 월별 계획종합 정보 경로
@@ -213,5 +228,18 @@ app.use('/api/basicdata', basicdataRoutes); // 기초 자료 변경 경로
     // (기획팀)
 app.use('/api/plansales', plansalesRoutes); // 월별 매출 계획 경로
 app.use('/api/planrefindicator', planrefindicatorRoutes); // 기준지표 정보 경로
+app.use('/api/plansellingexpenses', plansellingexpensesRoutes); // 월별 판매비 경로
+app.use('/api/plangeneraladministrative', plangeneraladministrativeRoutes); // 일반관리비 경로
+app.use('/api/plansellingexpensesdtl', plansellingexpensesdtlRoutes); // 월별 판매비(상세) 경로
+app.use('/api/planbyproduct', planbyproductRoutes); // 월별 제품별 경로
+app.use('/api/planmonthlyinventory', planmonthlyinventoryRoutes); // 월수불 경로
+app.use('/api/planmonthlyinventorydtl', planmonthlyinventorydtlRoutes); // 월수불(상세) 경로
+
+app.use('/api/planproc', planprocRoutes); // 전체 처리 경로
+app.use('/api/planbasicdata', planbasicdataRoutes); // 기초 자료 변경 경로
+app.use('/api/planbackup', planbackupRoutes); // 자료 백업 경로
+app.use('/api/planbackupdelete', planbackupdeleteRoutes); // 자료 백업 삭제 경로
+app.use('/api/planbackuprec', planbackuprecRoutes); // 자료 백업 원복 경로
+app.use('/api/planbackuplist', planbackuplistRoutes); // 백업 List 경로
 
 module.exports = app;

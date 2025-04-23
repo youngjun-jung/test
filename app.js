@@ -106,6 +106,12 @@ const planbackuplistRoutes = require('./src/routes/planbackuplist.routes');
 const planprocRoutes = require('./src/routes/planproc.routes');
 const planbasicdataRoutes = require('./src/routes/planbasicdata.routes');
 
+    // 전력료
+const elecdivisioncostRoutes = require('./src/routes/elecdivisioncost.routes');
+const elecrectifierRoutes = require('./src/routes/elecrectifier.routes');
+const elecrectifierplanRoutes = require('./src/routes/elecrectifierplan.routes');
+const elecdivisionfinalRoutes = require('./src/routes/elecdivisionfinal.routes');
+
 const app = express();
 
 // 미들웨어 설정
@@ -241,5 +247,11 @@ app.use('/api/planbackup', planbackupRoutes); // 자료 백업 경로
 app.use('/api/planbackupdelete', planbackupdeleteRoutes); // 자료 백업 삭제 경로
 app.use('/api/planbackuprec', planbackuprecRoutes); // 자료 백업 원복 경로
 app.use('/api/planbackuplist', planbackuplistRoutes); // 백업 List 경로
+
+   // (전력료)
+app.use('/api/elecdivisioncost', elecdivisioncostRoutes); // 전력료 계산 경로
+app.use('/api/elecrectifier', elecrectifierRoutes); // 정류기 계산 경로
+app.use('/api/elecrectifierplan', elecrectifierplanRoutes); // 정류기 요금차감 경로
+app.use('/api/elecdivisionfinal', elecdivisionfinalRoutes); // 전력료 최종계산 경로
 
 module.exports = app;

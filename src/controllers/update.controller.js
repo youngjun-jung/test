@@ -1,4 +1,4 @@
-const config = require('../config/envConfig'); // 환경변수 모듈 (2 depth)
+//const config = require('../config/envConfig'); // 환경변수 모듈 (2 depth)
 const { executeQuery } = require('../config/queries');
 const fs = require('fs');
 const path = require('path');
@@ -12,12 +12,14 @@ const path = require('path');
     const userId = receivedData.userid;
     const fileId = receivedData.fileid; 
     const fileVersion = receivedData.filever;
-
+    const updatePath_yp = "/pbPackage/yp/";
+    const updatePath_res ="/pbPackage/res/";
     //const { userid, fileid, filever } = receivedData;
 
     console.log(`ip: ${ip}, userId: ${userId}, gubun: ${gubun}, fileName: ${fileId}, version: ${fileVersion}`);
 
-    const prefixPath = ( gubun === 'YP' ) ? config.UPDATE.PATH_YP + fileVersion + "/":  config.UPDATE.PATH_RES + fileVersion + "/";
+    //const prefixPath = ( gubun === 'YP' ) ? config.UPDATE.PATH_YP + fileVersion + "/":  config.UPDATE.PATH_RES + fileVersion + "/";
+    const prefixPath = ( gubun === 'YP' ) ? updatePath_yp + fileVersion + "/":  updatePath_res + fileVersion + "/";
 
     const filePath = path.join(process.cwd(), prefixPath, fileId); 
     console.log('filePath: ', filePath);

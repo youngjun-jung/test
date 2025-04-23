@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const updateController = require('../controllers/update.controller');
 const checkApiKey = require('../middleware/authMiddleware'); // 인증 미들웨어 가져오기
 

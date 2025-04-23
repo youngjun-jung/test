@@ -112,6 +112,9 @@ const elecrectifierRoutes = require('./src/routes/elecrectifier.routes');
 const elecrectifierplanRoutes = require('./src/routes/elecrectifierplan.routes');
 const elecdivisionfinalRoutes = require('./src/routes/elecdivisionfinal.routes');
 
+// 계획비교
+const comparePlaRoutes = require('./src/routes/comparePlan.routes');
+
 const app = express();
 
 // 미들웨어 설정
@@ -253,5 +256,7 @@ app.use('/api/elecdivisioncost', elecdivisioncostRoutes); // 전력료 계산 �
 app.use('/api/elecrectifier', elecrectifierRoutes); // 정류기 계산 경로
 app.use('/api/elecrectifierplan', elecrectifierplanRoutes); // 정류기 요금차감 경로
 app.use('/api/elecdivisionfinal', elecdivisionfinalRoutes); // 전력료 최종계산 경로
+
+app.use('/api/compareplan', comparePlaRoutes); // 계획비교
 
 module.exports = app;

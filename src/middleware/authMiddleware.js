@@ -11,7 +11,7 @@ function checkApiKey(req, res, next) {
   const apiKey = req.headers['x-api-key']; //  헤더에서 API 키 확인
 
   logger.info(`Requested URL : ${req.baseUrl}${req.url}`);  
-  logger.info(`x-api-key : ${apiKey}`);
+  //logger.info(`x-api-key : ${apiKey}`);
 
   if (apiKey === API_KEY) {
     next(); // 유효한 API 키인 경우 다음 미들웨어로 이동

@@ -11,7 +11,7 @@ exports.getElecrectifierplanchk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callElecrectifierproc(year);
 
@@ -20,7 +20,7 @@ exports.getElecrectifierplanchk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   query = `SELECT A.YEAR, A.SNAME, B.X01, B.X02, B.X11, B.X12, B.XAVG, B.XAMT
           , (SELECT TO_CHAR(ROUND(VALUE, 0), 'FM999,999,999,999') FROM PLAN_ELEC_RECTIFIER_FINAL WHERE YEAR = A.YEAR AND SCODE = 'PERF001') FINAL
           FROM PLAN_ELEC_RECTIFIER_PLAN_CODE A, PLAN_ELEC_RECTIFIER_PLAN B

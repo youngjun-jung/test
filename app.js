@@ -112,8 +112,14 @@ const elecrectifierRoutes = require('./src/routes/elecrectifier.routes');
 const elecrectifierplanRoutes = require('./src/routes/elecrectifierplan.routes');
 const elecdivisionfinalRoutes = require('./src/routes/elecdivisionfinal.routes');
 
-// 계획비교
+    // 계획비교(삭제예정)
 const comparePlaRoutes = require('./src/routes/comparePlan.routes');
+
+   // 최종
+const plantotalfinalRoutes = require('./src/routes/plantotalfinal.routes');  
+const backupplantotalfinalRoutes = require('./src/routes/backupplantotalfinal.routes'); 
+const plancasetotalfinalRoutes = require('./src/routes/plancasetotalfinal.routes');  
+const backupplancasetotalfinalRoutes = require('./src/routes/backupplancasetotalfinal.routes');  
 
 const app = express();
 
@@ -258,5 +264,11 @@ app.use('/api/elecrectifierplan', elecrectifierplanRoutes); // 정류기 요금�
 app.use('/api/elecdivisionfinal', elecdivisionfinalRoutes); // 전력료 최종계산 경로
 
 app.use('/api/compareplan', comparePlaRoutes); // 계획비교
+
+   // 최종
+app.use('/api/plantotalfinal', plantotalfinalRoutes); // 최종 월별 자료 계산 경로
+app.use('/api/backupplantotalfinal', backupplantotalfinalRoutes); // 최종 월별 백업자료 계산 경로
+app.use('/api/plancasetotalfinal', plancasetotalfinalRoutes); // 최종 자료 계산 경로
+app.use('/api/backupplancasetotalfinal', backupplancasetotalfinalRoutes); // 최종 백업자료 계산 경로
 
 module.exports = app;

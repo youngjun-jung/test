@@ -13,7 +13,7 @@ exports.getElecdivisioncostchk = async (req, res) => {
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callElecdivisioncostproc(year);
 
@@ -22,7 +22,7 @@ exports.getElecdivisioncostchk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   query = `SELECT A.YEAR, A.SNAME, XSUM, XA, XB, XC
           FROM PLAN_ELEC_DIVISION_COST_CODE A, PLAN_ELEC_DIVISION_COST B
           WHERE A.SCODE = B.SCODE(+)

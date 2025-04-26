@@ -14,7 +14,7 @@ exports.getBackuplistchk = async (req, res) => {
   const query = `SELECT BACKUP_ID, COMMENTS, PROCID
                 FROM PLAN_BACKUP
                 WHERE BACKUP_ID LIKE '%' || :year || '%'
-                AND USE_YN = 'Y'
+                AND USE_YN IN ('Z', 'Y')
                 ORDER BY BACKUP_ID DESC`;                 
 
  const binds = {year: year};

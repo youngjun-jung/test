@@ -120,6 +120,7 @@ const plantotalfinalRoutes = require('./src/routes/plantotalfinal.routes');
 const backupplantotalfinalRoutes = require('./src/routes/backupplantotalfinal.routes'); 
 const plancasetotalfinalRoutes = require('./src/routes/plancasetotalfinal.routes');  
 const backupplancasetotalfinalRoutes = require('./src/routes/backupplancasetotalfinal.routes');  
+const yearbackupRoutes = require('./src/routes/yearbackup.routes'); 
 
 const app = express();
 
@@ -270,5 +271,6 @@ app.use('/api/plantotalfinal', plantotalfinalRoutes); // 최종 월별 자료 �
 app.use('/api/backupplantotalfinal', backupplantotalfinalRoutes); // 최종 월별 백업자료 계산 경로
 app.use('/api/plancasetotalfinal', plancasetotalfinalRoutes); // 최종 자료 계산 경로
 app.use('/api/backupplancasetotalfinal', backupplancasetotalfinalRoutes); // 최종 백업자료 계산 경로
+app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경로
 
 module.exports = app;

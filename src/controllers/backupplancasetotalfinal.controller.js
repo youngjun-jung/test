@@ -21,7 +21,7 @@ exports.getBackupplancasetotalfinalchk = async (req, res) => {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
 */
-  query = `SELECT YEAR, '기획팀' LNAME, '매출계획' MNAME, '아연괴 수' SNAME, VALUE MONTH_0
+  query = `SELECT YEAR, '' LNAME, '' MNAME, '아연괴 수' SNAME, VALUE MONTH_0
             FROM BACKUP_PLAN_PROC_ZINC_CNT
             WHERE BACKUP_ID = :backup_id
             AND SCODE = 'PPZC002'

@@ -26,11 +26,11 @@ exports.getPlancasetotalfinalchk = async (req, res) => {
             WHERE YEAR = :year
             AND SCODE = 'PPZC002'
             UNION ALL
-            SELECT YEAR, GUBUN1, GUBUN2, '평균', DECODE(ANNUAL, NULL, (MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) / 12
-                            , 0, (MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) / 12, ANNUAL)
+            SELECT YEAR, GUBUN1, GUBUN2, '평균', ROUND(DECODE(ANNUAL, NULL, (MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) / 12
+                            , 0, (MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) / 12, ANNUAL), 1)
             FROM PLAN_REF_INDICATOR
             WHERE YEAR = :year
-            AND SCODE IN ('RI001', 'RI002', 'RI003', 'RI005', 'RI006', 'RI008', 'RI009', 'RI010', 'RI011')
+            AND SCODE IN ('RI001', 'RI002', 'RI003', 'RI005', 'RI006', 'RI008', 'RI009', 'RI010', 'RI011', 'RI018', 'RI019', 'RI020')
             UNION ALL
             SELECT YEAR, LNAME, MNAME, SNAME, MONTH_0
             FROM (

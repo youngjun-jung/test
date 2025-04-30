@@ -1,5 +1,5 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/refindicator.procedure');
+const executeProcedure = require('../procedures/refindicatoress.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
@@ -9,8 +9,22 @@ exports.getRefindicatorchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const type_gubun = receivedData.type_gubun;
 
   console.log("year: ", year);
+  console.log("type_gubun: ", type_gubun);
+
+  if (type_gubun == '0' || type_gubun == '1') 
+  {
+    const data1 = await executeProcedure.callRefindicatoressproc(year, type_gubun);
+
+    logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
+
+    if (!data1 || Object.keys(data1).length === 0) {
+      res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
+    }
+  }
+ 
 
   const query = `SELECT YEAR, GUBUN1, GUBUN2, MEASURE, NVL(ANNUAL, 0) ANNUAL, NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03, NVL(MONTH_04, 0) MONTH_04, NVL(MONTH_05, 0) MONTH_05
                 , NVL(MONTH_06, 0) MONTH_06, NVL(MONTH_07, 0) MONTH_07, NVL(MONTH_08, 0) MONTH_08, NVL(MONTH_09, 0) MONTH_09, NVL(MONTH_10, 0) MONTH_10
@@ -42,6 +56,7 @@ exports.getRefindicatorchk = async (req, res) => {
                 , (SELECT SUM(DECODE(MONTH, 10, OPERATION_DAYS_6, 0)) FROM PRODUCTION_CALENDAR WHERE YEAR = A.YEAR) DAY_10
                 , (SELECT SUM(DECODE(MONTH, 11, OPERATION_DAYS_6, 0)) FROM PRODUCTION_CALENDAR WHERE YEAR = A.YEAR) DAY_11
                 , (SELECT SUM(DECODE(MONTH, 12, OPERATION_DAYS_6, 0)) FROM PRODUCTION_CALENDAR WHERE YEAR = A.YEAR) DAY_12
+                , (SELECT TYPE_GUBUN FROM PLAN_TYPE_GUBUN_CODE WHERE YEAR = A.YEAR AND USE_YN = 'Y' AND ROWNUM = 1) TYPE_GUBUN
                   FROM PLAN_REF_INDICATOR A
                   WHERE YEAR = :year
                   AND USE_YN = 'Y'

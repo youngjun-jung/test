@@ -3,6 +3,7 @@
     "@apidevtools/swagger-parser": "^10.1.1",
     "app-root-path": "^3.1.0",
     "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "docker": "^1.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

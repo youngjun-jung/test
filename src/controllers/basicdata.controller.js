@@ -15,15 +15,17 @@ exports.patchBasicdatachk = async (req, res) => {
     const zincin = receivedData.zincin;
     const zincout = receivedData.zincout;
     const zinctrans = receivedData.zinctrans;
+    const type_gubun = receivedData.type_gubun;
 
     logger.info(`req year : ${year}`);
     logger.info(`req zinccnt : ${zinccnt}`);
     logger.info(`req zincin : ${zincin}`);
     logger.info(`req zincout : ${zincout}`);
     logger.info(`req zinctrans : ${zinctrans}`);
+    logger.info(`req type_gubun : ${type_gubun}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callBasicdataproc(year, zinccnt, zincin, zincout, zinctrans);
+    const data = await executeProcedure.callBasicdataproc(year, zinccnt, zincin, zincout, zinctrans, type_gubun);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

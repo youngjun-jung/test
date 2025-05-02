@@ -9,6 +9,7 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const zinc_cnt = receivedData.zinc_cnt;
   const pd_1 = receivedData.pd_1;
   const pd_2 = receivedData.pd_2;
   const pd_3 = receivedData.pd_3;
@@ -21,8 +22,10 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   const pd_10 = receivedData.pd_10;
   const pd_11 = receivedData.pd_11;
   const pd_12 = receivedData.pd_12;
+  const type_gubun = '1';
 
   console.log("year: ", year);
+  console.log("zinc_cnt: ", zinc_cnt);
   console.log("pd_1: ", pd_1);
   console.log("pd_2: ", pd_2);
   console.log("pd_3: ", pd_3);
@@ -37,20 +40,23 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   console.log("pd_12: ", pd_12);
 
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12);
+  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
-  if (!data1 || Object.keys(data1).length === 0) {
+  if (!data1 || Object.keys(data1).length === 0 || data1.returncode != '0000') {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
+    return;
   }
 
-  query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME, B.MONTH_01, B.MONTH_02, B.MONTH_03, B.MONTH_04, B.MONTH_05, B.MONTH_06, B.MONTH_07, B.MONTH_08, B.MONTH_09, B.MONTH_10, B.MONTH_11, B.MONTH_12, B.MONTH_0
-            FROM PLAN_TOTAL_FINAL_CODE A, PLAN_TOTAL_FINAL B
-            WHERE A.SCODE = B.SCODE(+)
-            AND A.YEAR = B.YEAR(+)
-            AND A.YEAR = :year
-            ORDER BY A.IDX `; 
+  query = `SELECT YEAR, SCODE, XA, XB, XC
+          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '황산생산') S_CNT
+          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '아연괴생산') ZINC_CNT
+          , (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') ZINC_TRANS
+          FROM PLAN_ELEC_RECTIFIER_DTL A
+          WHERE YEAR = :year
+          AND GUBUN = '0'
+          ORDER BY IDX `; 
 
   binds = {year: year};                       
   

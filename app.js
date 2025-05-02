@@ -127,6 +127,8 @@ const yearbackupRoutes = require('./src/routes/yearbackup.routes');
 
    // 신규
 const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
+const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
+const procnewRoutes = require('./src/routes/procnew.routes');
 
 const app = express();
 
@@ -282,7 +284,9 @@ app.use('/api/plancasetotalfinal', plancasetotalfinalRoutes); // 최종 자료 �
 app.use('/api/backupplancasetotalfinal', backupplancasetotalfinalRoutes); // 최종 백업자료 계산 경로
 app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경로
 
-   // 신규 최종종
-app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로        
+   // 신규 최종
+app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       
+app.use('/api/planlaborzinc', planlaborzincRoutes); // 노무비 조회 경로  
+app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
 
 module.exports = app;

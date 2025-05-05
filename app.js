@@ -111,6 +111,9 @@ const elecdivisioncostRoutes = require('./src/routes/elecdivisioncost.routes');
 const elecrectifierRoutes = require('./src/routes/elecrectifier.routes');
 const elecrectifierplanRoutes = require('./src/routes/elecrectifierplan.routes');
 const elecdivisionfinalRoutes = require('./src/routes/elecdivisionfinal.routes');
+const elecrectifiermnRoutes = require('./src/routes/elecrectifiermn.routes');
+const elecrectifiercostRoutes = require('./src/routes/elecrectifiercost.routes');
+const elecrectifierwoncostRoutes = require('./src/routes/elecrectifierwoncost.routes');
 
     // 계획비교(삭제예정)
 const comparePlaRoutes = require('./src/routes/comparePlan.routes');
@@ -121,6 +124,11 @@ const backupplantotalfinalRoutes = require('./src/routes/backupplantotalfinal.ro
 const plancasetotalfinalRoutes = require('./src/routes/plancasetotalfinal.routes');  
 const backupplancasetotalfinalRoutes = require('./src/routes/backupplancasetotalfinal.routes');  
 const yearbackupRoutes = require('./src/routes/yearbackup.routes'); 
+
+   // 신규
+const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
+const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
+const procnewRoutes = require('./src/routes/procnew.routes');
 
 const app = express();
 
@@ -263,6 +271,9 @@ app.use('/api/elecdivisioncost', elecdivisioncostRoutes); // 전력료 계산 �
 app.use('/api/elecrectifier', elecrectifierRoutes); // 정류기 계산 경로
 app.use('/api/elecrectifierplan', elecrectifierplanRoutes); // 정류기 요금차감 경로
 app.use('/api/elecdivisionfinal', elecdivisionfinalRoutes); // 전력료 최종계산 경로
+app.use('/api/elecrectifiermn', elecrectifiermnRoutes); // 정류기 최대생산량 경로
+app.use('/api/elecrectifiercost', elecrectifiercostRoutes); // 정류기 요금 경로
+app.use('/api/elecrectifierwoncost', elecrectifierwoncostRoutes); // 정류기 요금 경로
 
 app.use('/api/compareplan', comparePlaRoutes); // 계획비교
 
@@ -272,5 +283,10 @@ app.use('/api/backupplantotalfinal', backupplantotalfinalRoutes); // 최종 월�
 app.use('/api/plancasetotalfinal', plancasetotalfinalRoutes); // 최종 자료 계산 경로
 app.use('/api/backupplancasetotalfinal', backupplancasetotalfinalRoutes); // 최종 백업자료 계산 경로
 app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경로
+
+   // 신규 최종
+app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       
+app.use('/api/planlaborzinc', planlaborzincRoutes); // 노무비 조회 경로  
+app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
 
 module.exports = app;

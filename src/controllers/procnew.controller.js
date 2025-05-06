@@ -8,16 +8,30 @@ exports.postProcnewchk = async (req, res) => {
     // 요청 본문에서 JSON 데이터 추출
     const receivedData = req.body;
 
-    //logger.info(JSON.stringify(receivedData, null, 2));
-
     const year = receivedData.year;
     const procid = receivedData.procid;
+    const zin_in = receivedData.zin_in;
+    const zin_lo = receivedData.zin_lo;
+    const zin_out = receivedData.zin_out;
+    const s_in = receivedData.s_in;
+    const s_dong = receivedData.s_dong;
+    const s_on = receivedData.s_on;
+    const scode = receivedData.scode;
+    const zinc_trans = receivedData.zinc_trans;
 
     logger.info(`req year : ${year}`);
     logger.info(`req procid : ${procid}`);
+    logger.info(`req zin_in : ${zin_in}`);
+    logger.info(`req zin_lo : ${zin_lo}`);
+    logger.info(`req zin_out : ${zin_out}`);
+    logger.info(`req s_in : ${s_in}`);
+    logger.info(`req s_dong : ${s_dong}`);
+    logger.info(`req s_on : ${s_on}`);
+    logger.info(`req scode : ${scode}`);
+    logger.info(`req zinc_trans : ${zinc_trans}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callProcnewproc(year, procid);
+    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, s_in, s_dong, s_on, scode, zinc_trans);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

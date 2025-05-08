@@ -11,14 +11,16 @@ exports.getVersionCheck = async (req, res) => {
                   GUBUN,
                   FILEID,
                   FILESIZE,
-                  VER
+                  VER, 
+                  CREATED_DT,
+                  MODIFIED_DT
               FROM TB_UPDATE_YP A
               WHERE TO_NUMBER(REPLACE(VER, '.', '')) = (
                   SELECT MAX(TO_NUMBER(REPLACE(VER, '.', '')))
                   FROM TB_UPDATE_YP B
                   WHERE A.FILEID = B.FILEID AND A.GUBUN = B.GUBUN
               )
-              AND TO_NUMBER(REPLACE(VER, '.', '')) > TO_NUMBER(REPLACE(:APPVERSION, '.', ''))
+              AND TO_NUMBER(REPLACE(VER, '.', '')) >= TO_NUMBER(REPLACE(:APPVERSION, '.', ''))
               ORDER BY GUBUN DESC, FILEID`;
 
   const binds = {appVersion: appVer};
@@ -27,11 +29,11 @@ exports.getVersionCheck = async (req, res) => {
       const data = await executeQuery(query, binds); // 데이터 조회
 
       const reformData = data.reduce((acc, curr) => {
-        const { GUBUN, FILEID, FILESIZE, VER } = curr;
+        const { GUBUN, FILEID, FILESIZE, VER, CREATED_DT, MODIFIED_DT } = curr;
         if (!acc[GUBUN]) { // gubun이 존재하지 않으면 태그 추가
           acc[GUBUN] = [];
         }
-        acc[GUBUN].push({ fileid: FILEID, filesize: FILESIZE, ver: VER });
+        acc[GUBUN].push({ fileid: FILEID, filesize: FILESIZE, ver: VER, created_dt: CREATED_DT, modified_dt: MODIFIED_DT });
         return acc;
       }, {});
 

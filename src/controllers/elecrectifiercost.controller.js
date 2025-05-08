@@ -15,7 +15,7 @@ exports.getElecrectifiercostchk = async (req, res) => {
   query = `SELECT SCODE, VALUE
             FROM PLAN_ELEC_RECTIFIER_MANUAL
             WHERE YEAR = :year
-            AND SCODE IN ('PERM0204', 'PERM0203', 'PERM0202', 'PERM0201', 'PERM0104', 'PERM0103', 'PERM0102', 'PERM0101', 'PERM0004', 'PERM0003', 'PERM0002', 'PERM0001') 
+            AND SCODE IN ('PERM0302', 'PERM0204', 'PERM0203', 'PERM0202', 'PERM0201', 'PERM0104', 'PERM0103', 'PERM0102', 'PERM0101', 'PERM0004', 'PERM0003', 'PERM0002', 'PERM0001') 
             ORDER BY IDX`;
 
   binds = {year: year};                       

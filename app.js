@@ -26,6 +26,7 @@ const plugRoutes = require('./src/routes/plug.routes');
 const ref1Routes = require('./src/routes/ref1.routes');
 const ref2Routes = require('./src/routes/ref2.routes');
 const refindicatorRoutes = require('./src/routes/refindicator.routes');
+const refindicatorprocRoutes = require('./src/routes/refindicatorproc.routes');
 const otherexpensesRoutes = require('./src/routes/otherexpenses.routes');
 const otherexpensestRoutes = require('./src/routes/otherexpensest.routes');
 const submaterialRoutes = require('./src/routes/submaterial.routes');
@@ -183,6 +184,7 @@ app.use('/api/plug', plugRoutes); // plug 정보 경로
 app.use('/api/ref1', ref1Routes); // 참조1 정보 경로
 app.use('/api/ref2', ref2Routes); // 참조2 정보 경로
 app.use('/api/refindicator', refindicatorRoutes); // 기준지표 정보 경로
+app.use('/api/refindicatorproc', refindicatorprocRoutes); // 기준지표 수정 경로
 app.use('/api/otherexpenses', otherexpensesRoutes); // 월별 기타경비 정보 경로
 app.use('/api/otherexpensest', otherexpensestRoutes); // 종합 기타경비 정보 경로
 app.use('/api/submaterial', submaterialRoutes); // 월별 보조재료 정보 경로

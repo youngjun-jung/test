@@ -1,5 +1,6 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
 const executeProcedure = require('../procedures/refindicatoress.procedure');
+const executeProcedure1 = require('../procedures/refindicator.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
@@ -101,7 +102,7 @@ exports.patchRefindicatorchk = async (req, res) => {
     logger.info(`req procid : ${annual}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callRefindicatorproc(year, scode, annual, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12);
+    const data = await executeProcedure1.callRefindicatorproc(year, scode, annual, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

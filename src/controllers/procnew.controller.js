@@ -18,6 +18,8 @@ exports.postProcnewchk = async (req, res) => {
     const s_on = receivedData.s_on;
     const scode = receivedData.scode;
     const zinc_trans = receivedData.zinc_trans;
+    const ca_trans = receivedData.ca_trans;
+    const comments = receivedData.comments;
 
     logger.info(`req year : ${year}`);
     logger.info(`req procid : ${procid}`);
@@ -29,9 +31,11 @@ exports.postProcnewchk = async (req, res) => {
     logger.info(`req s_on : ${s_on}`);
     logger.info(`req scode : ${scode}`);
     logger.info(`req zinc_trans : ${zinc_trans}`);
+    logger.info(`req ca_trans : ${ca_trans}`);
+    logger.info(`req comments : ${comments}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, s_in, s_dong, s_on, scode, zinc_trans);
+    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

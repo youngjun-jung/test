@@ -17,10 +17,7 @@ figlet("Hello YoungPoong!!", function (err, data) {
   logger.info(data);
 });
 
-// 서버 타임아웃 설정 (5분 = 300,000ms)
-const server = app.listen(PORT, () => {
+// 서버 실행
+app.listen(PORT, () => {
   logger.info(`Server is running on port:${PORT}`);
 });
-
-server.timeout = 300000; // 5분(300초) 타임아웃 설정
-server.keepAliveTimeout = 300000; // 커넥션 유지 시간(선택 사항)

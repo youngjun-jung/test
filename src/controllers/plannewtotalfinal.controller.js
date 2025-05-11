@@ -23,6 +23,7 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   const pd_11 = receivedData.pd_11;
   const pd_12 = receivedData.pd_12;
   const type_gubun = '1';
+  const gubun = receivedData.gubun;
 
   console.log("year: ", year);
   console.log("zinc_cnt: ", zinc_cnt);
@@ -38,9 +39,10 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   console.log("pd_10: ", pd_10);
   console.log("pd_11: ", pd_11);
   console.log("pd_12: ", pd_12);
+  console.log("gubun: ", gubun);
 
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun);
+  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -55,6 +57,8 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
           , (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') ZINC_TRANS
           , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR FROM PLUG WHERE XB = '정광' AND YEAR = A.YEAR) ZINC_CNT2
           , (SELECT SUM(XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR) FROM PLUG WHERE SCODE IN ('PPP0306', 'PPP0307', 'PPP0308') AND YEAR = A.YEAR) ZINC_CNT3
+          , CASE WHEN FN_REF_VALUE('아연괴생산', A.YEAR, '00') + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') > 220000 THEN ((FN_REF_VALUE('아연괴생산', A.YEAR, '00')  + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') - 220000) / 220000) * FN_REF_VALUE('캐소드생산', A.YEAR, '00')
+            ELSE 0 END AS CA_CNT
           FROM PLAN_ELEC_RECTIFIER_DTL A
           WHERE YEAR = :year
           AND GUBUN = '0'

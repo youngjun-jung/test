@@ -11,13 +11,27 @@ exports.getPlanlaborzincchk = async (req, res) => {
 
   console.log("year: ", year);
 
-  const query = `SELECT A.YEAR, A.SCODE, A.USE_YN, SUM(MG_VALUE + IM_VALUE) MG_VALUE, SUM(PD_VALUE) PD_VALUE
-                FROM PLAN_LABOR_ZINC_CODE A, PLAN_LABOR_ZINC_DTL B
-                WHERE A.YEAR = B.YEAR(+)
-                AND A.SCODE = B.MCODE(+)
-                AND A.YEAR = :year
-                GROUP BY A.YEAR, A.SCODE, A.USE_YN, A.IDX
-                ORDER BY A.IDX`;                 
+  const query = `SELECT A.YEAR, A.SCODE, A.USE_YN, SUM(NVL(MG_VALUE, 0) + NVL(IM_VALUE, 0)) MG_VALUE, SUM(PD_VALUE) PD_VALUE
+                  FROM PLAN_LABOR_ZINC_CODE A, PLAN_LABOR_ZINC_DTL B
+                  WHERE A.YEAR = B.YEAR(+)
+                  AND A.SCODE = B.MCODE(+)
+                  AND A.YEAR = :year
+                  AND (A.SCODE = 'PLZC001' 
+                      OR SUBSTR(A.SCODE, 1, 5) = (SELECT CASE WHEN A_CNT > 0 AND B_CNT = 0 AND C_CNT = 0 THEN 'PLZCA'
+                                                              WHEN A_CNT > 0 AND B_CNT > 0 AND C_CNT = 0 THEN 'PLZCB'
+                                                              WHEN A_CNT > 0 AND B_CNT > 0 AND C_CNT > 0 THEN 'PLZCC'
+                                                              ELSE 'PLZC0' END 
+                                                  FROM (
+                                                      SELECT SUM(DECODE(GUBUN, '0', 1, 0)) A_CNT
+                                                      , SUM(DECODE(GUBUN, '1', 1, 0)) B_CNT
+                                                      , SUM(DECODE(GUBUN, '2', 1, 0)) C_CNT
+                                                      from PLAN_ELEC_RECTIFIER_DTL
+                                                      WHERE YEAR = :year
+                                                      AND XSUM > 0
+                                                      )
+                                                  ))
+                  GROUP BY A.YEAR, A.SCODE, A.USE_YN
+                  ORDER BY A.SCODE`;                 
 
  const binds = {year: year};
 

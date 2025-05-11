@@ -18,7 +18,7 @@ const saleledgerRoutes = require('./src/routes/saleledger.routes');
 const cogmRoutes = require('./src/routes/cogm.routes');
 const errorRoutes = require('./src/routes/error.routes');
 //const checkversionRoutes = require('./src/routes/checkversion.routes');
-
+preciousmetals
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
 const tcRoutes = require('./src/routes/tc.routes');

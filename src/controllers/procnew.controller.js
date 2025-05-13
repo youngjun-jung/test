@@ -20,12 +20,14 @@ exports.postProcnewchk = async (req, res) => {
     const zinc_trans = receivedData.zinc_trans;
     const ca_trans = receivedData.ca_trans;
     const comments = receivedData.comments;
+    const zin_out_in = receivedData.zin_out_in;
 
     logger.info(`req year : ${year}`);
     logger.info(`req procid : ${procid}`);
     logger.info(`req zin_in : ${zin_in}`);
     logger.info(`req zin_lo : ${zin_lo}`);
     logger.info(`req zin_out : ${zin_out}`);
+    logger.info(`req zin_out_in : ${zin_out_in}`);
     logger.info(`req s_in : ${s_in}`);
     logger.info(`req s_dong : ${s_dong}`);
     logger.info(`req s_on : ${s_on}`);
@@ -35,7 +37,7 @@ exports.postProcnewchk = async (req, res) => {
     logger.info(`req comments : ${comments}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments);
+    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, zin_out_in, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

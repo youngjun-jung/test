@@ -24,10 +24,13 @@ exports.patchBasicdatachk = async (req, res) => {
     logger.info(`req zinctrans : ${zinctrans}`);
     logger.info(`req type_gubun : ${type_gubun}`);
 
+    logger.info(`START`);
+
     // 저장 프로시저 호출
     const data = await executeProcedure.callBasicdataproc(year, zinccnt, zincin, zincout, zinctrans, type_gubun);
 
-    //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
+    logger.info(`END`);
+logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 
     if (!data || Object.keys(data).length === 0) {
       logger.error('[404]Error calling stored procedure:', error);

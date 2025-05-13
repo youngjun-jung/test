@@ -268,7 +268,7 @@ app.use('/api/planbackupdelete', planbackupdeleteRoutes); // 자료 백업 삭�
 app.use('/api/planbackuprec', planbackuprecRoutes); // 자료 백업 원복 경로
 app.use('/api/planbackuplist', planbackuplistRoutes); // 백업 List 경로
 
-   // (전력료)
+   // (전력료)11
 app.use('/api/elecdivisioncost', elecdivisioncostRoutes); // 전력료 계산 경로
 app.use('/api/elecrectifier', elecrectifierRoutes); // 정류기 계산 경로
 app.use('/api/elecrectifierplan', elecrectifierplanRoutes); // 정류기 요금차감 경로

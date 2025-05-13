@@ -17,7 +17,7 @@ const saleRoutes = require('./src/routes/sale.routes');
 const saleledgerRoutes = require('./src/routes/saleledger.routes');
 const cogmRoutes = require('./src/routes/cogm.routes');
 const errorRoutes = require('./src/routes/error.routes');
-const checkversionRoutes = require('./src/routes/checkversion.routes');
+//const checkversionRoutes = require('./src/routes/checkversion.routes');1
 
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
@@ -131,6 +131,33 @@ const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes')
 const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
 const procnewRoutes = require('./src/routes/procnew.routes');
 
+// ========= Backup target =========
+const backplugRoutes = require('./src/routes/backplug.routes');
+const backotherexpensestRoutes = require('./src/routes/backotherexpensest.routes');
+const backsubmaterialtRoutes = require('./src/routes/backsubmaterialt.routes');
+const backlaborcosttRoutes = require('./src/routes/backlaborcostt.routes');
+const backrepairexpensestRoutes = require('./src/routes/backrepairexpensest.routes');
+const backdepreciationtRoutes = require('./src/routes/backdepreciationt.routes');
+const backzincconcentrateRoutes = require('./src/routes/backzincconcentrate.routes');
+//const backrefindicatorRoutes = require('./src/routes/refindicator.routes');
+//const backplansalesRoutes = require('./src/routes/plansales.routes');
+
+const backref1Routes = require('./src/routes/backref1.routes');
+const backref2Routes = require('./src/routes/backref2.routes');
+const backproducts_dtlRoutes = require('./src/routes/backproducts_dtl.routes');
+const backagbyproductsRoutes = require('./src/routes/backagbyproducts.routes');
+const backselfconsumptionRoutes = require('./src/routes/backselfconsumption.routes');
+const backzincautoRoutes = require('./src/routes/backzincauto.routes');
+const backzincconcplanRoutes = require('./src/routes/backzincconcplan.routes');
+const backproductioninputsRoutes = require('./src/routes/backproductioninputs.routes');
+const backpreciousmetalsRoutes = require('./src/routes/backpreciousmetals.routes');
+const backmonthlyproductcostRoutes = require('./src/routes/backmonthlyproductcost.routes');
+const backelecdivisioncostRoutes = require('./src/routes/backelecdivisioncost.routes');
+const backelecdivisionfinalRoutes = require('./src/routes/backelecdivisionfinal.routes');
+const backelecrectifierRoutes = require('./src/routes/backelecrectifier.routes');
+const backelecrectifierplanRoutes = require('./src/routes/backelecrectifierplan.routes');
+// ================================= 
+
 const app = express();
 
 // 미들웨어 설정
@@ -149,7 +176,6 @@ app.use(bodyParser.json());
 
         });
 
-
 // 라우트 설정
     // 시스템
 app.use('/api/login', loginRoutes); // 로그인 API 경로
@@ -159,7 +185,7 @@ app.use('/api/group', groupRoutes); // 그룹 정보 경로
 app.use('/api/file', fileRoutes); // 소스 파일 정보 경로
 app.use('/api/error', errorRoutes); // 시스템 오류 정보 경로
 app.use('/api/program/update/:gubun', updateRoutes); // 파일 업데이트 API 경로
-app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
+//app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
 
     // 실적 자료
 app.use('/api/sale', saleRoutes); // 판매량 정보 경로
@@ -290,5 +316,32 @@ app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경
 app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       
 app.use('/api/planlaborzinc', planlaborzincRoutes); // 노무비 조회 경로  
 app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
+
+// ========= Backup target =========
+app.use('/api/backplug', backplugRoutes); // plug 정보 경로
+app.use('/api/backotherexpensest', backotherexpensestRoutes); // 종합 기타경비 정보 경로
+app.use('/api/backsubmaterialt', backsubmaterialtRoutes); // 종합 보조재료 정보 경로
+app.use('/api/backlaborcostt', backlaborcosttRoutes); // 종합 노무비 정보 경로
+app.use('/api/backrepairexpensest', backrepairexpensestRoutes); // 종합 수선비 정보 경로
+app.use('/api/backdepreciationt', backdepreciationtRoutes); // 종합 감가상각비 정보 경로
+app.use('/api/backzincconcentrate', backzincconcentrateRoutes); // 월별 아연 정광 구매 계획(원료) 정보 경로
+//app.use('/api/backrefindicator', backrefindicatorRoutes); // 기준지표 정보 경로
+//app.use('/api/backplansales', backplansalesRoutes); // 월별 매출 계획 경로
+
+app.use('/api/backref1', backref1Routes); // 참조1 정보 경로
+app.use('/api/backref2', backref2Routes); // 참조2 정보 경로
+app.use('/api/backproducts_dtl', backproducts_dtlRoutes); // 월별 계획종합(상세) 정보 경로
+app.use('/api/backagbyproducts', backagbyproductsRoutes); // 월별 은부산물 정보 경로
+app.use('/api/backselfconsumption', backselfconsumptionRoutes); // 월별 자가소비 정보 경로
+app.use('/api/backzincauto', backzincautoRoutes); // 월별 정광 정보 경로
+app.use('/api/backzincconcplan', backzincconcplanRoutes); // 월별 정광수불(계획) 정보 경로
+app.use('/api/backproductioninputs', backproductioninputsRoutes); // 월별 생산, 부원료 정보 경로
+app.use('/api/backpreciousmetals', backpreciousmetalsRoutes); // 귀금속Conc 정보 경로
+app.use('/api/backmonthlyproductcost', backmonthlyproductcostRoutes); // 월별 제품별 정보 경로
+app.use('/api/backelecdivisioncost', backelecdivisioncostRoutes); // 전력료 계산 경로
+app.use('/api/backelecdivisionfinal', backelecdivisionfinalRoutes); // 전력료 최종계산 경로
+app.use('/api/backelecrectifier', backelecrectifierRoutes); // 정류기 계산 경로
+app.use('/api/backelecrectifierplan', backelecrectifierplanRoutes); // 정류기 요금차감 경로
+// ================================= 
 
 module.exports = app;

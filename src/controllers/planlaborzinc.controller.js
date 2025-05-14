@@ -22,9 +22,9 @@ exports.getPlanlaborzincchk = async (req, res) => {
                                                               WHEN A_CNT > 0 AND B_CNT > 0 AND C_CNT > 0 THEN 'PLZCC'
                                                               ELSE 'PLZC0' END 
                                                   FROM (
-                                                      SELECT SUM(DECODE(GUBUN, '0', 1, 0)) A_CNT
-                                                      , SUM(DECODE(GUBUN, '1', 1, 0)) B_CNT
-                                                      , SUM(DECODE(GUBUN, '2', 1, 0)) C_CNT
+                                                      SELECT SUM(DECODE(IDX, '0', 1, 0)) A_CNT
+                                                      , SUM(DECODE(IDX, '1', 1, 0)) B_CNT
+                                                      , SUM(DECODE(IDX, '2', 1, 0)) C_CNT
                                                       from PLAN_ELEC_RECTIFIER_DTL
                                                       WHERE YEAR = :year
                                                       AND XSUM > 0

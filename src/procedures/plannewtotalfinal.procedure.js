@@ -3,14 +3,14 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callPlannewtotalfinalproc = async (year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun) => {
+exports.callPlannewtotalfinalproc = async (year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk_1, chk_2, chk_3, chk_4, chk_5, chk_6, chk_7, chk_8, chk_9, chk_10, chk_11, chk_12) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_NEW_TOTAL_FINAL_PROC(:year, :zinc_cnt, :pd_1, :pd_2, :pd_3, :pd_4, :pd_5, :pd_6, :pd_7, :pd_8, :pd_9, :pd_10, :pd_11, :pd_12, :type_gubun, :gubun, :returncode); 
+                SP_PLAN_NEW_TOTAL_FINAL_PROC(:year, :zinc_cnt, :pd_1, :pd_2, :pd_3, :pd_4, :pd_5, :pd_6, :pd_7, :pd_8, :pd_9, :pd_10, :pd_11, :pd_12, :type_gubun, :gubun, :chk_1, :chk_2, :chk_3, :chk_4, :chk_5, :chk_6, :chk_7, :chk_8, :chk_9, :chk_10, :chk_11, :chk_12, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
@@ -29,6 +29,18 @@ exports.callPlannewtotalfinalproc = async (year, zinc_cnt, pd_1, pd_2, pd_3, pd_
                 pd_12: pd_12, // 매개변수
                 type_gubun: type_gubun, // 매개변수
                 gubun: gubun, // 매개변수
+                chk_1: chk_1, // 매개변수
+                chk_2: chk_2, // 매개변수
+                chk_3: chk_3, // 매개변수
+                chk_4: chk_4, // 매개변수
+                chk_5: chk_5, // 매개변수
+                chk_6: chk_6, // 매개변수
+                chk_7: chk_7, // 매개변수
+                chk_8: chk_8, // 매개변수
+                chk_9: chk_9, // 매개변수
+                chk_10: chk_10, // 매개변수
+                chk_11: chk_11, // 매개변수
+                chk_12: chk_12, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

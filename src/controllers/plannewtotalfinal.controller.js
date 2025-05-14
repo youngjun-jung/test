@@ -24,6 +24,18 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   const pd_12 = receivedData.pd_12;
   const type_gubun = '1';
   const gubun = receivedData.gubun;
+  const chk_1 = receivedData.chk_1;
+  const chk_2 = receivedData.chk_2;
+  const chk_3 = receivedData.chk_3;
+  const chk_4 = receivedData.chk_4;
+  const chk_5 = receivedData.chk_5;
+  const chk_6 = receivedData.chk_6;
+  const chk_7 = receivedData.chk_7;
+  const chk_8 = receivedData.chk_8;
+  const chk_9 = receivedData.chk_9;
+  const chk_10 = receivedData.chk_10;
+  const chk_11 = receivedData.chk_11;
+  const chk_12 = receivedData.chk_12;
 
   console.log("year: ", year);
   console.log("zinc_cnt: ", zinc_cnt);
@@ -40,9 +52,21 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   console.log("pd_11: ", pd_11);
   console.log("pd_12: ", pd_12);
   console.log("gubun: ", gubun);
+  console.log("chk_1: ", chk_1);
+  console.log("chk_2: ", chk_2);
+  console.log("chk_3: ", chk_3);
+  console.log("chk_4: ", chk_4);
+  console.log("chk_5: ", chk_5);
+  console.log("chk_6: ", chk_6);
+  console.log("chk_7: ", chk_7);
+  console.log("chk_8: ", chk_8);
+  console.log("chk_9: ", chk_9);
+  console.log("chk_10: ", chk_10);
+  console.log("chk_11: ", chk_11);
+  console.log("chk_12: ", chk_12);
 
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun);
+  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk_1, chk_2, chk_3, chk_4, chk_5, chk_6, chk_7, chk_8, chk_9, chk_10, chk_11, chk_12);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 

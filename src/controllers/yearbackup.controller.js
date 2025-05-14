@@ -11,12 +11,7 @@ exports.getYearbackupchk = async (req, res) => {
 
   console.log("year: ", year);
 
-  query = `SELECT '3' GUBUN, BACKUP_ID, COMMENTS
-          FROM PLAN_BACKUP
-          WHERE BACKUP_ID LIKE 'BAC' || :year || '%'
-          AND USE_YN = 'Z'
-          UNION ALL 
-          SELECT TO_CHAR(ROWNUM), BACKUP_ID, COMMENTS
+  query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, COMMENTS
           FROM (
                 SELECT BACKUP_ID, COMMENTS
                 FROM PLAN_BACKUP
@@ -24,8 +19,8 @@ exports.getYearbackupchk = async (req, res) => {
                 AND USE_YN = 'Y'
                 ORDER BY BACKUP_ID DESC
               )
-          WHERE ROWNUM < 3
-          ORDER BY GUBUN DESC`; 
+          WHERE ROWNUM < 6
+          ORDER BY TO_CHAR(ROWNUM) DESC`; 
 
   binds = {year: year};                       
   

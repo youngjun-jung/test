@@ -1,19 +1,19 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/plansellingexpenses.procedure');
+const executeProcedure = require('../procedures/plansellingexpensesdtl.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.getPlansellingexpenseschk = async (req, res) => {
+exports.getBackplansellingexpensesdtlchk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const year = receivedData.backupid;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
 /*
   // 프로시저 호출
-    const data1 = await executeProcedure.callPlansellingexpensesproc(year);
+    const data1 = await executeProcedure.callPlansellingexpensesdtlproc(year);
 
     logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -21,7 +21,7 @@ exports.getPlansellingexpenseschk = async (req, res) => {
       res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
     }
 */
-  const query = `SELECT A.YEAR, A.NAME, A.LNAME, A.MNAME, A.SNAME
+  const query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME
               , NVL(MONTH_0, 0) MONTH_0
               , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03
               , NVL(MONTH_1, 0) MONTH_1
@@ -31,14 +31,14 @@ exports.getPlansellingexpenseschk = async (req, res) => {
               , NVL(MONTH_3, 0) MONTH_3
               , NVL(MONTH_10, 0) MONTH_10, NVL(MONTH_11, 0) MONTH_11, NVL(MONTH_12, 0) MONTH_12
               , NVL(MONTH_4, 0) MONTH_4
-              FROM PLANNING_SELLING_EXPENSES_CODE A, PLANNING_SELLING_EXPENSES B
+              FROM PLANNING_SELLING_EXPENSES_DTL_CODE A, PLANNING_SELLING_EXPENSES_DTL B
               WHERE A.SCODE = B.SCODE(+)
-              AND A.YEAR = B.YEAR(+)
-              AND A.YEAR = :year
+              AND A.BACKUP_ID = B.BACKUP_ID(+)
+              AND A.BACKUP_ID = :backupid
               AND A.USE_YN = 'Y'
               ORDER BY A.IDX`;                 
 
-  const binds = {year: year};
+  const binds = {backupid: backupid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

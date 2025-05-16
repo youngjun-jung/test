@@ -92,10 +92,13 @@ const basicdataRoutes = require('./src/routes/basicdata.routes');
 
     // 기획팀
 const plansalesRoutes = require('./src/routes/plansales.routes');
+const backplansalesRoutes = require('./src/routes/backplansales.routes');
 const planrefindicatorRoutes = require('./src/routes/planrefindicator.routes');
 const plansellingexpensesRoutes = require('./src/routes/plansellingexpenses.routes');
+const backplansellingexpensesRoutes = require('./src/routes/backplansellingexpenses.routes');
 const plangeneraladministrativeRoutes = require('./src/routes/plangeneraladministrative.routes');
 const plansellingexpensesdtlRoutes = require('./src/routes/plansellingexpensesdtl.routes');
+const backplansellingexpensesdtlRoutes = require('./src/routes/backplansellingexpensesdtl.routes');
 const planbyproductRoutes = require('./src/routes/planbyproduct.routes');
 const planmonthlyinventoryRoutes = require('./src/routes/planmonthlyinventory.routes');
 const planmonthlyinventorydtlRoutes = require('./src/routes/planmonthlyinventorydtl.routes');
@@ -279,10 +282,13 @@ app.use('/api/basicdata', basicdataRoutes); // 기초 자료 변경 경로
 
     // (기획팀)
 app.use('/api/plansales', plansalesRoutes); // 월별 매출 계획 경로
+app.use('/api/backplansales', backplansalesRoutes); // 월별 매출 계획 경로
 app.use('/api/planrefindicator', planrefindicatorRoutes); // 기준지표 정보 경로
 app.use('/api/plansellingexpenses', plansellingexpensesRoutes); // 월별 판매비 경로
+app.use('/api/backplansellingexpenses', backplansellingexpensesRoutes); // 월별 판매비 경로
 app.use('/api/plangeneraladministrative', plangeneraladministrativeRoutes); // 일반관리비 경로
 app.use('/api/plansellingexpensesdtl', plansellingexpensesdtlRoutes); // 월별 판매비(상세) 경로
+app.use('/api/backplansellingexpensesdtl', backplansellingexpensesdtlRoutes); // 월별 판매비(상세) 경로
 app.use('/api/planbyproduct', planbyproductRoutes); // 월별 제품별 경로
 app.use('/api/planmonthlyinventory', planmonthlyinventoryRoutes); // 월수불 경로
 app.use('/api/planmonthlyinventorydtl', planmonthlyinventorydtlRoutes); // 월수불(상세) 경로

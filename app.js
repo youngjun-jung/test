@@ -102,6 +102,8 @@ const backplansellingexpensesdtlRoutes = require('./src/routes/backplansellingex
 const planbyproductRoutes = require('./src/routes/planbyproduct.routes');
 const planmonthlyinventoryRoutes = require('./src/routes/planmonthlyinventory.routes');
 const planmonthlyinventorydtlRoutes = require('./src/routes/planmonthlyinventorydtl.routes');
+const plancostofgoodsRoutes = require('./src/routes/plancostofgoods.routes');
+const backplancostofgoodsRoutes = require('./src/routes/backplancostofgoods.routes');
 
 const planbackupRoutes = require('./src/routes/planbackup.routes');
 const planbackupdeleteRoutes = require('./src/routes/planbackupdelete.routes');
@@ -292,6 +294,8 @@ app.use('/api/backplansellingexpensesdtl', backplansellingexpensesdtlRoutes); //
 app.use('/api/planbyproduct', planbyproductRoutes); // 월별 제품별 경로
 app.use('/api/planmonthlyinventory', planmonthlyinventoryRoutes); // 월수불 경로
 app.use('/api/planmonthlyinventorydtl', planmonthlyinventorydtlRoutes); // 월수불(상세) 경로
+app.use('/api/plancostofgoods', plancostofgoodsRoutes); // 제조원가 경로
+app.use('/api/backplancostofgoods', backplancostofgoodsRoutes); // 제조원가 경로
 
 app.use('/api/planproc', planprocRoutes); // 전체 처리 경로
 app.use('/api/planbasicdata', planbasicdataRoutes); // 기초 자료 변경 경로

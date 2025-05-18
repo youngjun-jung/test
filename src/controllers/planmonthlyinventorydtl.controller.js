@@ -13,7 +13,7 @@ exports.getPlanmonthlyinventorydtlchk = async (req, res) => {
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callPlanmonthlyinventoryproc(year);
 
@@ -23,7 +23,7 @@ exports.getPlanmonthlyinventorydtlchk = async (req, res) => {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
 
-
+*/
   query = `SELECT X.YEAR, X.MNAME, X.SNAME
           , DECODE(SUBSTR(A.SCODE, 8, 1), '3', ((SELECT VALUE FROM PLANNING_MONTHLY_INVENTORY_MANUAL WHERE YEAR = X.YEAR AND SCODE = 'PNMIM' || SUBSTR(A.SCODE, 5, 3) || '1') * (SELECT VALUE FROM PLANNING_MONTHLY_INVENTORY_MANUAL WHERE YEAR = X.YEAR AND SCODE = 'PNMIM' || SUBSTR(A.SCODE, 5, 3) || '2') / 1000),
           (SELECT VALUE FROM PLANNING_MONTHLY_INVENTORY_MANUAL WHERE YEAR = X.YEAR AND SCODE = 'PNMIM' || SUBSTR(A.SCODE, 5, 4)))  BASIC

@@ -3,20 +3,23 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callBackuprecproc = async (backupid, recoveryid, gubun) => {
+exports.callBackuprecproc = async (backupid, recoveryid, gubun, gubun1, gubun2, zinc_cnt) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_BACKUP_RECOVERY_PROC(:backupid, :recoveryid, :gubun, :returncode); 
+                SP_BACKUP_RECOVERY_PROC(:backupid, :recoveryid, :gubun, :gubun1, :gubun2, :zinc_cnt, :returncode); 
             END;`,
             {
               backupid: backupid, // 매개변수
               recoveryid: recoveryid, // 매개변수
               gubun: gubun, // 매개변수
-                returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
+              gubun1: gubun1, // 매개변수
+              gubun2: gubun2, // 매개변수
+              zinc_cnt: zinc_cnt, // 매개변수
+              returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );
 

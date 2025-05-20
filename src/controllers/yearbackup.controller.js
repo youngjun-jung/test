@@ -11,9 +11,9 @@ exports.getYearbackupchk = async (req, res) => {
 
   console.log("year: ", year);
 
-  query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, COMMENTS
+  query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, '(' || SUBSTR(TIMEMARK, 1, 8) || ') ' || COMMENTS COMMENTS
           FROM (
-                SELECT BACKUP_ID, COMMENTS
+                SELECT BACKUP_ID, COMMENTS, TIMEMARK
                 FROM PLAN_BACKUP
                 WHERE BACKUP_ID LIKE 'BAC' || :year || '%'
                 AND USE_YN = 'Y'

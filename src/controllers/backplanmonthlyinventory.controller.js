@@ -1,21 +1,21 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/monthlyproductcost.procedure');
+const executeProcedure = require('../procedures/planmonthlyinventory.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.getMonthlyproductcostchk = async (req, res) => {
+exports.getPlanmonthlyinventorychk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const backupid = receivedData.backupid;
   const gubun = receivedData.gubun;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
   console.log("gubun: ", gubun);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callMonthlyproductcostproc(year);
+  const data1 = await executeProcedure.callPlanmonthlyinventoryproc(year);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -28,15 +28,14 @@ exports.getMonthlyproductcostchk = async (req, res) => {
           , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03, NVL(MONTH_04, 0) MONTH_04
           , NVL(MONTH_05, 0) MONTH_05, NVL(MONTH_06, 0) MONTH_06, NVL(MONTH_07, 0) MONTH_07, NVL(MONTH_08, 0) MONTH_08
           , NVL(MONTH_09, 0) MONTH_09, NVL(MONTH_10, 0) MONTH_10, NVL(MONTH_11, 0) MONTH_11, NVL(MONTH_12, 0) MONTH_12
-          , NVL(MONTH_0, 0) MONTH_0, NVL(MONTH_1, 0) MONTH_1, NVL(MONTH_2, 0) MONTH_2, NVL(MONTH_3, 0) MONTH_3, NVL(MONTH_4, 0) MONTH_4
-          FROM PLAN_MONTHLY_PRODUCT_COST_CODE X, PLAN_MONTHLY_PRODUCT_COST A
-          WHERE X.SCODE = A.SCODE(+)
-          AND X.YEAR = A.YEAR(+)
-          AND X.YEAR = :year
+          FROM BAK_PLANNING_MONTHLY_INVENTORY_CODE X, BAK_PLANNING_MONTHLY_INVENTORY A
+          WHERE X.SCODE = A.SCODE_1(+)
+          AND X.BACKUP_ID = A.BACKUP_ID(+)
+          AND X.BACKUP_ID = :backupid
           AND X.USE_YN = 'Y'
-          ORDER BY X.IDX`; 
+          ORDER BY X.IDX, A.IDX`; 
 
-  binds = {year: year};                       
+  binds = {backupid: backupid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

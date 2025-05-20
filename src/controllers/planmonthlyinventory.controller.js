@@ -13,7 +13,7 @@ exports.getPlanmonthlyinventorychk = async (req, res) => {
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callPlanmonthlyinventoryproc(year);
 
@@ -22,7 +22,7 @@ exports.getPlanmonthlyinventorychk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
 
   query = `SELECT X.YEAR, X.MNAME, X.SNAME
           , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03, NVL(MONTH_04, 0) MONTH_04

@@ -8,8 +8,10 @@ exports.getPlugchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 
   const query = `SELECT NUM, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ, XK, XL, XM, XN, XO, XP, XQ, XR, XS
                 , XT, XU, XV, XW, XX, XY, XZ, XAA, XAB, XAC, XAD, XAE, XAF, XAG, XAH, XAI, XAJ

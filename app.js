@@ -17,7 +17,7 @@ const saleRoutes = require('./src/routes/sale.routes');
 const saleledgerRoutes = require('./src/routes/saleledger.routes');
 const cogmRoutes = require('./src/routes/cogm.routes');
 const errorRoutes = require('./src/routes/error.routes');
-//const checkversionRoutes = require('./src/routes/checkversion.routes');1
+const checkversionRoutes = require('./src/routes/checkversion.routes');
 
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
@@ -26,14 +26,19 @@ const plugRoutes = require('./src/routes/plug.routes');
 const ref1Routes = require('./src/routes/ref1.routes');
 const ref2Routes = require('./src/routes/ref2.routes');
 const refindicatorRoutes = require('./src/routes/refindicator.routes');
+const backrefindicatorRoutes = require('./src/routes/backrefindicator.routes');
 const refindicatorprocRoutes = require('./src/routes/refindicatorproc.routes');
 const otherexpensesRoutes = require('./src/routes/otherexpenses.routes');
+const backotherexpensesRoutes = require('./src/routes/backotherexpenses.routes');
 const otherexpensestRoutes = require('./src/routes/otherexpensest.routes');
 const submaterialRoutes = require('./src/routes/submaterial.routes');
+const backsubmaterialRoutes = require('./src/routes/backsubmaterial.routes');
 const submaterialtRoutes = require('./src/routes/submaterialt.routes');
 const laborcostRoutes = require('./src/routes/laborcost.routes');
+const backlaborcostRoutes = require('./src/routes/backlaborcost.routes');
 const laborcosttRoutes = require('./src/routes/laborcostt.routes');
 const repairexpensesRoutes = require('./src/routes/repairexpenses.routes');
+const backrepairexpensesRoutes = require('./src/routes/backrepairexpenses.routes');
 const repairexpensestRoutes = require('./src/routes/repairexpensest.routes');
 const eleccostRoutes = require('./src/routes/eleccost.routes');
 const eleccosttRoutes = require('./src/routes/eleccostt.routes');
@@ -101,7 +106,9 @@ const plansellingexpensesdtlRoutes = require('./src/routes/plansellingexpensesdt
 const backplansellingexpensesdtlRoutes = require('./src/routes/backplansellingexpensesdtl.routes');
 const planbyproductRoutes = require('./src/routes/planbyproduct.routes');
 const planmonthlyinventoryRoutes = require('./src/routes/planmonthlyinventory.routes');
+const backplanmonthlyinventoryRoutes = require('./src/routes/backplanmonthlyinventory.routes');
 const planmonthlyinventorydtlRoutes = require('./src/routes/planmonthlyinventorydtl.routes');
+const backplanmonthlyinventorydtlRoutes = require('./src/routes/backplanmonthlyinventorydtl.routes');
 const plancostofgoodsRoutes = require('./src/routes/plancostofgoods.routes');
 const backplancostofgoodsRoutes = require('./src/routes/backplancostofgoods.routes');
 
@@ -135,6 +142,8 @@ const yearbackupRoutes = require('./src/routes/yearbackup.routes');
 const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
 const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
 const procnewRoutes = require('./src/routes/procnew.routes');
+const procnew1Routes = require('./src/routes/procnew1.routes');
+const procnew2Routes = require('./src/routes/procnew2.routes');
 
 // ========= Backup target =========
 const backplugRoutes = require('./src/routes/backplug.routes');
@@ -190,7 +199,7 @@ app.use('/api/group', groupRoutes); // 그룹 정보 경로
 app.use('/api/file', fileRoutes); // 소스 파일 정보 경로
 app.use('/api/error', errorRoutes); // 시스템 오류 정보 경로
 app.use('/api/program/update/:gubun', updateRoutes); // 파일 업데이트 API 경로
-//app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
+app.use('/api/program/checkverion', checkversionRoutes); // 프로그램 버전 체크
 
     // 실적 자료
 app.use('/api/sale', saleRoutes); // 판매량 정보 경로
@@ -215,14 +224,19 @@ app.use('/api/plug', plugRoutes); // plug 정보 경로
 app.use('/api/ref1', ref1Routes); // 참조1 정보 경로
 app.use('/api/ref2', ref2Routes); // 참조2 정보 경로
 app.use('/api/refindicator', refindicatorRoutes); // 기준지표 정보 경로
+app.use('/api/backrefindicator', backrefindicatorRoutes); // 기준지표 정보 경로
 app.use('/api/refindicatorproc', refindicatorprocRoutes); // 기준지표 수정 경로
 app.use('/api/otherexpenses', otherexpensesRoutes); // 월별 기타경비 정보 경로
+app.use('/api/backotherexpenses', backotherexpensesRoutes); // 월별 기타경비 정보 경로
 app.use('/api/otherexpensest', otherexpensestRoutes); // 종합 기타경비 정보 경로
 app.use('/api/submaterial', submaterialRoutes); // 월별 보조재료 정보 경로
+app.use('/api/backsubmaterial', backsubmaterialRoutes); // 월별 보조재료 정보 경로
 app.use('/api/submaterialt', submaterialtRoutes); // 종합 보조재료 정보 경로
 app.use('/api/laborcost', laborcostRoutes); // 월별 노무비 정보 경로
+app.use('/api/backlaborcost', backlaborcostRoutes); // 월별 노무비 정보 경로
 app.use('/api/laborcostt', laborcosttRoutes); // 종합 노무비 정보 경로
 app.use('/api/repairexpenses', repairexpensesRoutes); // 월별 수선비 정보 경로
+app.use('/api/backrepairexpenses', backrepairexpensesRoutes); // 월별 수선비 정보 경로
 app.use('/api/repairexpensest', repairexpensestRoutes); // 종합 수선비 정보 경로
 app.use('/api/eleccost', eleccostRoutes); // 월별 전력비 정보 경로
 app.use('/api/eleccostt', eleccosttRoutes); // 종합 전력비 정보 경로
@@ -293,7 +307,9 @@ app.use('/api/plansellingexpensesdtl', plansellingexpensesdtlRoutes); // 월별 
 app.use('/api/backplansellingexpensesdtl', backplansellingexpensesdtlRoutes); // 월별 판매비(상세) 경로
 app.use('/api/planbyproduct', planbyproductRoutes); // 월별 제품별 경로
 app.use('/api/planmonthlyinventory', planmonthlyinventoryRoutes); // 월수불 경로
+app.use('/api/backplanmonthlyinventory', backplanmonthlyinventoryRoutes); // 월수불 경로
 app.use('/api/planmonthlyinventorydtl', planmonthlyinventorydtlRoutes); // 월수불(상세) 경로
+app.use('/api/backplanmonthlyinventorydtl', backplanmonthlyinventorydtlRoutes); // 월수불(상세) 경로
 app.use('/api/plancostofgoods', plancostofgoodsRoutes); // 제조원가 경로
 app.use('/api/backplancostofgoods', backplancostofgoodsRoutes); // 제조원가 경로
 
@@ -326,6 +342,8 @@ app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경
 app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       
 app.use('/api/planlaborzinc', planlaborzincRoutes); // 노무비 조회 경로  
 app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
+app.use('/api/procnew1', procnew1Routes); // 전체 처리 경로
+app.use('/api/procnew2', procnew2Routes); // 전체 처리 경로
 
 // ========= Backup target =========
 app.use('/api/backplug', backplugRoutes); // plug 정보 경로

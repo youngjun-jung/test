@@ -7,6 +7,6 @@ const connectString = process.env.ORACLE_CONNECT_STRING;
 module.exports = {
     user: oracleUser,
     password: oraclePassword,
-    connectString: connectString // Oracle DB 접속 문자열
+    connectString: connectString, // Oracle DB 접속 문자열
   };
   

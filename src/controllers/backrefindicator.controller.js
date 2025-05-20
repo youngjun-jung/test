@@ -9,12 +9,12 @@ exports.getRefindicatorchk = async (req, res) => {
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const backupid = receivedData.backupid;
   const type_gubun = receivedData.type_gubun;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
   console.log("type_gubun: ", type_gubun);
-
+/*
   if (type_gubun == '0' || type_gubun == '1') 
   {
     const data1 = await executeProcedure.callRefindicatoressproc(year, type_gubun);
@@ -26,7 +26,7 @@ exports.getRefindicatorchk = async (req, res) => {
     }
   }
  
-
+*/
   const query = `SELECT YEAR, GUBUN1, GUBUN2, MEASURE, NVL(ANNUAL, 0) ANNUAL, NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03, NVL(MONTH_04, 0) MONTH_04, NVL(MONTH_05, 0) MONTH_05
                 , NVL(MONTH_06, 0) MONTH_06, NVL(MONTH_07, 0) MONTH_07, NVL(MONTH_08, 0) MONTH_08, NVL(MONTH_09, 0) MONTH_09, NVL(MONTH_10, 0) MONTH_10
                 , NVL(MONTH_11, 0) MONTH_11, NVL(MONTH_12, 0) MONTH_12, BIGO, USE_YN, SCODE, FN_REF_VALUE('아연괴생산', A.YEAR, '00') ZINCCNT
@@ -58,12 +58,12 @@ exports.getRefindicatorchk = async (req, res) => {
                 , (SELECT SUM(DECODE(MONTH, 11, OPERATION_DAYS_6, 0)) FROM PRODUCTION_CALENDAR WHERE YEAR = A.YEAR) DAY_11
                 , (SELECT SUM(DECODE(MONTH, 12, OPERATION_DAYS_6, 0)) FROM PRODUCTION_CALENDAR WHERE YEAR = A.YEAR) DAY_12
                 , (SELECT TYPE_GUBUN FROM PLAN_TYPE_GUBUN_CODE WHERE YEAR = A.YEAR AND USE_YN = 'Y' AND ROWNUM = 1) TYPE_GUBUN
-                  FROM PLAN_REF_INDICATOR A
-                  WHERE YEAR = :year
+                  FROM BACKUP_PLAN_REF_INDICATOR A
+                  WHERE BACKUP_ID = :backupid
                   AND USE_YN = 'Y'
                   ORDER BY IDX`;                 
 
- const binds = {year: year};
+ const binds = {backupid: backupid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

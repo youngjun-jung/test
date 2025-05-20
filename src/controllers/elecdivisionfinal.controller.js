@@ -11,7 +11,7 @@ exports.getElecdivisionfinalchk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
   const data1 = await executeProcedure.callElecdivisioncostproc(year);
 
@@ -20,7 +20,7 @@ exports.getElecdivisionfinalchk = async (req, res) => {
   if (!data1 || Object.keys(data1).length === 0) {
     res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
   }
-
+*/
   query = `SELECT A.YEAR, A.SNAME, X01, X02, X11, X12, XSUM1, XSUM2, TO_CHAR(ROUND(XSUM2, 0), 'FM999,999,999,999') SUM
           FROM PLAN_ELEC_DIVISION_COST_CODE A, PLAN_ELEC_DIVISION_FINAL B
           WHERE A.SCODE = B.SCODE(+)

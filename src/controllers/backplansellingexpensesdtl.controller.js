@@ -8,7 +8,7 @@ exports.getBackplansellingexpensesdtlchk = async (req, res) => {
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.backupid;
+  const backupid = receivedData.backupid;
 
   console.log("backupid: ", backupid);
 /*
@@ -31,7 +31,7 @@ exports.getBackplansellingexpensesdtlchk = async (req, res) => {
               , NVL(MONTH_3, 0) MONTH_3
               , NVL(MONTH_10, 0) MONTH_10, NVL(MONTH_11, 0) MONTH_11, NVL(MONTH_12, 0) MONTH_12
               , NVL(MONTH_4, 0) MONTH_4
-              FROM PLANNING_SELLING_EXPENSES_DTL_CODE A, PLANNING_SELLING_EXPENSES_DTL B
+              FROM BAK_PLANNING_SELLING_EXPENSES_DTL_CODE A, BAK_PLANNING_SELLING_EXPENSES_DTL B
               WHERE A.SCODE = B.SCODE(+)
               AND A.BACKUP_ID = B.BACKUP_ID(+)
               AND A.BACKUP_ID = :backupid

@@ -2,18 +2,16 @@ const { executeQuery, executeQueryMany } = require('../config/queries');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.getOtherexpenseschk = async (req, res) => {
+exports.getSubmaterialchk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const backupid = receivedData.backupid;
   const gubun = receivedData.gubun;
-  const procid = receivedData.procid;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
   console.log("gubun: ", gubun);
-  console.log("procid: ", procid);
 
   let query;
   let binds;
@@ -22,13 +20,13 @@ exports.getOtherexpenseschk = async (req, res) => {
   {
       query = `SELECT GUBUN, YEAR, MONTH, SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_OTHER_EXPENSES_CODE WHERE YEAR = :year) X, PLAN_OTHER_EXPENSES A
+                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_SUB_MATERIAL_CODE WHERE BACKUP_ID = :backupid) X, BACKUP_PLAN_SUB_MATERIAL A
                     WHERE X.SNAME = A.NAME(+)
-                    AND YEAR(+) = :year
+                    AND BACKUP_ID(+) = :backupid
                     AND GUBUN(+) = :gubun
-                    ORDER BY YEAR, MONTH, X.IDX`;  
+                    ORDER BY BACKUP_ID, MONTH, X.IDX`;  
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {backupid: backupid, gubun: gubun};              
   }
   else
   {
@@ -37,18 +35,18 @@ exports.getOtherexpenseschk = async (req, res) => {
                 , A.XJ*B.XJ XJ, A.XK*B.XK XK, A.XL*B.XL XL, A.XM*B.XM XM, A.XN*B.XN XN, A.XO*B.XO XO
                 , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
                 , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_OTHER_EXPENSES_CODE WHERE YEAR = :year) X
-                    , (SELECT * FROM PLAN_OTHER_EXPENSES WHERE GUBUN = '1') A
-                    , (SELECT * FROM PLAN_OTHER_EXPENSES WHERE GUBUN = '2') B
+                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_SUB_MATERIAL_CODE WHERE BACKUP_ID = :backupid) X
+                    , (SELECT * FROM BACKUP_PLAN_SUB_MATERIAL WHERE GUBUN = '1') A
+                    , (SELECT * FROM BACKUP_PLAN_SUB_MATERIAL WHERE GUBUN = '2') B
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
-                    AND A.YEAR = B.YEAR
+                    AND A.BACKUP_ID = B.BACKUP_ID
                     AND A.MONTH = B.MONTH
                     AND A.NAME = B.NAME
-                    AND A.YEAR = :year
-                    ORDER BY YEAR, MONTH, X.IDX`;  
+                    AND A.BACKUP_ID = :backupid
+                    ORDER BY A.BACKUP_ID, MONTH, X.IDX`;  
 
-      binds = {year: year};                 
+      binds = {backupid: backupid};                 
   }           
 
   try {

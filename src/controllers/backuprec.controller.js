@@ -11,13 +11,19 @@ exports.postBackuprecchk = async (req, res) => {
     const backupid = receivedData.backup_id;
     const recoveryid = receivedData.recoveryid;
     const gubun = receivedData.gubun;
+    const gubun1 = receivedData.gubun1;
+    const gubun2 = receivedData.gubun2;
+    const zinc_cnt = receivedData.zinc_cnt;
 
     logger.info(`req backupid : ${backupid}`);
     logger.info(`req recoveryid : ${recoveryid}`);
     logger.info(`req gubun : ${gubun}`);
+    logger.info(`req gubun1 : ${gubun1}`);
+    logger.info(`req gubun2 : ${gubun2}`);
+    logger.info(`req zinc_cnt : ${zinc_cnt}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callBackuprecproc(backupid, recoveryid, gubun);
+    const data = await executeProcedure.callBackuprecproc(backupid, recoveryid, gubun, gubun1, gubun2, zinc_cnt);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

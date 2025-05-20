@@ -11,7 +11,7 @@ exports.getPlancostofgoodschk = async (req, res) => {
   const year = receivedData.year;
 
   console.log("year: ", year);
-
+/*
   // 프로시저 호출
     const data1 = await executeProcedure.callPlancostofgoodsproc(year);
 
@@ -20,7 +20,7 @@ exports.getPlancostofgoodschk = async (req, res) => {
     if (!data1 || Object.keys(data1).length === 0) {
       res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
     }
-
+*/
   const query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME
               , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03
               , NVL(MONTH_01, 0) + NVL(MONTH_02, 0) + NVL(MONTH_03, 0) MONTH_1

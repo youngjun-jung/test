@@ -9,11 +9,13 @@ exports.getAgbyproductschk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-    const data1 = await executeProcedure.callAgbyproductsproc(year);
+    const data1 = await executeProcedure.callAgbyproductsproc(year, procid);
 
     logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -26,6 +28,7 @@ exports.getAgbyproductschk = async (req, res) => {
                 FROM PLAN_REF_INDICATOR
                 WHERE YEAR = :year 
                 AND GUBUN1 IN ('LME', 'T/C')
+                AND PROCID = :procid
                 UNION ALL
                 SELECT A.YEAR, LNAME, MNAME, SNAME, A.MEASURE, MONTH_01, MONTH_02, MONTH_03, MONTH_04, MONTH_05, MONTH_06, MONTH_07
                 , MONTH_08, MONTH_09, MONTH_10, MONTH_11, MONTH_12, USE_YN, TO_NUMBER(A.IDX||'00')   
@@ -35,9 +38,10 @@ exports.getAgbyproductschk = async (req, res) => {
                 AND A.SNAME = B.GUBUN2(+)
                 AND A.YEAR = B.YEAR(+)
                 AND A.YEAR = :year
+                AND B.PROCID(+) = :procid
                 ORDER BY IDX`;                 
 
- const binds = {year: year};
+ const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

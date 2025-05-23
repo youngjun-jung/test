@@ -7,11 +7,11 @@ exports.getEleccostchk = async (req, res) => {
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const backupid = receivedData.backupid;
   const gubun = receivedData.gubun;
   const procid = receivedData.procid;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
   console.log("gubun: ", gubun);
   console.log("procid: ", procid);
 
@@ -22,14 +22,14 @@ exports.getEleccostchk = async (req, res) => {
   {
       query = `SELECT GUBUN, YEAR, MONTH, SNAME NAME, XA, XB, XC, XD, XE, XF, XF1, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX FROM PLAN_ELEC_COST_CODE WHERE YEAR = :year) X, PLAN_ELEC_COST A
+                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_ELEC_COST_CODE WHERE BACKUP_ID = :backupid) X, BACKUP_PLAN_ELEC_COST A
                     WHERE X.SNAME = A.NAME(+)
-                    AND YEAR(+) = :year
+                    AND BACKUP_ID(+) = :backupid
                     AND GUBUN(+) = :gubun
-                    AND A.PROCID(+) = :procid
+                    AND A.PROCID = :procid
                     ORDER BY YEAR, MONTH, X.IDX`;  
                     
-      binds = {year: year, gubun: gubun, procid: procid};              
+      binds = {backupid: backupid, gubun: gubun, procid: procid};              
   }  
 
   try {

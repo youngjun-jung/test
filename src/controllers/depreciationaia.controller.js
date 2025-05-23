@@ -10,12 +10,14 @@ exports.getDepreciationaiachk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callDepreciationaiaproc(year);
+  const data1 = await executeProcedure.callDepreciationaiaproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -28,9 +30,10 @@ exports.getDepreciationaiachk = async (req, res) => {
         query = `SELECT YEAR, MONTH, NAME, XA, XB, XC, XD, XE, XF, XG, XH, ZN, XI, XJ, XK, XL, XM, XN, NUM
                 FROM PLAN_DEPRECIATION_AIA
                 WHERE YEAR = :year
+                AND PROCID = :procid
                 ORDER BY NUM`;  
                       
-        binds = {year: year};              
+        binds = {year: year, procid: procid};              
     }
     else
     {
@@ -40,10 +43,11 @@ exports.getDepreciationaiachk = async (req, res) => {
                 WHERE A.YEAR = :year
                 AND A.NAME = B.SNAME(+)
                 AND A.YEAR = B.YEAR(+)
+                AND A.PROCID(+) = :procid
                 GROUP BY A.YEAR, A.NAME, B.IDX
                 ORDER BY B.IDX`;  
   
-        binds = {year: year};                 
+        binds = {year: year, procid: procid};                 
     }           
   
   try {

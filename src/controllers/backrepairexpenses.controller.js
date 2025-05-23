@@ -7,10 +7,10 @@ exports.getRepairexpenseschk = async (req, res) => {
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const backupid = receivedData.backupid;
   const gubun = receivedData.gubun;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
   console.log("gubun: ", gubun);
 
   let query;
@@ -20,15 +20,15 @@ exports.getRepairexpenseschk = async (req, res) => {
   {
       query = `SELECT GUBUN, A.YEAR, MONTH, X.SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X, BACKUP_PLAN_REPAIR_EXPENSES A
-                    , (SELECT * FROM BACKUP_PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = '2025') C
+                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_REPAIR_EXPENSES_CODE WHERE BACKUP_ID = :backupid) X, BACKUP_PLAN_REPAIR_EXPENSES A
+                    , (SELECT * FROM BACKUP_PLAN_REPAIR_EXPENSES_MANUAL WHERE BACKUP_ID = :backupid) C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = C.SNAME(+)
-                    AND A.YEAR(+) = :year
+                    AND A.BACKUP_ID(+) = :backupid
                     AND GUBUN(+) = :gubun
                     ORDER BY YEAR, MONTH, X.IDX`;  
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {backupid: backupid, gubun: gubun};              
   }
   else
   {
@@ -37,20 +37,20 @@ exports.getRepairexpenseschk = async (req, res) => {
                 , A.XJ*B.XJ*C.VALUE XJ, A.XK*B.XK*C.VALUE XK, A.XL*B.XL*C.VALUE XL, A.XM*B.XM*C.VALUE XM, A.XN*B.XN*C.VALUE XN, A.XO*B.XO*C.VALUE XO
                 , A.XP*B.XP*C.VALUE XP, A.XQ*B.XQ*C.VALUE XQ, A.XR*B.XR*C.VALUE XR, A.XS*B.XS*C.VALUE XS, A.XT*B.XT*C.VALUE XT, A.XU*B.XU*C.VALUE XU
                 , A.XV*B.XV*C.VALUE XV, A.XW*B.XW*C.VALUE XW, A.XX*B.XX*C.VALUE XX, A.XY*B.XY*C.VALUE XY, A.XZ*B.XZ*C.VALUE XZ, A.XAA*B.XAA*C.VALUE XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X
+                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_REPAIR_EXPENSES_CODE WHERE BACKUP_ID = :backupid) X
                     , (SELECT * FROM BACKUP_PLAN_REPAIR_EXPENSES WHERE GUBUN = '1') A
                     , (SELECT * FROM BACKUP_PLAN_REPAIR_EXPENSES WHERE GUBUN = '2') B
-                    , (SELECT * FROM BACKUP_PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = :year) C
+                    , (SELECT * FROM BACKUP_PLAN_REPAIR_EXPENSES_MANUAL WHERE BACKUP_ID = :backupid) C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
-                    AND A.YEAR = B.YEAR
+                    AND A.BACKUP_ID = B.BACKUP_ID
                     AND A.MONTH = B.MONTH
                     AND A.NAME = B.NAME
                     AND X.SNAME = C.SNAME(+)
-                    AND A.YEAR = :year
+                    AND A.BACKUP_ID = :backupid
                     ORDER BY YEAR, MONTH, X.IDX`;  
 
-      binds = {year: year};                 
+      binds = {backupid: backupid};                 
   }           
 
   try {

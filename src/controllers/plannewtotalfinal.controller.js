@@ -36,6 +36,7 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   const chk_10 = receivedData.chk_10;
   const chk_11 = receivedData.chk_11;
   const chk_12 = receivedData.chk_12;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("zinc_cnt: ", zinc_cnt);
@@ -64,9 +65,10 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   console.log("chk_10: ", chk_10);
   console.log("chk_11: ", chk_11);
   console.log("chk_12: ", chk_12);
+  console.log("procid: ", procid);
 
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk_1, chk_2, chk_3, chk_4, chk_5, chk_6, chk_7, chk_8, chk_9, chk_10, chk_11, chk_12);
+  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk_1, chk_2, chk_3, chk_4, chk_5, chk_6, chk_7, chk_8, chk_9, chk_10, chk_11, chk_12, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -76,19 +78,20 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   }
 
   query = `SELECT YEAR, SCODE, XA, XB, XC
-          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '황산생산') S_CNT
-          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '아연괴생산') ZINC_CNT
-          , (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') ZINC_TRANS
-          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR FROM PLUG WHERE XB = '정광' AND YEAR = A.YEAR) ZINC_CNT2
-          , (SELECT SUM(XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR) FROM PLUG WHERE SCODE IN ('PPP0306', 'PPP0307', 'PPP0308') AND YEAR = A.YEAR) ZINC_CNT3
-          , CASE WHEN FN_REF_VALUE('아연괴생산', A.YEAR, '00') + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') > 220000 THEN ((FN_REF_VALUE('아연괴생산', A.YEAR, '00')  + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001') - 220000) / 220000) * FN_REF_VALUE('캐소드생산', A.YEAR, '00')
+          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '황산생산' AND PROCID = :procid) S_CNT
+          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '아연괴생산' AND PROCID = :procid) ZINC_CNT
+          , (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001' AND PROCID = :procid) ZINC_TRANS
+          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR FROM PLUG WHERE XB = '정광' AND YEAR = A.YEAR AND PROCID = :procid) ZINC_CNT2
+          , (SELECT SUM(XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR) FROM PLUG WHERE SCODE IN ('PPP0306', 'PPP0307', 'PPP0308') AND YEAR = A.YEAR AND PROCID = :procid) ZINC_CNT3
+          , CASE WHEN FN_REF_VALUE('아연괴생산', A.YEAR, '00', :procid) + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001' AND PROCID = :procid) > 220000 THEN ((FN_REF_VALUE('아연괴생산', A.YEAR, '00', :procid)  + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001' AND PROCID = :procid) - 220000) / 220000) * FN_REF_VALUE('캐소드생산', A.YEAR, '00', :procid)
             ELSE 0 END AS CA_CNT
           FROM PLAN_ELEC_RECTIFIER_DTL A
           WHERE YEAR = :year
           AND GUBUN = '0'
+          AND PROCID = :procid
           ORDER BY IDX `; 
 
-  binds = {year: year};                       
+  binds = {year: year, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

@@ -9,11 +9,13 @@ exports.getPlancasetotalfinalchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlantotalfinalproc(year);
+  const data1 = await executeProcedure.callPlantotalfinalproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -25,12 +27,14 @@ exports.getPlancasetotalfinalchk = async (req, res) => {
             FROM PLAN_PROC_ZINC_CNT
             WHERE YEAR = :year
             AND SCODE = 'PPZC002'
+            AND PROCID = :procid
             UNION ALL
             SELECT YEAR, GUBUN1, GUBUN2, '평균', ROUND(DECODE(ANNUAL, NULL, (MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) / 12
                             , 0, (MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) / 12, ANNUAL), 1)
             FROM PLAN_REF_INDICATOR
             WHERE YEAR = :year
             AND SCODE IN ('RI001', 'RI002', 'RI003', 'RI005', 'RI006', 'RI008', 'RI009', 'RI010', 'RI011', 'RI018', 'RI019', 'RI020')
+            AND PROCID = :procid
             UNION ALL
             SELECT YEAR, LNAME, MNAME, SNAME, MONTH_0
             FROM (
@@ -39,10 +43,11 @@ exports.getPlancasetotalfinalchk = async (req, res) => {
                 WHERE A.SCODE = B.SCODE(+)
                 AND A.YEAR = B.YEAR(+)
                 AND A.YEAR = :year
+                AND B.PROCID(+) = :procid
                 ORDER BY A.IDX
                 ) `; 
 
-  binds = {year: year};                       
+  binds = {year: year, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

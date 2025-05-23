@@ -9,11 +9,13 @@ exports.getProductioninputschk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
    // 프로시저 호출
-   const data1 = await executeProcedure.callProductioninputsproc(year);
+   const data1 = await executeProcedure.callProductioninputsproc(year, procid);
 
    logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
  
@@ -43,9 +45,10 @@ exports.getProductioninputschk = async (req, res) => {
                 WHERE X.YEAR = A.YEAR(+)
                 AND X.SCODE = A.SCODE(+)
                 AND X.YEAR = :year
+                AND A.PROCID(+) = :procid
                 ORDER BY X.IDX`;                 
 
-   const binds = {year: year};
+   const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

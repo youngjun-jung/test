@@ -42,6 +42,8 @@ const backrepairexpensesRoutes = require('./src/routes/backrepairexpenses.routes
 const repairexpensestRoutes = require('./src/routes/repairexpensest.routes');
 const eleccostRoutes = require('./src/routes/eleccost.routes');
 const eleccosttRoutes = require('./src/routes/eleccostt.routes');
+const backeleccostRoutes = require('./src/routes/backeleccost.routes');
+const backeleccosttRoutes = require('./src/routes/backeleccostt.routes');
 const depreciationRoutes = require('./src/routes/depreciation.routes');
 const depreciationtRoutes = require('./src/routes/depreciationt.routes');
 const zincconcentrateRoutes = require('./src/routes/zincconcentrate.routes');
@@ -151,6 +153,7 @@ const backotherexpensestRoutes = require('./src/routes/backotherexpensest.routes
 const backsubmaterialtRoutes = require('./src/routes/backsubmaterialt.routes');
 const backlaborcosttRoutes = require('./src/routes/backlaborcostt.routes');
 const backrepairexpensestRoutes = require('./src/routes/backrepairexpensest.routes');
+const backdepreciationRoutes = require('./src/routes/backdepreciation.routes');
 const backdepreciationtRoutes = require('./src/routes/backdepreciationt.routes');
 const backzincconcentrateRoutes = require('./src/routes/backzincconcentrate.routes');
 //const backrefindicatorRoutes = require('./src/routes/refindicator.routes');
@@ -240,6 +243,8 @@ app.use('/api/backrepairexpenses', backrepairexpensesRoutes); // 월별 수선�
 app.use('/api/repairexpensest', repairexpensestRoutes); // 종합 수선비 정보 경로
 app.use('/api/eleccost', eleccostRoutes); // 월별 전력비 정보 경로
 app.use('/api/eleccostt', eleccosttRoutes); // 종합 전력비 정보 경로
+app.use('/api/backeleccost', backeleccostRoutes); // 월별 전력비 정보 경로
+app.use('/api/backeleccostt', backeleccosttRoutes); // 종합 전력비 정보 경로
 app.use('/api/depreciation', depreciationRoutes); // 월별 감가상각비 정보 경로
 app.use('/api/depreciationt', depreciationtRoutes); // 종합 감가상각비 정보 경로
 app.use('/api/zincconcentrate', zincconcentrateRoutes); // 월별 아연 정광 구매 계획(원료) 정보 경로
@@ -351,6 +356,7 @@ app.use('/api/backotherexpensest', backotherexpensestRoutes); // 종합 기타�
 app.use('/api/backsubmaterialt', backsubmaterialtRoutes); // 종합 보조재료 정보 경로
 app.use('/api/backlaborcostt', backlaborcosttRoutes); // 종합 노무비 정보 경로
 app.use('/api/backrepairexpensest', backrepairexpensestRoutes); // 종합 수선비 정보 경로
+app.use('/api/backdepreciation', backdepreciationRoutes); // 월별 감가상각비 정보 경로
 app.use('/api/backdepreciationt', backdepreciationtRoutes); // 종합 감가상각비 정보 경로
 app.use('/api/backzincconcentrate', backzincconcentrateRoutes); // 월별 아연 정광 구매 계획(원료) 정보 경로
 //app.use('/api/backrefindicator', backrefindicatorRoutes); // 기준지표 정보 경로

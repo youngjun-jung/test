@@ -9,9 +9,11 @@ exports.getDepreciationtchk = async (req, res) => {
 
   const backupid = receivedData.backupid;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("backupid: ", backupid);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 
   let query;
   let binds;

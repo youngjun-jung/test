@@ -3,17 +3,18 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callElecrectifierproc = async (year) => {
+exports.callElecrectifierproc = async (year, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_ELEC_RECTIFIER_PROC(:year, :returncode); 
+                SP_PLAN_ELEC_RECTIFIER_PROC(:year, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
+                procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

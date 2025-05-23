@@ -43,18 +43,18 @@ exports.getRef1chk = async (req, res) => {
                       END AS XS                          
               FROM (        
                   SELECT A.NUM, A.XA, A.XB, A.XC, GUBUN1
-                  , FN_REF_CAL(A.XB, A.YEAR, '01', A.AUTO_YN, ROUND(XD, 2)) XD
-                  , FN_REF_CAL(A.XB, A.YEAR, '02', A.AUTO_YN, ROUND(XE, 2)) XE
-                  , FN_REF_CAL(A.XB, A.YEAR, '03', A.AUTO_YN, ROUND(XF, 2)) XF                     
-                  , FN_REF_CAL(A.XB, A.YEAR, '04', A.AUTO_YN, ROUND(XH, 2)) XH
-                  , FN_REF_CAL(A.XB, A.YEAR, '05', A.AUTO_YN, ROUND(XI, 2)) XI
-                  , FN_REF_CAL(A.XB, A.YEAR, '06', A.AUTO_YN, ROUND(XJ, 2)) XJ                  
-                  , FN_REF_CAL(A.XB, A.YEAR, '07', A.AUTO_YN, ROUND(XL, 2)) XL
-                  , FN_REF_CAL(A.XB, A.YEAR, '08', A.AUTO_YN, ROUND(XM, 2)) XM
-                  , FN_REF_CAL(A.XB, A.YEAR, '09', A.AUTO_YN, ROUND(XN, 2)) XN                   
-                  , FN_REF_CAL(A.XB, A.YEAR, '10', A.AUTO_YN, ROUND(XP, 2)) XP
-                  , FN_REF_CAL(A.XB, A.YEAR, '11', A.AUTO_YN, ROUND(XQ, 2)) XQ
-                  , FN_REF_CAL(A.XB, A.YEAR, '12', A.AUTO_YN, ROUND(XR, 2)) XR                             
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '01', A.AUTO_YN, ROUND(XD, 2)) XD
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '02', A.AUTO_YN, ROUND(XE, 2)) XE
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '03', A.AUTO_YN, ROUND(XF, 2)) XF                     
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '04', A.AUTO_YN, ROUND(XH, 2)) XH
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '05', A.AUTO_YN, ROUND(XI, 2)) XI
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '06', A.AUTO_YN, ROUND(XJ, 2)) XJ                  
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '07', A.AUTO_YN, ROUND(XL, 2)) XL
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '08', A.AUTO_YN, ROUND(XM, 2)) XM
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '09', A.AUTO_YN, ROUND(XN, 2)) XN                   
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '10', A.AUTO_YN, ROUND(XP, 2)) XP
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '11', A.AUTO_YN, ROUND(XQ, 2)) XQ
+                  , FN_REF_CAL_BACK(A.XB, A.BACKUP_ID, '12', A.AUTO_YN, ROUND(XR, 2)) XR                             
                   FROM BACKUP_PLAN_REF_AUTO_CODE A, BACKUP_PLUG B
                   WHERE A.XB = B.XB(+)
                   AND A.BACKUP_ID = B.BACKUP_ID(+)

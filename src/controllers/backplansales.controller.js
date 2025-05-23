@@ -11,16 +11,7 @@ exports.getPlansaleschk = async (req, res) => {
   const backupid = receivedData.backupid;
 
   console.log("backupid: ", backupid);
-/*
-  // 프로시저 호출
-    const data1 = await executeProcedure.callPlansalesproc(year);
 
-    logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
-
-    if (!data1 || Object.keys(data1).length === 0) {
-      res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
-    }
-*/
   const query = `SELECT A.YEAR, A.NAME, A.LNAME, A.MNAME, A.SNAME
               , NVL(MONTH_0, 0) MONTH_0
               , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03

@@ -9,9 +9,11 @@ exports.getSubmaterialchk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 
   let query;
   let binds;
@@ -24,9 +26,10 @@ exports.getSubmaterialchk = async (req, res) => {
                     WHERE X.SNAME = A.NAME(+)
                     AND YEAR(+) = :year
                     AND GUBUN(+) = :gubun
+                    AND A.PROCID(+) = :procid
                     ORDER BY YEAR, MONTH, X.IDX`;  
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {year: year, gubun: gubun, procid: procid};              
   }
   else
   {
@@ -36,8 +39,8 @@ exports.getSubmaterialchk = async (req, res) => {
                 , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
                 , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_SUB_MATERIAL_CODE WHERE YEAR = :year) X
-                    , (SELECT * FROM PLAN_SUB_MATERIAL WHERE GUBUN = '1') A
-                    , (SELECT * FROM PLAN_SUB_MATERIAL WHERE GUBUN = '2') B
+                    , (SELECT * FROM PLAN_SUB_MATERIAL WHERE GUBUN = '1' AND PROCID = :procid) A
+                    , (SELECT * FROM PLAN_SUB_MATERIAL WHERE GUBUN = '2' AND PROCID = :procid) B
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
                     AND A.YEAR = B.YEAR
@@ -46,7 +49,7 @@ exports.getSubmaterialchk = async (req, res) => {
                     AND A.YEAR = :year
                     ORDER BY YEAR, MONTH, X.IDX`;  
 
-      binds = {year: year};                 
+      binds = {year: year, procid: procid};                 
   }           
 
   try {

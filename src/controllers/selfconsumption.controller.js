@@ -9,11 +9,13 @@ exports.getSelfconsumptionchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-    const data1 = await executeProcedure.callSelfconsumptionproc(year);
+    const data1 = await executeProcedure.callSelfconsumptionproc(year, procid);
 
     logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -35,9 +37,10 @@ exports.getSelfconsumptionchk = async (req, res) => {
                 AND A.MNAME = C.MNAME(+)
                 AND A.YEAR = C.YEAR(+)
                 AND A.YEAR = :year
+                AND B.PROCID(+) = :procid
                 ORDER BY A.NUM`;                 
 
- const binds = {year: year};
+ const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

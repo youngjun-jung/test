@@ -9,9 +9,11 @@ exports.getLaborcosttchk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 
   let query;
   let binds;
@@ -23,13 +25,13 @@ exports.getLaborcosttchk = async (req, res) => {
                     , SUM(XY) XY, SUM(XZ) XZ, SUM(XAA) XAA, IDX
                     FROM (SELECT DISTINCT X.*, A.*
                         FROM (SELECT SCODE, SNAME, IDX FROM PLAN_LABOR_COST_CODE WHERE YEAR = :year) X
-                        LEFT JOIN (SELECT * FROM PLAN_LABOR_COST WHERE YEAR = :year AND GUBUN = :gubun) A
+                        LEFT JOIN (SELECT * FROM PLAN_LABOR_COST WHERE YEAR = :year AND GUBUN = :gubun AND A.PROCID = :procid) A
                         ON X.SNAME = A.NAME
                         )
                     GROUP BY GUBUN, YEAR, SNAME, IDX    
                     ORDER BY YEAR, MONTH, IDX`;               
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {year: year, gubun: gubun, procid: procid};              
   }
   else
   {
@@ -42,8 +44,8 @@ exports.getLaborcosttchk = async (req, res) => {
                 , A.XP*B.XP*VALUE XP, A.XQ*B.XQ*VALUE XQ, A.XR*B.XR*VALUE XR, A.XS*B.XS*VALUE XS, A.XT*B.XT*VALUE XT, A.XU*B.XU*VALUE XU
                 , A.XV*B.XV*VALUE XV, A.XW*B.XW*VALUE XW, A.XX*B.XX*VALUE XX, A.XY*B.XY*VALUE XY, A.XZ*B.XZ*VALUE XZ, A.XAA*B.XAA*VALUE XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_LABOR_COST_CODE WHERE YEAR = :year) X
-                    , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '1') A
-                    , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '2') B
+                    , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '1' AND A.PROCID = :procid) A
+                    , (SELECT * FROM PLAN_LABOR_COST WHERE GUBUN = '2' AND A.PROCID = :procid) B
                     , (SELECT VALUE FROM PLAN_LABOR_COST_MANUAL WHERE YEAR = :year AND SCODE = 'PLCM001') C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
@@ -54,7 +56,7 @@ exports.getLaborcosttchk = async (req, res) => {
                 GROUP BY GUBUN, YEAR, SNAME, IDX    
                 ORDER BY YEAR, MONTH, IDX`;  
 
-      binds = {year: year};                 
+      binds = {year: year, procid: procid};                 
   }           
 
   try {

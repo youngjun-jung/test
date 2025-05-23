@@ -9,8 +9,10 @@ exports.getAgbyproductschk = async (req, res) => {
   const receivedData = req.query;
 
   const backupid = receivedData.backupid;
+  const procid = receivedData.procid;
 
   console.log("backupid: ", backupid);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
     const data1 = await executeProcedure.callAgbyproductsproc(year);

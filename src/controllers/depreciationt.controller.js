@@ -9,9 +9,11 @@ exports.getDepreciationtchk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 
   let query;
   let binds;
@@ -23,13 +25,13 @@ exports.getDepreciationtchk = async (req, res) => {
                     , SUM(XY) XY, SUM(XZ) XZ, SUM(XAA) XAA, IDX
                     FROM (SELECT DISTINCT X.*, A.*
                         FROM (SELECT SCODE, SNAME, IDX FROM PLAN_DEPRECIATION_CODE WHERE YEAR = :year) X
-                        LEFT JOIN (SELECT * FROM PLAN_DEPRECIATION WHERE YEAR = :year AND GUBUN = :gubun) A
+                        LEFT JOIN (SELECT * FROM PLAN_DEPRECIATION WHERE YEAR = :year AND GUBUN = :gubun AND PROCID = :procid) A
                         ON X.SNAME = A.NAME
                         )
                     GROUP BY GUBUN, YEAR, SNAME, IDX    
                     ORDER BY YEAR, MONTH, IDX`;               
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {year: year, gubun: gubun,procid: procid};              
   }
   else
   {
@@ -42,8 +44,8 @@ exports.getDepreciationtchk = async (req, res) => {
                 , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
                 , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_DEPRECIATION_CODE WHERE YEAR = :year) X
-                    , (SELECT * FROM PLAN_DEPRECIATION WHERE GUBUN = '1') A
-                    , (SELECT * FROM PLAN_DEPRECIATION WHERE GUBUN = '2') B
+                    , (SELECT * FROM PLAN_DEPRECIATION WHERE GUBUN = '1' AND PROCID = :procid) A
+                    , (SELECT * FROM PLAN_DEPRECIATION WHERE GUBUN = '2' AND PROCID = :procid) B
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
                     AND A.YEAR = B.YEAR
@@ -53,7 +55,7 @@ exports.getDepreciationtchk = async (req, res) => {
                 GROUP BY GUBUN, YEAR, SNAME, IDX    
                 ORDER BY YEAR, MONTH, IDX`;  
 
-      binds = {year: year};                 
+      binds = {year: year,procid: procid};                 
   }           
 
   try {

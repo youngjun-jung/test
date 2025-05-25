@@ -9,11 +9,13 @@ exports.getElecrectifierplanchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callElecrectifierproc(year);
+  const data1 = await executeProcedure.callElecrectifierproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -22,14 +24,15 @@ exports.getElecrectifierplanchk = async (req, res) => {
   }
 */
   query = `SELECT A.YEAR, A.SNAME, B.X01, B.X02, B.X11, B.X12, B.XAVG, B.XAMT
-          , (SELECT TO_CHAR(ROUND(VALUE, 0), 'FM999,999,999,999') FROM PLAN_ELEC_RECTIFIER_FINAL WHERE YEAR = A.YEAR AND SCODE = 'PERF001') FINAL
+          , (SELECT TO_CHAR(ROUND(VALUE, 0), 'FM999,999,999,999') FROM PLAN_ELEC_RECTIFIER_FINAL WHERE YEAR = A.YEAR AND SCODE = 'PERF001' AND PROCID = :procid) FINAL
           FROM PLAN_ELEC_RECTIFIER_PLAN_CODE A, PLAN_ELEC_RECTIFIER_PLAN B
           WHERE A.SCODE = B.SCODE(+)
           AND A.YEAR = B.YEAR(+)
           AND A.YEAR = :year
+          AND B.PROCID(+) = :procid
           ORDER BY A.IDX `; 
 
-  binds = {year: year};                       
+  binds = {year: year, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

@@ -8,8 +8,10 @@ exports.getZincconcentratechk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 
   const query = `SELECT DECODE(GUBUN, '1', '수입', '0', '국내', '기타') GUBUN, X.YEAR, SNAME, IDX
                 , SUM(DECODE(MONTH, '01', CNT, 0)) CNT_01
@@ -49,12 +51,12 @@ exports.getZincconcentratechk = async (req, res) => {
                 , SUM(DECODE(MONTH, '12', UNIT_COST, 0)) UNIT_COST_12
                 , SUM(DECODE(MONTH, '12', AMT, 0)) AMT_12
                 FROM (SELECT * FROM PLAN_ZINC_CONCENTRATE_CODE WHERE YEAR = :year) X
-                , (SELECT * FROM PLAN_ZINC_CONCENTRATE WHERE YEAR = :year) A
+                , (SELECT * FROM PLAN_ZINC_CONCENTRATE WHERE YEAR = :year AND PROCID = :procid) A
                 WHERE X.SNAME = A.NAME(+)
                 GROUP BY GUBUN, X.YEAR, SNAME, IDX
                 ORDER BY X.YEAR, IDX`;                 
 
-   const binds = {year: year};
+   const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

@@ -7,11 +7,11 @@ exports.getEleccosttchk = async (req, res) => {
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
-  const year = receivedData.year;
+  const backupid = receivedData.backupid;
   const gubun = receivedData.gubun;
   const procid = receivedData.procid;
 
-  console.log("year: ", year);
+  console.log("backupid: ", backupid);
   console.log("gubun: ", gubun);
   console.log("procid: ", procid);
 
@@ -24,8 +24,8 @@ exports.getEleccosttchk = async (req, res) => {
               , SUM(XK) XK, SUM(XL) XL, SUM(XM) XM, SUM(XN) XN, SUM(XO) XO, SUM(XP) XP, SUM(XQ) XQ, SUM(XR) XR, SUM(XS) XS, SUM(XT) XT, SUM(XU) XU, SUM(XV) XV, SUM(XW) XW, SUM(XX) XX
               , SUM(XY) XY, SUM(XZ) XZ, NVL(SUM(XAA), 0) XAA, IDX
               FROM (SELECT DISTINCT X.*, A.*
-                  FROM (SELECT SCODE, SNAME, IDX FROM PLAN_ELEC_COST_CODE WHERE YEAR = :year) X
-                  LEFT JOIN (SELECT * FROM PLAN_ELEC_COST WHERE YEAR = :year AND GUBUN = :gubun AND A.PROCID = :procid) A
+                  FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_ELEC_COST_CODE WHERE BACKUP_ID = :backupid) X
+                  LEFT JOIN (SELECT * FROM BACKUP_PLAN_ELEC_COST WHERE BACKUP_ID = :backupid AND GUBUN = :gubun AND PROCID = :procid) A
                   ON X.SNAME = A.NAME
                   WHERE X.SNAME = '수량'
                   )
@@ -62,8 +62,8 @@ exports.getEleccosttchk = async (req, res) => {
               , DECODE(SUM(DECODE(SNAME, '수량', XAA, 0)), 0, 0, SUM(DECODE(SNAME, '금액', XAA, 0)) / SUM(DECODE(SNAME, '수량', XAA, 0)) * 1000) XAA
               , 2 IDX
               FROM (SELECT DISTINCT X.*, A.*
-                  FROM (SELECT SCODE, SNAME, IDX FROM PLAN_ELEC_COST_CODE WHERE YEAR = :year) X
-                  LEFT JOIN (SELECT * FROM PLAN_ELEC_COST WHERE YEAR = :year AND GUBUN = :gubun AND A.PROCID = :procid) A
+                  FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_ELEC_COST_CODE WHERE BACKUP_ID = :backupid) X
+                  LEFT JOIN (SELECT * FROM BACKUP_PLAN_ELEC_COST WHERE BACKUP_ID = :backupid AND GUBUN = :gubun AND PROCID = :procid) A
                   ON X.SNAME = A.NAME
                   WHERE X.SNAME IN ('수량', '금액')
                   )
@@ -73,15 +73,15 @@ exports.getEleccosttchk = async (req, res) => {
               , SUM(XK) XK, SUM(XL) XL, SUM(XM) XM, SUM(XN) XN, SUM(XO) XO, SUM(XP) XP, SUM(XQ) XQ, SUM(XR) XR, SUM(XS) XS, SUM(XT) XT, SUM(XU) XU, SUM(XV) XV, SUM(XW) XW, SUM(XX) XX
               , SUM(XY) XY, SUM(XZ) XZ, NVL(SUM(XAA), 0), IDX
               FROM (SELECT DISTINCT X.*, A.*
-                  FROM (SELECT SCODE, SNAME, IDX FROM PLAN_ELEC_COST_CODE WHERE YEAR = :year) X
-                  LEFT JOIN (SELECT * FROM PLAN_ELEC_COST WHERE YEAR = :year AND GUBUN = :gubun AND A.PROCID = :procid) A
+                  FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_ELEC_COST_CODE WHERE BACKUP_ID = :backupid) X
+                  LEFT JOIN (SELECT * FROM BACKUP_PLAN_ELEC_COST WHERE BACKUP_ID = :backupid AND GUBUN = :gubun AND PROCID = :procid) A
                   ON X.SNAME = A.NAME
                   WHERE X.SNAME = '금액'
                   )
               GROUP BY GUBUN, YEAR, SNAME, IDX 
               ORDER BY YEAR, MONTH, IDX`;               
                     
-      binds = {year: year, gubun: gubun, procid: procid};              
+      binds = {backupid: backupid, gubun: gubun, procid: procid};              
   }  
 
   try {

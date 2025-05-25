@@ -3,18 +3,19 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callRefindicatoressproc = async (year, type_gubun) => {
+exports.callRefindicatoressproc = async (year, type_gubun, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_TYPE_GUBUN_PROC(:year, :type_gubun, :returncode); 
+                SP_PLAN_TYPE_GUBUN_PROC(:year, :type_gubun, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
                 type_gubun: type_gubun, // 매개변수
+                procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

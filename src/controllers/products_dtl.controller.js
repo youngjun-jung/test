@@ -10,12 +10,14 @@ exports.getProducts_dtlchk = async (req, res) => {
 
   const year = receivedData.year;
   const month = receivedData.month;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("month: ", month);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callProductsproc(year);
+  const data1 = await executeProcedure.callProductsproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -56,10 +58,11 @@ exports.getProducts_dtlchk = async (req, res) => {
             WHERE X.SCODE = A.SCODE(+)
             AND X.YEAR = A.YEAR(+) 
             AND X.YEAR = :year
+            AND A.PROCID(+) = :procid
             AND MONTH(+) = '00'
             ORDER BY IDX`;
                     
-    binds = {year: year};                
+    binds = {year: year, procid: procid};                
                   
   }
   else{
@@ -243,12 +246,13 @@ exports.getProducts_dtlchk = async (req, res) => {
                       AND A.SCODE_2 = P.SCODE(+)
                       AND A.YEAR = P.YEAR(+)
                       AND X.YEAR(+) = :year
+                      AND A.PROCID(+) = :procid
                       ORDER BY X.IDX, P.IDX
                       )
                   GROUP BY YEAR, NAME, LNAME, MNAME, SNAME, MEASURE, IDX    
                   ORDER BY IDX`;
 
-    binds = {year: year, month: month};              
+    binds = {year: year, month: month, procid: procid};              
 
   }
 

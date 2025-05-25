@@ -22,8 +22,9 @@ exports.getOtherexpenseschk = async (req, res) => {
   {
       query = `SELECT GUBUN, YEAR, MONTH, SNAME NAME, XA, XB, XC, XD, XE, XF, XG, XH, XI, XJ
                     , XK, XL, XM, XN, XO, XP, XQ, XR, XS, XT, XU, XV, XW, XX, XY, XZ, XAA, X.IDX
-                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_OTHER_EXPENSES_CODE WHERE BACKUP_ID = :backupid) X, BACKUP_PLAN_OTHER_EXPENSES A
+                    FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_OTHER_EXPENSES_CODE WHERE BACKUP_ID = :backupid AND PROCID = :procid) X, BACKUP_PLAN_OTHER_EXPENSES A
                     WHERE X.SNAME = A.NAME(+)
+                    AND X.PROCID = A.PROCID(+)
                     AND BACKUP_ID(+) = :backupid
                     AND GUBUN(+) = :gubun
                     ORDER BY YEAR, MONTH, X.IDX`;  

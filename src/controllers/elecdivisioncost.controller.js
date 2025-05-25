@@ -10,12 +10,14 @@ exports.getElecdivisioncostchk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callElecdivisioncostproc(year);
+  const data1 = await executeProcedure.callElecdivisioncostproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -29,9 +31,10 @@ exports.getElecdivisioncostchk = async (req, res) => {
           AND A.YEAR = B.YEAR(+)
           AND A.YEAR = :year         
           AND B.GUBUN(+) = :gubun
+          AND B.PROCID(+) = :procid
           ORDER BY A.IDX`; 
 
-  binds = {year: year, gubun: gubun};                       
+  binds = {year: year, gubun: gubun, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

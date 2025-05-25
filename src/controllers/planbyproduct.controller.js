@@ -10,12 +10,14 @@ exports.getPlanbyproductchk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlanbyproductproc(year);
+  const data1 = await executeProcedure.callPlanbyproductproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -33,6 +35,7 @@ exports.getPlanbyproductchk = async (req, res) => {
           AND X.YEAR = A.YEAR(+)
           AND X.YEAR = :year
           AND X.USE_YN = 'Y'
+          AND A.PROCID(+) = P_PROCID
           ORDER BY X.IDX`; 
 
   binds = {year: year};                       

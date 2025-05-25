@@ -9,9 +9,11 @@ exports.getRepairexpensestchk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 
   let query;
   let binds;
@@ -23,13 +25,13 @@ exports.getRepairexpensestchk = async (req, res) => {
                     , SUM(XY) XY, SUM(XZ) XZ, SUM(XAA) XAA, IDX
                     FROM (SELECT DISTINCT X.*, A.*
                         FROM (SELECT SCODE, SNAME, IDX FROM PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X
-                        LEFT JOIN (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE YEAR = :year AND GUBUN = :gubun) A
+                        LEFT JOIN (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE YEAR = :year AND GUBUN = :gubun AND PROCID = :procid) A
                         ON X.SNAME = A.NAME
                         )
                     GROUP BY GUBUN, YEAR, SNAME, IDX    
                     ORDER BY YEAR, MONTH, IDX`;               
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {year: year, gubun: gubun, procid: procid};              
   }
   else
   {
@@ -42,8 +44,8 @@ exports.getRepairexpensestchk = async (req, res) => {
                 , A.XP*B.XP*C.VALUE XP, A.XQ*B.XQ*C.VALUE XQ, A.XR*B.XR*C.VALUE XR, A.XS*B.XS*C.VALUE XS, A.XT*B.XT*C.VALUE XT, A.XU*B.XU*C.VALUE XU
                 , A.XV*B.XV*C.VALUE XV, A.XW*B.XW*C.VALUE XW, A.XX*B.XX*C.VALUE XX, A.XY*B.XY*C.VALUE XY, A.XZ*B.XZ*C.VALUE XZ, A.XAA*B.XAA*C.VALUE XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X
-                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '1') A
-                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '2') B
+                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '1' AND PROCID = :procid) A
+                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '2' AND PROCID = :procid) B
                     , (SELECT * FROM PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = :year) C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
@@ -55,7 +57,7 @@ exports.getRepairexpensestchk = async (req, res) => {
                 GROUP BY GUBUN, YEAR, SNAME, IDX    
                 ORDER BY YEAR, MONTH, IDX`;  
 
-      binds = {year: year};                 
+      binds = {year: year, procid: procid};                 
   }           
 
   try {

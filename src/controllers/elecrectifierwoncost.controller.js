@@ -9,16 +9,19 @@ exports.getElecrectifierwoncostchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
  
   query = `SELECT SCODE, VALUE
             FROM PLAN_ELEC_RECTIFIER_MANUAL
             WHERE YEAR = :year
             AND SCODE IN ('PERM0523', 'PERM0522', 'PERM0521', 'PERM0513', 'PERM0512', 'PERM0511', 'PERM0503', 'PERM0502', 'PERM0501')
+            AND PROCID = :procid
             ORDER BY IDX`;
 
-  binds = {year: year};                       
+  binds = {year: year, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

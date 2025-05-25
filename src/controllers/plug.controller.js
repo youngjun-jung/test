@@ -19,9 +19,10 @@ exports.getPlugchk = async (req, res) => {
                 FROM PLUG 
                 WHERE YEAR = :year
                 AND USE_YN = 'Y'
+                AND PROCID = :procid
                 ORDER BY NUM`;                 
 
- const binds = {year: year};
+ const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

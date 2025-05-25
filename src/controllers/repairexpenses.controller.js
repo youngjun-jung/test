@@ -9,9 +9,11 @@ exports.getRepairexpenseschk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 
   let query;
   let binds;
@@ -26,9 +28,10 @@ exports.getRepairexpenseschk = async (req, res) => {
                     AND X.SNAME = C.SNAME(+)
                     AND A.YEAR(+) = :year
                     AND GUBUN(+) = :gubun
+                    AND A.PROCID(+) = :procid
                     ORDER BY YEAR, MONTH, X.IDX`;  
                     
-      binds = {year: year, gubun: gubun};              
+      binds = {year: year, gubun: gubun, procid: procid};              
   }
   else
   {
@@ -38,8 +41,8 @@ exports.getRepairexpenseschk = async (req, res) => {
                 , A.XP*B.XP*C.VALUE XP, A.XQ*B.XQ*C.VALUE XQ, A.XR*B.XR*C.VALUE XR, A.XS*B.XS*C.VALUE XS, A.XT*B.XT*C.VALUE XT, A.XU*B.XU*C.VALUE XU
                 , A.XV*B.XV*C.VALUE XV, A.XW*B.XW*C.VALUE XW, A.XX*B.XX*C.VALUE XX, A.XY*B.XY*C.VALUE XY, A.XZ*B.XZ*C.VALUE XZ, A.XAA*B.XAA*C.VALUE XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM PLAN_REPAIR_EXPENSES_CODE WHERE YEAR = :year) X
-                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '1') A
-                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '2') B
+                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '1' AND PROCID = :procid) A
+                    , (SELECT * FROM PLAN_REPAIR_EXPENSES WHERE GUBUN = '2' AND PROCID = :procid) B
                     , (SELECT * FROM PLAN_REPAIR_EXPENSES_MANUAL WHERE YEAR = :year) C
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
@@ -50,7 +53,7 @@ exports.getRepairexpenseschk = async (req, res) => {
                     AND A.YEAR = :year
                     ORDER BY YEAR, MONTH, X.IDX`;  
 
-      binds = {year: year};                 
+      binds = {year: year, procid: procid};                 
   }           
 
   try {

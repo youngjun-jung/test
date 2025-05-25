@@ -9,11 +9,13 @@ exports.getZincautochk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
    // 프로시저 호출
-   const data1 = await executeProcedure.callZincproc(year);
+   const data1 = await executeProcedure.callZincproc(year, procid);
 
    logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
  
@@ -29,9 +31,10 @@ exports.getZincautochk = async (req, res) => {
                 , MONTH_0, IDX, GUBUN 
                 FROM PLAN_ZINC_CONCENTRATE_DTL
                 WHERE YEAR = :year
+                AND PROCID = :procid
                 ORDER BY IDX, GUBUN`;                 
 
-   const binds = {year: year};
+   const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

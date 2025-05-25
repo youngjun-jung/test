@@ -9,11 +9,13 @@ exports.getRef2chk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callRefmanualproc(year);
+  const data1 = await executeProcedure.callRefmanualproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -31,9 +33,10 @@ exports.getRef2chk = async (req, res) => {
               AND A.YEAR = B.YEAR(+)
               AND A.YEAR = :year
               AND A.USE_YN = 'Y'
+              AND B.PROCID(+) = :procid
               ORDER BY A.NUM`;                 
 
- const binds = {year: year};
+ const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

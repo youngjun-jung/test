@@ -9,11 +9,13 @@ exports.getRef1chk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 /*
    // 프로시저 호출
-   const data1 = await executeProcedure.callRefmanualproc(year);
+   const data1 = await executeProcedure.callRefmanualproc(year, procid);
 
    logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
  
@@ -43,27 +45,28 @@ exports.getRef1chk = async (req, res) => {
                       END AS XS                          
               FROM (        
                   SELECT A.NUM, A.XA, A.XB, A.XC, GUBUN1
-                  , FN_REF_CAL(A.XB, A.YEAR, '01', A.AUTO_YN, ROUND(XD, 2)) XD
-                  , FN_REF_CAL(A.XB, A.YEAR, '02', A.AUTO_YN, ROUND(XE, 2)) XE
-                  , FN_REF_CAL(A.XB, A.YEAR, '03', A.AUTO_YN, ROUND(XF, 2)) XF                     
-                  , FN_REF_CAL(A.XB, A.YEAR, '04', A.AUTO_YN, ROUND(XH, 2)) XH
-                  , FN_REF_CAL(A.XB, A.YEAR, '05', A.AUTO_YN, ROUND(XI, 2)) XI
-                  , FN_REF_CAL(A.XB, A.YEAR, '06', A.AUTO_YN, ROUND(XJ, 2)) XJ                  
-                  , FN_REF_CAL(A.XB, A.YEAR, '07', A.AUTO_YN, ROUND(XL, 2)) XL
-                  , FN_REF_CAL(A.XB, A.YEAR, '08', A.AUTO_YN, ROUND(XM, 2)) XM
-                  , FN_REF_CAL(A.XB, A.YEAR, '09', A.AUTO_YN, ROUND(XN, 2)) XN                   
-                  , FN_REF_CAL(A.XB, A.YEAR, '10', A.AUTO_YN, ROUND(XP, 2)) XP
-                  , FN_REF_CAL(A.XB, A.YEAR, '11', A.AUTO_YN, ROUND(XQ, 2)) XQ
-                  , FN_REF_CAL(A.XB, A.YEAR, '12', A.AUTO_YN, ROUND(XR, 2)) XR                             
+                  , FN_REF_CAL(A.XB, A.YEAR, '01', A.AUTO_YN, ROUND(XD, 2), :procid) XD
+                  , FN_REF_CAL(A.XB, A.YEAR, '02', A.AUTO_YN, ROUND(XE, 2), :procid) XE
+                  , FN_REF_CAL(A.XB, A.YEAR, '03', A.AUTO_YN, ROUND(XF, 2), :procid) XF                     
+                  , FN_REF_CAL(A.XB, A.YEAR, '04', A.AUTO_YN, ROUND(XH, 2), :procid) XH
+                  , FN_REF_CAL(A.XB, A.YEAR, '05', A.AUTO_YN, ROUND(XI, 2), :procid) XI
+                  , FN_REF_CAL(A.XB, A.YEAR, '06', A.AUTO_YN, ROUND(XJ, 2), :procid) XJ                  
+                  , FN_REF_CAL(A.XB, A.YEAR, '07', A.AUTO_YN, ROUND(XL, 2), :procid) XL
+                  , FN_REF_CAL(A.XB, A.YEAR, '08', A.AUTO_YN, ROUND(XM, 2), :procid) XM
+                  , FN_REF_CAL(A.XB, A.YEAR, '09', A.AUTO_YN, ROUND(XN, 2), :procid) XN                   
+                  , FN_REF_CAL(A.XB, A.YEAR, '10', A.AUTO_YN, ROUND(XP, 2), :procid) XP
+                  , FN_REF_CAL(A.XB, A.YEAR, '11', A.AUTO_YN, ROUND(XQ, 2), :procid) XQ
+                  , FN_REF_CAL(A.XB, A.YEAR, '12', A.AUTO_YN, ROUND(XR, 2), :procid) XR                             
                   FROM PLAN_REF_AUTO_CODE A, PLUG B
                   WHERE A.XB = B.XB(+)
                   AND A.YEAR = B.YEAR(+)
                   AND A.YEAR = :year
+                  AND B.PROCID(+) = :procid
                   AND A.USE_YN = 'Y'
               )    
               ORDER BY NUM`;                 
 
- const binds = {year: year};
+ const binds = {year: year, procid: procid};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

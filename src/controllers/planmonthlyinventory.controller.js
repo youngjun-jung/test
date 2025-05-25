@@ -10,12 +10,14 @@ exports.getPlanmonthlyinventorychk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);
+  console.log("procid: ", procid);
 /*
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlanmonthlyinventoryproc(year);
+  const data1 = await executeProcedure.callPlanmonthlyinventoryproc(year, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
@@ -33,9 +35,10 @@ exports.getPlanmonthlyinventorychk = async (req, res) => {
           AND X.YEAR = A.YEAR(+)
           AND X.YEAR = :year
           AND X.USE_YN = 'Y'
+          AND A.PROCID(+) = :procid
           ORDER BY X.IDX, A.IDX`; 
 
-  binds = {year: year};                       
+  binds = {year: year, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

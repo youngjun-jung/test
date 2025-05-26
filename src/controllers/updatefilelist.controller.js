@@ -2,7 +2,7 @@ const { executeQuery } = require('../config/queries');
 const logger = require('../../logger'); 
 
   // 버전 조회 로직
-exports.getVersionCheck = async (req, res) => {
+exports.getUpdateFileList = async (req, res) => {
    const receivedData = req.query;
 
    const appVer = receivedData.appver;

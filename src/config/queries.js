@@ -58,4 +58,21 @@ async function executeQueryMany(query, params = []) {
   }
 }
 
-module.exports = { executeQuery, executeQueryMany };
+// 상위 호출 function에서 커넥션 제어 필요
+async function executeQueryStream(query, params = []) {
+  let connection;  
+  
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    logger.info(`start execute: ${query}`);
+    const result = await connection.execute(query, params, { autoCommit: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+    return  { connection: connection, rows: result.rows };  
+  } catch (err) {
+    logger.error("Error executing query:", err);
+    throw err;
+  }
+}
+
+module.exports = { executeQuery, executeQueryMany, executeQueryStream };

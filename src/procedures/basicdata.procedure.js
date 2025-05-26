@@ -19,6 +19,7 @@ exports.callBasicdataproc = async (year, zinccnt, zincin, zincout, zinctrans, ty
                 zincout: zincout, // 매개변수
                 zinctrans: zinctrans, // 매개변수
                 type_gubun: type_gubun, // 매개변수
+                procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

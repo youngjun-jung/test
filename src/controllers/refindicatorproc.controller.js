@@ -25,14 +25,16 @@ exports.patchRefindicatorprocchk = async (req, res) => {
     const month_11 = receivedData.month_11;
     const month_12 = receivedData.month_12;
     const save = receivedData.save;
+    const procid = receivedData.procid;
 
     logger.info(`req year : ${year}`);
     logger.info(`req scode : ${scode}`);
     logger.info(`req annual : ${annual}`);
     logger.info(`req save : ${save}`);
+    logger.info(`req procid : ${procid}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callRefindicatorproc(year, scode, annual, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, save);
+    const data = await executeProcedure.callRefindicatorproc(year, scode, annual, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, save, procid);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

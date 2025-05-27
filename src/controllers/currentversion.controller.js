@@ -7,11 +7,18 @@ exports.getCurrentVersion = async (req, res) => {
 
    const appVer = receivedData.appver;
 
-   const query = `SELECT RDATE, APPVER, RLEVEL, RTITLE, COMMENTS
-                    FROM TB_UPDATE_YP_MGMT A
-                   WHERE TO_NUMBER(REPLACE(APPVER, '.', '')) = (
-                        SELECT MAX(TO_NUMBER(REPLACE(APPVER, '.', '')))
-                          FROM TB_UPDATE_YP_MGMT B )`;
+   const query = `SELECT RVERSION, RTITLE, RCOMMENTS, RIDX
+                  FROM (
+                    SELECT RVERSION, RTITLE, RCOMMENTS, RIDX,
+                            ROW_NUMBER() OVER (ORDER BY
+                                LPAD(REGEXP_SUBSTR(RVERSION, '[^.]+', 1, 1), 3, '0') DESC,
+                                LPAD(REGEXP_SUBSTR(RVERSION, '[^.]+', 1, 2), 3, '0') DESC,
+                                LPAD(REGEXP_SUBSTR(RVERSION, '[^.]+', 1, 3), 3, '0') DESC,
+                                RIDX DESC
+                            ) as RN
+                      FROM TB_UPDATE_YP_MGMT
+                  )
+                  WHERE RN = 1`;
 
   const binds = { };
   

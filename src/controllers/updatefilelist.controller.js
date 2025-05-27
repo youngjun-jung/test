@@ -1,39 +1,36 @@
 const { executeQuery } = require('../config/queries');
 const logger = require('../../logger'); 
 
-  // 버전 조회 로직
+  // 업데이트 파일 조회 로직
 exports.getUpdateFileList = async (req, res) => {
    const receivedData = req.query;
 
-   const appVer = receivedData.appver;
+   const rversion = receivedData.rversion;
+   const ridx = receivedData.ridx;
 
    const query = `SELECT
-                  GUBUN,
-                  FILEID,
-                  FILESIZE,
-                  VER, 
-                  CREATED_DT,
-                  MODIFIED_DT
-              FROM TB_UPDATE_YP A
-              WHERE TO_NUMBER(REPLACE(VER, '.', '')) = (
-                  SELECT MAX(TO_NUMBER(REPLACE(VER, '.', '')))
-                  FROM TB_UPDATE_YP B
-                  WHERE A.FILEID = B.FILEID AND A.GUBUN = B.GUBUN
-              )
-              AND TO_NUMBER(REPLACE(VER, '.', '')) >= TO_NUMBER(REPLACE(:APPVERSION, '.', ''))
-              ORDER BY GUBUN DESC, FILEID`;
+                    GUBUN,
+                    FILEID,
+                    FILESIZE,
+                    VER, 
+                    CREATED_DT,
+                    MODIFIED_DT,
+                    RIDX
+                  FROM TB_UPDATE_YP
+                  WHERE VER = :rversion
+                    AND RIDX = :ridx`;
 
-  const binds = {appVersion: appVer};
+  const binds = {rversion: rversion, ridx: ridx};
   
     try {
       const data = await executeQuery(query, binds); // 데이터 조회
 
       const reformData = data.reduce((acc, curr) => {
-        const { GUBUN, FILEID, FILESIZE, VER, CREATED_DT, MODIFIED_DT } = curr;
+        const { GUBUN, FILEID, FILESIZE, VER, CREATED_DT, MODIFIED_DT, RIDX } = curr;
         if (!acc[GUBUN]) { // gubun이 존재하지 않으면 태그 추가
           acc[GUBUN] = [];
         }
-        acc[GUBUN].push({ fileid: FILEID, filesize: FILESIZE, ver: VER, created_dt: CREATED_DT, modified_dt: MODIFIED_DT });
+        acc[GUBUN].push({ fileid: FILEID, filesize: FILESIZE, ver: VER, created_dt: CREATED_DT, modified_dt: MODIFIED_DT, ridx: RIDX });
         return acc;
       }, {});
 

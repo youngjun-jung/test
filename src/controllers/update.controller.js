@@ -9,6 +9,7 @@ const { executeQuery, executeQueryStream } = require('../config/queries');
     const userId = receivedData.userid;
     const fileId = receivedData.fileid; 
     const fileVersion = receivedData.filever;
+    const ridx = receivedData.ridx;
     
     let connStream = null;
     let data = null;
@@ -21,12 +22,14 @@ const { executeQuery, executeQueryStream } = require('../config/queries');
                      FROM TB_UPDATE_YP
                     WHERE GUBUN = :gubun
                       AND FILEID = :fileId
-                      AND VER = :fileVersion`; 
+                      AND VER = :fileVersion
+                      AND RIDX = :ridx`; 
 
     const binds = {
       gubun: gubun,
       fileId: fileId,
-      fileVersion: fileVersion
+      fileVersion: fileVersion,
+      ridx: ridx
     };
 
     try {
@@ -76,18 +79,18 @@ const { executeQuery, executeQueryStream } = require('../config/queries');
         console.error(err);
         res.status(500).json({ success: false, message: '처리 실패', error: err.message });
     } finally {
-      await recordUpdateLog({ip, userId, gubun, fileId, fileVersion, fileSize, resFlag});
+      await recordUpdateLog({ip, userId, gubun, fileId, fileVersion, ridx, fileSize, resFlag});
     }
   };
 
-  async function recordUpdateLog({ ip, userId, gubun, fileId, fileVersion, fileSize, resFlag }) {
+  async function recordUpdateLog({ ip, userId, gubun, fileId, fileVersion, ridx, fileSize, resFlag }) {
     const query = 
     `INSERT INTO LOG_UPDATE_HISTORY 
       (WORKDATE, IP, USERID, GUBUN, FILEID, 
-      FILESIZE, VERSION, RESULT, UPDATE_DT)
+      FILESIZE, VER, RIDX, RESULT, UPDATE_DT)
     VALUES 
       (TO_CHAR(SYSDATE, 'YYYYMMDD'), :ip, :userId, :gubun, :fileId, 
-      :fileSize, :fileVersion, :resFlag, SYSDATE)`;
+      :fileSize, :fileVersion, :ridx, :resFlag, SYSDATE)`;
 
     const binds = {
     ip: ip,
@@ -95,7 +98,8 @@ const { executeQuery, executeQueryStream } = require('../config/queries');
     gubun: gubun,              
     fileId: fileId, 
     fileSize: fileSize,          
-    fileVersion: fileVersion,     
+    fileVersion: fileVersion,
+    ridx: ridx,     
     resFlag: resFlag              
     };
 

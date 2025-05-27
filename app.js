@@ -148,6 +148,11 @@ const procnewRoutes = require('./src/routes/procnew.routes');
 const procnew1Routes = require('./src/routes/procnew1.routes');
 const procnew2Routes = require('./src/routes/procnew2.routes');
 
+    // 시물레이션
+const simulplannewtotalfinalRoutes = require('./src/routes/simulplannewtotalfinal.routes');   
+const simulprocnew1Routes = require('./src/routes/simulprocnew1.routes');
+const simulprocnew2Routes = require('./src/routes/simulprocnew2.routes');  
+
 // ========= Backup target =========
 const backplugRoutes = require('./src/routes/backplug.routes');
 const backotherexpensestRoutes = require('./src/routes/backotherexpensest.routes');
@@ -351,6 +356,11 @@ app.use('/api/planlaborzinc', planlaborzincRoutes); // 노무비 조회 경로
 app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
 app.use('/api/procnew1', procnew1Routes); // 전체 처리 경로
 app.use('/api/procnew2', procnew2Routes); // 전체 처리 경로
+
+   // 시뮬레이션
+app.use('/api/simulplannewtotalfinal', simulplannewtotalfinalRoutes); // 최종 계산 경로  
+app.use('/api/simulprocnew1', simulprocnew1Routes); // 전체 처리 경로
+app.use('/api/simulprocnew2', simulprocnew2Routes); // 전체 처리 경로
 
 // ========= Backup target =========
 app.use('/api/backplug', backplugRoutes); // plug 정보 경로

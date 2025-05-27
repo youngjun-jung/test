@@ -28,6 +28,7 @@ exports.getRef2chk = async (req, res) => {
               , B.MONTH_04, B.MONTH_05, B.MONTH_06, B.MONTH_04 + B.MONTH_05 + B.MONTH_06 MONTH_2
               , B.MONTH_07, B.MONTH_08, B.MONTH_09, B.MONTH_07 + B.MONTH_08 + B.MONTH_09 MONTH_3
               , B.MONTH_10, B.MONTH_11, B.MONTH_12, B.MONTH_10 + B.MONTH_11 + B.MONTH_12 MONTH_4
+              , B.MONTH_01 + B.MONTH_02 + B.MONTH_03 + B.MONTH_04 + B.MONTH_05 + B.MONTH_06 + B.MONTH_07 + B.MONTH_08 + B.MONTH_09 + B.MONTH_10 + B.MONTH_11 + B.MONTH_12 MONTH_0
               FROM PLAN_REF_MANUAL_CODE A, PLAN_REF_MANUAL B
               WHERE A.XB = B.NAME(+)
               AND A.YEAR = B.YEAR(+)

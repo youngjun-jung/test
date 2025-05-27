@@ -42,7 +42,11 @@ exports.getRef1chk = async (req, res) => {
               , CASE WHEN GUBUN1 = '0' THEN ROUND((XP + XQ + XR)/3, 2)
                       WHEN GUBUN1 = '1' THEN ROUND(XP + XQ + XR, 2)
                       ELSE 0
-                      END AS XS                          
+                      END AS XS     
+              , CASE WHEN GUBUN1 = '0' THEN ROUND((XD + XE + XF + XH + XI + XL + XM + XN + XJ + XP + XQ + XR)/12, 2)
+                      WHEN GUBUN1 = '1' THEN ROUND(XD + XE + XF + XH + XI + XL + XM + XN + XJ + XP + XQ + XR, 2)
+                      ELSE 0
+                      END AS XT                               
               FROM (        
                   SELECT A.NUM, A.XA, A.XB, A.XC, GUBUN1
                   , FN_REF_CAL(A.XB, A.YEAR, '01', A.AUTO_YN, ROUND(XD, 2), :procid) XD

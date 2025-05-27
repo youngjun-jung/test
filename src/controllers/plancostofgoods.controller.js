@@ -25,14 +25,14 @@ exports.getPlancostofgoodschk = async (req, res) => {
 */
   const query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME
               , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03
-              , NVL(MONTH_01, 0) + NVL(MONTH_02, 0) + NVL(MONTH_03, 0) MONTH_1
+              , (NVL(MONTH_01, 0) + NVL(MONTH_02, 0) + NVL(MONTH_03, 0)) / DECODE(A.SNAME, '단가', 3, 1) MONTH_1
               , NVL(MONTH_04, 0) MONTH_04, NVL(MONTH_05, 0) MONTH_05, NVL(MONTH_06, 0) MONTH_06
-              , NVL(MONTH_04, 0) + NVL(MONTH_05, 0) + NVL(MONTH_06, 0) MONTH_2
+              , (NVL(MONTH_04, 0) + NVL(MONTH_05, 0) + NVL(MONTH_06, 0)) / DECODE(A.SNAME, '단가', 3, 1) MONTH_2
               , NVL(MONTH_07, 0) MONTH_07, NVL(MONTH_08, 0) MONTH_08, NVL(MONTH_09, 0) MONTH_09
-              , NVL(MONTH_07, 0) + NVL(MONTH_08, 0) + NVL(MONTH_09, 0) MONTH_3
+              , (NVL(MONTH_07, 0) + NVL(MONTH_08, 0) + NVL(MONTH_09, 0)) / DECODE(A.SNAME, '단가', 3, 1) MONTH_3
               , NVL(MONTH_10, 0) MONTH_10, NVL(MONTH_11, 0) MONTH_11, NVL(MONTH_12, 0) MONTH_12
-              , NVL(MONTH_10, 0) + NVL(MONTH_11, 0) + NVL(MONTH_12, 0) MONTH_4
-              , NVL(MONTH_0, 0) MONTH_0
+              , (NVL(MONTH_10, 0) + NVL(MONTH_11, 0) + NVL(MONTH_12, 0)) / DECODE(A.SNAME, '단가', 3, 1) MONTH_4
+              , NVL(MONTH_0, 0) / DECODE(A.SNAME, '단가', 12, 1) MONTH_0
               FROM PLAN_COST_OF_GOODS_CODE A, PLAN_COST_OF_GOODS B
               WHERE A.SCODE = B.SCODE(+)
               AND A.YEAR = B.YEAR(+)

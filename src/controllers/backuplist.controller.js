@@ -19,7 +19,7 @@ exports.getBackuplistchk = async (req, res) => {
                 FROM PLAN_BACKUP
                 WHERE BACKUP_ID LIKE '%' || :year || '%'
                 AND USE_YN IN ('Z', 'Y')
-                AND PROCID LIKE :procid
+                AND PROCID LIKE DECODE(:procid, 'ahs2024', '%', :procid)
                 AND (TIMEMARK LIKE :todate || '%' OR TIMEMARK BETWEEN TO_CHAR(TO_DATE(:todate, 'YYYYMMDD') - 15, 'YYYYMMDD')||'000000' AND :todate || '999999')
                 ORDER BY BACKUP_ID DESC`;                 
 

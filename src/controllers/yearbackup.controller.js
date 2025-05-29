@@ -8,8 +8,10 @@ exports.getYearbackupchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
+  const procid = receivedData.procid;
 
   console.log("year: ", year);
+  console.log("procid: ", procid);
 
   query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, '(' || SUBSTR(TIMEMARK, 1, 8) || ') ' || COMMENTS COMMENTS
           FROM (
@@ -17,12 +19,13 @@ exports.getYearbackupchk = async (req, res) => {
                 FROM PLAN_BACKUP
                 WHERE BACKUP_ID LIKE 'BAC' || :year || '%'
                 AND USE_YN = 'Y'
+                AND PROCID LIKE DECODE(:procid, 'ahs2024', '%', 'jminzzang', '%', :procid)
                 ORDER BY BACKUP_ID DESC
               )
           WHERE ROWNUM < 6
           ORDER BY TO_CHAR(ROWNUM) DESC`; 
 
-  binds = {year: year};                       
+  binds = {year: year, procid: procid};                       
   
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

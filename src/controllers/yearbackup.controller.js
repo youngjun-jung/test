@@ -19,12 +19,24 @@ exports.getYearbackupchk = async (req, res) => {
                 FROM PLAN_BACKUP
                 WHERE BACKUP_ID LIKE 'BAC' || :year || '%'
                 AND USE_YN = 'Y'
-                AND PROCID LIKE DECODE(:procid, 'ahs2024', '%', 'jminzzang', '%', :procid)
+                AND PROCID LIKE (SELECT DECODE(GUBUN1, 'Y', '%', :procid) FROM ADM_USER WHERE USERID = :procid)
                 ORDER BY BACKUP_ID DESC
               )
           WHERE ROWNUM < 6
           ORDER BY TO_CHAR(ROWNUM) DESC`; 
-
+/*
+  query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, '(' || SUBSTR(TIMEMARK, 1, 8) || ') ' || COMMENTS COMMENTS
+          FROM (
+                SELECT BACKUP_ID, COMMENTS, TIMEMARK
+                FROM PLAN_BACKUP
+                WHERE BACKUP_ID LIKE 'BAC' || :year || '%'
+                AND USE_YN = 'Y'
+                AND PROCID LIKE DECODE(:procid, 'ahs2024', '%', 'jminzzang', '%', :procid)
+                ORDER BY BACKUP_ID DESC
+              )
+          WHERE ROWNUM < 6
+          ORDER BY TO_CHAR(ROWNUM) DESC`;         
+*/
   binds = {year: year, procid: procid};                       
   
   try {

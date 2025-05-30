@@ -17,9 +17,9 @@ exports.getYearbackupchk = async (req, res) => {
           FROM (
                 SELECT BACKUP_ID, COMMENTS, TIMEMARK
                 FROM PLAN_BACKUP
-                WHERE BACKUP_ID LIKE 'BAC' || :year || '%'
+                WHERE BACKUP_ID LIKE '%' || :year || '%'
                 AND USE_YN = 'Y'
-                AND PROCID LIKE (SELECT DECODE(GUBUN1, 'Y', '%', :procid) FROM ADM_USER WHERE USERID = :procid)
+                AND PROCID LIKE (SELECT DECODE(GUBUN1, 'Y', '%', :procid) FROM ADM_USER WHERE USERID LIKE :procid)
                 ORDER BY BACKUP_ID DESC
               )
           WHERE ROWNUM < 6

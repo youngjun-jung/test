@@ -201,7 +201,7 @@ app.use(bodyParser.json());
 
         });
 
-// 라우트 설정
+// 라우트 설정1
     // 시스템
 app.use('/api/login', loginRoutes); // 로그인 API 경로
 app.use('/api/menu', menuRoutes); // 메뉴 API 경로

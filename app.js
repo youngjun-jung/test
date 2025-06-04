@@ -145,6 +145,7 @@ const yearbackupRoutes = require('./src/routes/yearbackup.routes');
 const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
 const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
 const planlossRoutes = require('./src/routes/planloss.routes'); 
+const plansalecntRoutes = require('./src/routes/plansalecnt.routes');
 const procnewRoutes = require('./src/routes/procnew.routes');
 const procnew1Routes = require('./src/routes/procnew1.routes');
 const procnew2Routes = require('./src/routes/procnew2.routes');

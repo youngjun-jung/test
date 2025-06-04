@@ -144,7 +144,7 @@ const yearbackupRoutes = require('./src/routes/yearbackup.routes');
    // 신규
 const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
 const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
-const planlossRoutes = require('./src/routes/planloss.routes'); 
+const planlossRoutes = require('./src/routes/planloss.routes');
 const plansalecntRoutes = require('./src/routes/plansalecnt.routes');
 const procnewRoutes = require('./src/routes/procnew.routes');
 const procnew1Routes = require('./src/routes/procnew1.routes');
@@ -355,7 +355,9 @@ app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경
    // 신규 최종
 app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       
 app.use('/api/planlaborzinc', planlaborzincRoutes); // 노무비 조회 경로  
-app.use('/api/planloss', planlossRoutes); // 재고평가손실 조회 경로 
+app.use('/api/planloss', planlossRoutes); // 재고 조회 경로
+app.use('/api/plansalecnt', plansalecntRoutes); // (실적+계획)판매수량 조회/수정 경로
+app.use('/api/plansellingexpensescnt', plansellingexpensescntRoutes); // (실적+계획)월별 판매비 조회/수정 경로
 app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
 app.use('/api/procnew1', procnew1Routes); // 전체 처리 경로
 app.use('/api/procnew2', procnew2Routes); // 전체 처리 경로

@@ -50,6 +50,10 @@ exports.patchPlanlosschk = async (req, res) => {
     const soamt = receivedData.soamt;
     const cathcnt = receivedData.cathcnt;
     const cathamt = receivedData.cathamt;
+    const scnt = receivedData.scnt;
+    const samt = receivedData.samt;
+    const cathscnt = receivedData.cathscnt;
+    const cathsamt = receivedData.cathsamt;
     const procid = receivedData.procid;
 
     logger.info(`req year : ${year}`);
@@ -62,10 +66,14 @@ exports.patchPlanlosschk = async (req, res) => {
     logger.info(`req soamt : ${soamt}`);
     logger.info(`req cathcnt : ${cathcnt}`);
     logger.info(`req cathamt : ${cathamt}`);
+    logger.info(`req scnt : ${scnt}`);
+    logger.info(`req samt : ${samt}`);
+    logger.info(`req cathscnt : ${cathscnt}`);
+    logger.info(`req cathsamt : ${cathsamt}`);
     logger.info(`req procid : ${procid}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callPlanlossproc(year, month, zinccnt, zincamt, jungcnt, jungamt, socnt, soamt, cathcnt, cathamt, procid);
+    const data = await executeProcedure.callPlanlossproc(year, month, zinccnt, zincamt, jungcnt, jungamt, socnt, soamt, cathcnt, cathamt, scnt, samt, cathscnt, cathsamt, procid);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

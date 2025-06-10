@@ -1,9 +1,9 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/plansalecnt.procedure');
+const executeProcedure = require('../procedures/plantotalfinal.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.getPlansalecntchk = async (req, res) => {
+exports.getPlantotalfinalmenualchk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
@@ -14,28 +14,27 @@ exports.getPlansalecntchk = async (req, res) => {
   console.log("year: ", year);
   console.log("procid: ", procid);
 
-  const query = `SELECT A.YEAR, A.NAME, A.LNAME, A.MNAME, A.SNAME, A.SCODE
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 1), '1', ROUND(MONTH_01, 2), 0) MONTH_01
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 2), '1', ROUND(MONTH_02, 2), 0) MONTH_02
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 3), '1', ROUND(MONTH_03, 2), 0) MONTH_03
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 4), '1', ROUND(MONTH_04, 2), 0) MONTH_04
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 5), '1', ROUND(MONTH_05, 2), 0) MONTH_05
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 6), '1', ROUND(MONTH_06, 2), 0) MONTH_06
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 7), '1', ROUND(MONTH_07, 2), 0) MONTH_07
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 8), '1', ROUND(MONTH_08, 2), 0) MONTH_08
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 9), '1', ROUND(MONTH_09, 2), 0) MONTH_09
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 10), '1', ROUND(MONTH_10, 2), 0) MONTH_10
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 11), '1', ROUND(MONTH_11, 2), 0) MONTH_11
-                , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = B.PROCID AND MONTH = 12), '1', ROUND(MONTH_12, 2), 0) MONTH_12
-                FROM PLANNING_PLUG_CODE A, PLANNING_PLUG B
-                WHERE A.YEAR = B.YEAR
-                AND A.YEAR = :year
-                AND B.PROCID = :procid
-                AND A.SCODE = B.SCODE
-                ORDER BY A.IDX`;                 
+  query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME, A.SCODE
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 1), '1', 0, ROUND(B.MONTH_01, 2)) MONTH_01
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 2), '1', 0, ROUND(B.MONTH_02, 2)) MONTH_02
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 3), '1', 0, ROUND(B.MONTH_03, 2)) MONTH_03
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 4), '1', 0, ROUND(B.MONTH_04, 2)) MONTH_04
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 5), '1', 0, ROUND(B.MONTH_05, 2)) MONTH_05
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 6), '1', 0, ROUND(B.MONTH_06, 2)) MONTH_06
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 7), '1', 0, ROUND(B.MONTH_07, 2)) MONTH_07
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 8), '1', 0, ROUND(B.MONTH_08, 2)) MONTH_08
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 9), '1', 0, ROUND(B.MONTH_09, 2)) MONTH_09
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 10), '1', 0, ROUND(B.MONTH_10, 2)) MONTH_10
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 11), '1', 0, ROUND(B.MONTH_11, 2)) MONTH_11
+          , DECODE((SELECT CHK FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid AND MONTH = 12), '1', 0, ROUND(B.MONTH_12, 2)) MONTH_12
+            FROM PLAN_TOTAL_FINAL_CODE A, PLAN_TOTAL_FINAL_MANUAL B
+            WHERE A.SCODE = B.SCODE(+)
+            AND A.YEAR = B.YEAR(+)
+            AND A.YEAR = :year
+            ORDER BY A.IDX `; 
 
-  const binds = {year: year, procid: procid};
-
+  binds = {year: year, procid: procid};                       
+  
   try {
     const data = await executeQuery(query, binds); // 데이터 조회
     res.json({ success: true, data }); // JSON 형식으로 응답
@@ -45,7 +44,8 @@ exports.getPlansalecntchk = async (req, res) => {
   }
 };
 
-exports.patchPlansalecntchk = async (req, res) => { 
+ // 비즈니스 로직
+exports.patchPlantotalfinalmenualchk = async (req, res) => { 
   try {
     // 요청 본문에서 JSON 데이터 추출
     const receivedData = req.body;
@@ -83,7 +83,7 @@ exports.patchPlansalecntchk = async (req, res) => {
     logger.info(`req procid : ${procid}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callPlansalecntproc(year, scode, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, procid);
+    const data = await executeProcedure.callPlantotalfinalproc(year, scode, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, procid);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

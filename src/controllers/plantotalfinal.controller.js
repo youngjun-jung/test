@@ -1,5 +1,5 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/plantotalfinal.procedure');
+//const executeProcedure = require('../procedures/plantotalfinal.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
@@ -13,17 +13,12 @@ exports.getPlantotalfinalchk = async (req, res) => {
 
   console.log("year: ", year);
   console.log("procid: ", procid);
-/*
-  // 프로시저 호출
-  const data1 = await executeProcedure.callPlantotalfinalproc(year, procid);
 
-  logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
-
-  if (!data1 || Object.keys(data1).length === 0) {
-    res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
-  }
-*/
-  query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME, B.MONTH_01, B.MONTH_02, B.MONTH_03, B.MONTH_04, B.MONTH_05, B.MONTH_06, B.MONTH_07, B.MONTH_08, B.MONTH_09, B.MONTH_10, B.MONTH_11, B.MONTH_12, B.MONTH_0
+  query = `SELECT A.YEAR, A.LNAME, A.MNAME, A.SNAME, A.SCODE, ROUND(B.MONTH_01, 2) MONTH_01, ROUND(B.MONTH_02, 2) MONTH_02, ROUND(B.MONTH_03, 2) MONTH_03
+          , ROUND(B.MONTH_05, 2) MONTH_04, ROUND(B.MONTH_06, 2) MONTH_05, ROUND(B.MONTH_06, 2) MONTH_06
+          , ROUND(B.MONTH_07, 2) MONTH_07, ROUND(B.MONTH_08, 2) MONTH_08, ROUND(B.MONTH_09, 2) MONTH_09
+          , ROUND(B.MONTH_10, 2) MONTH_10, ROUND(B.MONTH_11, 2) MONTH_11, ROUND(B.MONTH_12, 2) MONTH_12
+          , ROUND(B.MONTH_0, 2) MONTH_0
             FROM PLAN_TOTAL_FINAL_CODE A, PLAN_TOTAL_FINAL B
             WHERE A.SCODE = B.SCODE(+)
             AND A.YEAR = B.YEAR(+)

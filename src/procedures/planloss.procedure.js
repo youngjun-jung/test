@@ -3,14 +3,14 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callPlanlossproc = async (year, month, zinccnt, zincamt, jungcnt, jungamt, socnt, soamt, cathcnt, cathamt, procid) => {
+exports.callPlanlossproc = async (year, month, zinccnt, zincamt, jungcnt, jungamt, socnt, soamt, cathcnt, cathamt, scnt, samt, cathscnt, cathsamt, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_LOSS_UPDATE(:year, :month, :zinccnt, :zincamt, :jungcnt, :jungamt, :socnt, :soamt, :cathcnt, :cathamt, :procid, :returncode); 
+                SP_PLAN_LOSS_UPDATE(:year, :month, :zinccnt, :zincamt, :jungcnt, :jungamt, :socnt, :soamt, :cathcnt, :cathamt, :scnt, :samt, :cathscnt, :cathsamt, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
@@ -23,6 +23,10 @@ exports.callPlanlossproc = async (year, month, zinccnt, zincamt, jungcnt, jungam
                 soamt: soamt, // 매개변수
                 cathcnt: cathcnt, // 매개변수
                 cathamt: cathamt, // 매개변수
+                scnt: scnt, // 매개변수
+                samt: samt, // 매개변수
+                cathscnt: cathscnt, // 매개변수
+                cathsamt: cathsamt, // 매개변수
                 procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }

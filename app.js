@@ -134,21 +134,25 @@ const elecrectifierwoncostRoutes = require('./src/routes/elecrectifierwoncost.ro
     // 계획비교(삭제예정)
 const comparePlaRoutes = require('./src/routes/comparePlan.routes');
 
-   // 최종
+   // 최종 백업
 const plantotalfinalRoutes = require('./src/routes/plantotalfinal.routes');  
 const backupplantotalfinalRoutes = require('./src/routes/backupplantotalfinal.routes'); 
 const plancasetotalfinalRoutes = require('./src/routes/plancasetotalfinal.routes');  
 const backupplancasetotalfinalRoutes = require('./src/routes/backupplancasetotalfinal.routes');  
 const yearbackupRoutes = require('./src/routes/yearbackup.routes'); 
+const insmonthRoutes = require('./src/routes/insmonth.routes'); 
+const instransmonthRoutes = require('./src/routes/instransmonth.routes'); 
 
    // 신규
 const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
 const planlaborzincRoutes = require('./src/routes/planlaborzinc.routes'); 
 const planlossRoutes = require('./src/routes/planloss.routes');
 const plansalecntRoutes = require('./src/routes/plansalecnt.routes');
+const plansellingexpensescntRoutes = require('./src/routes/plansellingexpensescnt.routes');
 const procnewRoutes = require('./src/routes/procnew.routes');
 const procnew1Routes = require('./src/routes/procnew1.routes');
 const procnew2Routes = require('./src/routes/procnew2.routes');
+const plantotalfinalmenualRoutes = require('./src/routes/plantotalfinalmenual.routes');
 
     // 시물레이션
 const simulplannewtotalfinalRoutes = require('./src/routes/simulplannewtotalfinal.routes');   
@@ -345,12 +349,14 @@ app.use('/api/elecrectifierwoncost', elecrectifierwoncostRoutes); // 정류기 �
 
 app.use('/api/compareplan', comparePlaRoutes); // 계획비교
 
-   // 최종
+   // 최종 백업
 app.use('/api/plantotalfinal', plantotalfinalRoutes); // 최종 월별 자료 계산 경로
 app.use('/api/backupplantotalfinal', backupplantotalfinalRoutes); // 최종 월별 백업자료 계산 경로
 app.use('/api/plancasetotalfinal', plancasetotalfinalRoutes); // 최종 자료 계산 경로
 app.use('/api/backupplancasetotalfinal', backupplancasetotalfinalRoutes); // 최종 백업자료 계산 경로
 app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경로
+app.use('/api/insmonth', insmonthRoutes); // 월별 실적 기초자료 insert 경로
+app.use('/api/instransmonth', instransmonthRoutes); // 월별 실적 기초자료 insert 경로(이관)
 
    // 신규 최종
 app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       
@@ -361,6 +367,7 @@ app.use('/api/plansellingexpensescnt', plansellingexpensescntRoutes); // (실적
 app.use('/api/procnew', procnewRoutes); // 전체 처리 경로
 app.use('/api/procnew1', procnew1Routes); // 전체 처리 경로
 app.use('/api/procnew2', procnew2Routes); // 전체 처리 경로
+app.use('/api/plantotalfinalmenual', plantotalfinalmenualRoutes); // 월별 실적 자료 경로
 
    // 시뮬레이션
 app.use('/api/simulplannewtotalfinal', simulplannewtotalfinalRoutes); // 최종 계산 경로  

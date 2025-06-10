@@ -3,17 +3,19 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callPlansellingexpensescntproc = async (year, procid) => {
+exports.callPlansellingexpensescntproc = async (year, scode, value, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLANNING_SELLING_EXPENSES_PROC(:year, :procid, :returncode); 
+                SP_PLANNING_SELLING_EXPENSES_CNT_PROC(:year, :scode, :value, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
+                scode: scode, // 매개변수
+                value: value, // 매개변수
                 procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }

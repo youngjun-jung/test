@@ -112,6 +112,7 @@ const planmonthlyinventoryRoutes = require('./src/routes/planmonthlyinventory.ro
 const backplanmonthlyinventoryRoutes = require('./src/routes/backplanmonthlyinventory.routes');
 const planmonthlyinventorydtlRoutes = require('./src/routes/planmonthlyinventorydtl.routes');
 const backplanmonthlyinventorydtlRoutes = require('./src/routes/backplanmonthlyinventorydtl.routes');
+const planmonthlyinventorymanualRoutes = require('./src/routes/planmonthlyinventorymanual.routes');
 const plancostofgoodsRoutes = require('./src/routes/plancostofgoods.routes');
 const backplancostofgoodsRoutes = require('./src/routes/backplancostofgoods.routes');
 
@@ -328,6 +329,7 @@ app.use('/api/planmonthlyinventory', planmonthlyinventoryRoutes); // 월수불 �
 app.use('/api/backplanmonthlyinventory', backplanmonthlyinventoryRoutes); // 월수불 경로
 app.use('/api/planmonthlyinventorydtl', planmonthlyinventorydtlRoutes); // 월수불(상세) 경로
 app.use('/api/backplanmonthlyinventorydtl', backplanmonthlyinventorydtlRoutes); // 월수불(상세) 경로
+app.use('/api/planmonthlyinventorymanual', planmonthlyinventorymanualRoutes); // 기초재고 처리 경로
 app.use('/api/plancostofgoods', plancostofgoodsRoutes); // 제조원가 경로
 app.use('/api/backplancostofgoods', backplancostofgoodsRoutes); // 제조원가 경로
 

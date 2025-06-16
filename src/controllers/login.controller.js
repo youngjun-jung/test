@@ -38,9 +38,9 @@ exports.postLoginchk = async (req, res) => {
 
     const returnCode = data.returncode    
  
-    if (!data || Object.keys(data).length === 0 || returnCode === 'N') {
+    if (!data || Object.keys(data).length === 0) {
       logger.error('[404]Error User not found');
-      res.json({ success: false, message: '사용자 없음', error: 'User not found' });
+      res.json({ success: false, message: 'DB 조회 실패', error: 'Procedure Error' });
     }
     else {
       res.json({ success: true, data }); // JSON 형식으로 응답
@@ -48,7 +48,7 @@ exports.postLoginchk = async (req, res) => {
 
   } catch (err) {
     logger.error('[500]Error calling stored procedure:', err);
-    res.status(500).json({ success: false, message: '데이터 조회 실패', error: err.message });
+    res.status(500).json({ success: false, message: 'API 조회 실패', error: err.message });
   }
  };
 

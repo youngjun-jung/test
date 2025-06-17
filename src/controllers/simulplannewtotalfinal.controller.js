@@ -24,6 +24,8 @@ exports.getSimulplannewtotalfinalchk = async (req, res) => {
   const pd_12 = receivedData.pd_12;
   const type_gubun = '1';
   const gubun = receivedData.gubun;
+  const chk = receivedData.chk;
+  const plugid = receivedData.plugid;
   const procid = receivedData.procid;
 
   console.log("year: ", year);
@@ -41,10 +43,12 @@ exports.getSimulplannewtotalfinalchk = async (req, res) => {
   console.log("pd_11: ", pd_11);
   console.log("pd_12: ", pd_12);
   console.log("gubun: ", gubun);
+  console.log("chk: ", chk);
+  console.log("plugid: ", plugid);
   console.log("procid: ", procid);
 
   // 프로시저 호출
-  const data1 = await executeProcedure.callSimulplannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, procid);
+  const data1 = await executeProcedure.callSimulplannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk, plugid, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 

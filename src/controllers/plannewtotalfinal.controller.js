@@ -36,6 +36,8 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   const chk_10 = receivedData.chk_10;
   const chk_11 = receivedData.chk_11;
   const chk_12 = receivedData.chk_12;
+  const chk = receivedData.chk;
+  const plugid = receivedData.plugid;
   const procid = receivedData.procid;
 
   console.log("year: ", year);
@@ -65,10 +67,12 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   console.log("chk_10: ", chk_10);
   console.log("chk_11: ", chk_11);
   console.log("chk_12: ", chk_12);
+  console.log("chk: ", chk);
+  console.log("plugid: ", plugid);
   console.log("procid: ", procid);
 
   // 프로시저 호출
-  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk_1, chk_2, chk_3, chk_4, chk_5, chk_6, chk_7, chk_8, chk_9, chk_10, chk_11, chk_12, procid);
+  const data1 = await executeProcedure.callPlannewtotalfinalproc(year, zinc_cnt, pd_1, pd_2, pd_3, pd_4, pd_5, pd_6, pd_7, pd_8, pd_9, pd_10, pd_11, pd_12, type_gubun, gubun, chk_1, chk_2, chk_3, chk_4, chk_5, chk_6, chk_7, chk_8, chk_9, chk_10, chk_11, chk_12, chk, plugid, procid);
 
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 

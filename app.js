@@ -143,6 +143,8 @@ const backupplancasetotalfinalRoutes = require('./src/routes/backupplancasetotal
 const yearbackupRoutes = require('./src/routes/yearbackup.routes'); 
 const insmonthRoutes = require('./src/routes/insmonth.routes'); 
 const instransmonthRoutes = require('./src/routes/instransmonth.routes'); 
+const saveplugRoutes = require('./src/routes/saveplug.routes'); 
+const saveplugidRoutes = require('./src/routes/saveplugid.routes'); 
 
    // 신규
 const plannewtotalfinalRoutes = require('./src/routes/plannewtotalfinal.routes');  
@@ -359,6 +361,8 @@ app.use('/api/backupplancasetotalfinal', backupplancasetotalfinalRoutes); // 최
 app.use('/api/yearbackup', yearbackupRoutes); // 월별 기준 백업 자료 경로
 app.use('/api/insmonth', insmonthRoutes); // 월별 실적 기초자료 insert 경로
 app.use('/api/instransmonth', instransmonthRoutes); // 월별 실적 기초자료 insert 경로(이관)
+app.use('/api/saveplug', saveplugRoutes); // 저장 플러그 조회 경로
+app.use('/api/saveplugid', saveplugidRoutes); // 저장 플러그 저장 경로
 
    // 신규 최종
 app.use('/api/plannewtotalfinal', plannewtotalfinalRoutes); // 최종 계산 경로       

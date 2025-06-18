@@ -8,17 +8,26 @@ exports.getUpdateFileList = async (req, res) => {
    const rversion = receivedData.rversion;
    const ridx = receivedData.ridx;
 
-   const query = `SELECT
-                    GUBUN,
-                    FILEID,
-                    FILESIZE,
-                    VER, 
-                    CREATED_DT,
-                    MODIFIED_DT,
-                    RIDX
-                  FROM TB_UPDATE_YP
-                  WHERE VER = :rversion
-                    AND RIDX = :ridx`;
+   const query = `
+   SELECT 
+    GUBUN,
+    FILEID,
+    FILESIZE,
+    VER, 
+    CREATED_DT,
+    MODIFIED_DT,
+    RIDX
+FROM (
+    SELECT A.*,
+           ROW_NUMBER() OVER (
+               PARTITION BY FILEID
+               ORDER BY VER DESC, RIDX DESC
+           ) AS RN
+      FROM TB_UPDATE_YP A
+     WHERE VER > :rversion OR (VER = :rversion AND RIDX > :ridx)
+)
+WHERE RN = 1
+ORDER BY RIDX, MODIFIED_DT`;
 
   const binds = {rversion: rversion, ridx: ridx};
   

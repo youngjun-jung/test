@@ -101,16 +101,18 @@ exports.patchUser = async (req, res) => {
   if (!id || !wd || !cnt) {
     res.status(400).json({ success: false, message: 'FIELD 오류(NULL)'});
   }
- 
-  const query = 'UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = TO_NUMBER(:fail_cnt) WHERE USERID = :userid';
+  else{
+    const query = 'UPDATE ADM_USER SET PASSWD = :passwd, FAIL_CNT = TO_NUMBER(:fail_cnt) WHERE USERID = :userid';
 
-  const binds = {userid: id, passwd: wd, fail_cnt: cnt};
- 
-   try {
-     const data = await executeQuery(query, binds); // 데이터 조회
-     res.json({ success: true, message: '데이터 수정 성공' }); // JSON 형식으로 응답
+    const binds = {userid: id, passwd: wd, fail_cnt: cnt};
+  
+    try {
+      const data = await executeQuery(query, binds); // 데이터 조회
+      res.json({ success: true, message: '데이터 수정 성공' }); // JSON 형식으로 응답
 
-   } catch (err) {
-     res.status(500).json({ success: false, message: '데이터 수정 실패', error: err.message });
-   }
+    } catch (err) {
+      res.status(500).json({ success: false, message: '데이터 수정 실패', error: err.message });
+    }
+  }
+  
  };

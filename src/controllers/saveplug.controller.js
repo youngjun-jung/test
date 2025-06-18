@@ -23,12 +23,12 @@ exports.getSaveplugchk = async (req, res) => {
                 FROM PLAN_PLUG A
                 WHERE PLUG_ID LIKE '%' || :plugid || '%'
                 AND GUBUN = :gubun
-                AND PROCID LIKE :procid
+                AND PROCID LIKE '%' 
                 AND SALE_YN = :sale_yn
                 AND USE_YN = 'Y'
                 ORDER BY PLUG_ID DESC`;                 
 
-  const binds = {plugid: plugid, procid: procid, gubun: gubun, sale_yn: sale_yn};
+  const binds = {plugid: plugid, gubun: gubun, sale_yn: sale_yn};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

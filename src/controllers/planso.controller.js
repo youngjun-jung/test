@@ -1,9 +1,9 @@
 const { executeQuery, executeQueryMany } = require('../config/queries');
-const executeProcedure = require('../procedures/elecrectifiercost.procedure');
+const executeProcedure = require('../procedures/planso.procedure');
 const logger = require('../../logger'); 
 
   // 비즈니스 로직
-exports.getElecrectifiercostchk = async (req, res) => {
+exports.getPlansochk = async (req, res) => {
 
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
@@ -14,11 +14,16 @@ exports.getElecrectifiercostchk = async (req, res) => {
   console.log("year: ", year);
   console.log("procid: ", procid);
  
-  query = `SELECT SCODE, VALUE
-            FROM PLAN_ELEC_RECTIFIER_MANUAL
-            WHERE YEAR = :year
-            AND SCODE IN ('PERM0302', 'PERM0204', 'PERM0203', 'PERM0202', 'PERM0201', 'PERM0104', 'PERM0103', 'PERM0102', 'PERM0101', 'PERM0004', 'PERM0003', 'PERM0002', 'PERM0001') 
-            AND PROCID = :procid
+  query = `SELECT A.LNAME, A.MNAME, A.SNAME, A.SCODE
+            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
+            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
+            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
+            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
+            FROM PLAN_SO_CODE A, PLAN_SO B
+            WHERE A.YEAR = B.YEAR(+)
+            AND A.SOCDE = B.SCODE(+)
+            AND A.YEAR = :year
+            AND A.PROCID = :procid
             ORDER BY IDX`;
 
   binds = {year: year,procid: procid};                       
@@ -32,7 +37,7 @@ exports.getElecrectifiercostchk = async (req, res) => {
   }
 };
 
-exports.patchElecrectifiercostchk = async (req, res) => { 
+exports.patchPlansochk = async (req, res) => { 
   try {
     // 요청 본문에서 JSON 데이터 추출
     const receivedData = req.body;

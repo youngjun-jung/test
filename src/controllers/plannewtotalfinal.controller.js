@@ -77,7 +77,7 @@ exports.getPlannewtotalfinalchk = async (req, res) => {
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
   if (!data1 || Object.keys(data1).length === 0 || data1.returncode != '0000') {
-    res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
+    res.status(404).json({ success: false, message: '[오류]처리 실패', error: 'Procedure proc error' });
     return;
   }
 

@@ -27,12 +27,12 @@ exports.postSaveplugidchk = async (req, res) => {
     logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 
     if (!data || Object.keys(data).length === 0) {
-      res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
+      res.status(404).json({ success: false, message: '[오류]처리 실패', error: 'Procedure proc error' });
     }
 
     res.json({ success: true, data }); // JSON 형식으로 응답
 
   } catch (err) {
-    res.status(500).json({ success: false, message: '오류 정보 저장 실패', error: err.message });
+    res.status(500).json({ success: false, message: '[오류]처리 실패', error: err.message });
   }
  };

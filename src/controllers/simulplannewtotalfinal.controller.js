@@ -53,7 +53,7 @@ exports.getSimulplannewtotalfinalchk = async (req, res) => {
   logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
   if (!data1 || Object.keys(data1).length === 0 || data1.returncode != '0000') {
-    res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
+    res.status(404).json({ success: false, message: '[오류]처리 실패', error: 'Procedure proc error' });
     return;
   }
 
@@ -65,6 +65,13 @@ exports.getSimulplannewtotalfinalchk = async (req, res) => {
           , (SELECT SUM(XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR) FROM PLUG WHERE SCODE IN ('PPP0306', 'PPP0307', 'PPP0308') AND YEAR = A.YEAR AND PROCID = :procid) ZINC_CNT3
           , CASE WHEN FN_REF_VALUE('아연괴생산', A.YEAR, '00', :procid) + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001' AND PROCID = :procid) > 220000 THEN ((FN_REF_VALUE('아연괴생산', A.YEAR, '00', :procid)  + (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001' AND PROCID = :procid) - 220000) / 220000) * FN_REF_VALUE('캐소드생산', A.YEAR, '00', :procid)
             ELSE 0 END AS CA_CNT
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML0001' AND PROCID = 'jminzzang') ZINC_IN 
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML0002' AND PROCID = 'jminzzang') ZINC_LO  
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML0003' AND PROCID = 'jminzzang') ZINC_OUT 
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML0004' AND PROCID = 'jminzzang') ZINC_OUT_IN 
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML1001' AND PROCID = 'jminzzang') S_IN 
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML1002' AND PROCID = 'jminzzang') S_DONG 
+          , (SELECT VALUE FROM PLANNING_PLUG_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PPML1003' AND PROCID = 'jminzzang') S_ON  
           FROM PLAN_ELEC_RECTIFIER_DTL A
           WHERE YEAR = :year
           AND GUBUN = '0'

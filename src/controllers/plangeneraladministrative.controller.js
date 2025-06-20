@@ -18,7 +18,7 @@ exports.getPlangeneraladministrativechk = async (req, res) => {
     logger.info(`req data : ${JSON.stringify(data1, null, 2)}`);
 
     if (!data1 || Object.keys(data1).length === 0) {
-      res.status(404).json({ success: false, message: '오류 정보 저장 실패', error: 'User insert error' });
+      res.status(404).json({ success: false, message: '[오류]처리 실패', error: 'Procedure proc error' });
     }
 
   const query = `SELECT A.YEAR, LNAME, MNAME, SNAME, VALUE_1, VALUE_2, VALUE_3, VALUE_4, VALUE_5, VALUE_6, VALUE_7, VALUE_8, VALUE_9, VALUE_10, VALUE_11, VALUE_12, VALUE_13

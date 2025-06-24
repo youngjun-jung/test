@@ -10,7 +10,7 @@ exports.getDepreciationaiachk = async (req, res) => {
 
   const year = receivedData.year;
   const gubun = receivedData.gubun;
-  const procid = receivedData.procid;
+  const procid = 'jminzzang';
 
   console.log("year: ", year);
   console.log("gubun: ", gubun);

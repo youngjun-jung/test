@@ -3,30 +3,25 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callSimulprocnewproc = async (year, procid, zin_in, zin_lo, zin_out, zin_out_in, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments, labor) => {
+exports.callPlanplugmanualproc = async (year, zinc_in, zinc_lo, zinc_out, zinc_out_in, s_in, s_dong, s_on, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_SIMUL_PROC_NEW1(:year, :procid, :zin_in, :zin_lo, :zin_out, :zin_out_in, :s_in, :s_dong, :s_on, :scode, :zinc_trans, :ca_trans, :comments, :labor, :returncode); 
+                SP_PLAN_SALE_MAX_UPDATE(:year, :zinc_in, :zinc_lo, :zinc_out, :zinc_out_in, :s_in, :s_dong, :s_on, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
-                procid: procid, // 매개변수
-                zin_in: zin_in, // 매개변수
-                zin_lo: zin_lo, // 매개변수
-                zin_out: zin_out, // 매개변수
-                zin_out_in: zin_out_in, // 매개변수
+                zinc_in: zinc_in, // 매개변수
+                zinc_lo: zinc_lo, // 매개변수
+                zinc_out: zinc_out, // 매개변수
+                zinc_out_in: zinc_out_in, // 매개변수
                 s_in: s_in, // 매개변수
                 s_dong: s_dong, // 매개변수
                 s_on: s_on, // 매개변수
-                scode: scode, // 매개변수
-                zinc_trans: zinc_trans, // 매개변수
-                ca_trans: ca_trans, // 매개변수
-                comments: comments, // 매개변수
-                labor: labor, // 매개변수
+                procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

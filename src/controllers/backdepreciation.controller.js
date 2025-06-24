@@ -26,7 +26,7 @@ exports.getDepreciationchk = async (req, res) => {
                     WHERE X.SNAME = A.NAME(+)
                     AND BACKUP_ID(+) = :backupid
                     AND GUBUN(+) = :gubun
-                    AND A.PROCID = :procid
+                    AND A.PROCID LIKE DECODE(:procid, 'jminzzang', '%', :procid)
                     ORDER BY YEAR, MONTH, X.IDX`;  
                     
       binds = {backupid: backupid, gubun: gubun, procid: procid};              
@@ -39,8 +39,8 @@ exports.getDepreciationchk = async (req, res) => {
                 , A.XP*B.XP XP, A.XQ*B.XQ XQ, A.XR*B.XR XR, A.XS*B.XS XS, A.XT*B.XT XT, A.XU*B.XU XU
                 , A.XV*B.XV XV, A.XW*B.XW XW, A.XX*B.XX XX, A.XY*B.XY XY, A.XZ*B.XZ XZ, A.XAA*B.XAA XAA, X.IDX
                     FROM (SELECT SCODE, SNAME, IDX FROM BACKUP_PLAN_DEPRECIATION_CODE WHERE BACKUP_ID = :backupid) X
-                    , (SELECT * FROM BACKUP_PLAN_DEPRECIATION WHERE GUBUN = '1' AND PROCID = :procid) A
-                    , (SELECT * FROM BACKUP_PLAN_DEPRECIATION WHERE GUBUN = '2' AND PROCID = :procid) B
+                    , (SELECT * FROM BACKUP_PLAN_DEPRECIATION WHERE GUBUN = '1' AND A.PROCID LIKE DECODE(:procid, 'jminzzang', '%', :procid)) A
+                    , (SELECT * FROM BACKUP_PLAN_DEPRECIATION WHERE GUBUN = '2' AND A.PROCID LIKE DECODE(:procid, 'jminzzang', '%', :procid)) B
                     WHERE X.SNAME = A.NAME(+)
                     AND X.SNAME = B.NAME(+)
                     AND A.BACKUP_ID = B.BACKUP_ID

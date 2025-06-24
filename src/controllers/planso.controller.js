@@ -15,16 +15,17 @@ exports.getPlansochk = async (req, res) => {
   console.log("procid: ", procid);
  
   query = `SELECT A.LNAME, A.MNAME, A.SNAME, A.SCODE
-            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
-            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
-            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
-            , TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01, TO_CHAR(MONTH_01) MONTH_01
+            , MONTH_01, MONTH_02, MONTH_03
+            , MONTH_04, MONTH_05, MONTH_06
+            , MONTH_07, MONTH_08, MONTH_09
+            , MONTH_10, MONTH_11, MONTH_12
             FROM PLAN_SO_CODE A, PLAN_SO B
             WHERE A.YEAR = B.YEAR(+)
-            AND A.SOCDE = B.SCODE(+)
+            AND A.SCODE = B.SCODE(+)
             AND A.YEAR = :year
-            AND A.PROCID = :procid
-            ORDER BY IDX`;
+            AND B.PROCID (+)= :procid
+            AND A.SCODE NOT LIKE '%99'
+            ORDER BY A.IDX`;
 
   binds = {year: year,procid: procid};                       
   
@@ -45,37 +46,39 @@ exports.patchPlansochk = async (req, res) => {
     //logger.info(JSON.stringify(receivedData, null, 2));
 
     const year = receivedData.year;
-    const cost1 = receivedData.cost1;
-    const cost2 = receivedData.cost2;
-    const cost3 = receivedData.cost3;
-    const cost4 = receivedData.cost4;
-    const cost5 = receivedData.cost5;
-    const cost6 = receivedData.cost6;
-    const cost7 = receivedData.cost7;
-    const cost8 = receivedData.cost8;
-    const cost9 = receivedData.cost9;
-    const cost10 = receivedData.cost10;
-    const cost11 = receivedData.cost11;
-    const cost12 = receivedData.cost12;
-    const cost13 = receivedData.cost13;
+    const scode = receivedData.scode;
+    const month_01 = receivedData.month_01;
+    const month_02 = receivedData.month_02;
+    const month_03 = receivedData.month_03;
+    const month_04 = receivedData.month_04;
+    const month_05 = receivedData.month_05;
+    const month_06 = receivedData.month_06;
+    const month_07 = receivedData.month_07;
+    const month_08 = receivedData.month_08;
+    const month_09 = receivedData.month_09;
+    const month_10 = receivedData.month_10;
+    const month_11 = receivedData.month_11;
+    const month_12 = receivedData.month_12;
+    const procid = receivedData.procid;
 
     logger.info(`req year : ${year}`);
-    logger.info(`req cost1 : ${cost1}`);
-    logger.info(`req cost2 : ${cost2}`);
-    logger.info(`req cost3 : ${cost3}`);
-    logger.info(`req cost4 : ${cost4}`);
-    logger.info(`req cost5 : ${cost5}`);
-    logger.info(`req cost6 : ${cost6}`);
-    logger.info(`req cost7 : ${cost7}`);
-    logger.info(`req cost8 : ${cost8}`);
-    logger.info(`req cost9 : ${cost9}`);
-    logger.info(`req cost10 : ${cost10}`);
-    logger.info(`req cost11 : ${cost11}`);
-    logger.info(`req cost12 : ${cost12}`);
-    logger.info(`req cost13 : ${cost13}`);
+    logger.info(`req scode : ${scode}`);
+    logger.info(`req month_01 : ${month_01}`);
+    logger.info(`req month_02 : ${month_02}`);
+    logger.info(`req month_03 : ${month_03}`);
+    logger.info(`req month_04 : ${month_04}`);
+    logger.info(`req month_05 : ${month_05}`);
+    logger.info(`req month_06 : ${month_06}`);
+    logger.info(`req month_07 : ${month_07}`);
+    logger.info(`req month_08 : ${month_08}`);
+    logger.info(`req month_09 : ${month_09}`);
+    logger.info(`req month_10 : ${month_10}`);
+    logger.info(`req month_11 : ${month_11}`);
+    logger.info(`req month_12 : ${month_12}`);
+    logger.info(`req procid : ${procid}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callElecrectifiercostproc(year, cost1, cost2, cost3, cost4, cost5, cost6, cost7, cost8, cost9, cost10, cost11, cost12, cost13);
+    const data = await executeProcedure.callSoproc(year, scode, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, procid);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

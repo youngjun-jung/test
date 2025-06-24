@@ -13,8 +13,10 @@ exports.getPlanlaborzincchk = async (req, res) => {
   console.log("year: ", year);
   console.log("procid: ", procid);
 
-  const query = `SELECT A.YEAR, A.SCODE, A.USE_YN, ROUND(SUM(NVL(MG_VALUE, 0) + NVL(IM_VALUE, 0)), 0) MG_VALUE, ROUND(SUM(PD_VALUE), 0) PD_VALUE
+  const query = `SELECT A.YEAR, A.SCODE, A.USE_YN, ROUND(SUM(NVL(MG_VALUE * C.VALUE, 0) + NVL(IM_VALUE * C.VALUE, 0)), 0) MG_VALUE, ROUND(SUM(PD_VALUE * C.VALUE), 0) PD_VALUE
+                  , (SELECT VALUE * 100 FROM PLAN_LABOR_MANUAL WHERE YEAR = :year AND SCODE = 'PLCM001' AND PROCID = :procid) VALUE
                   FROM PLAN_LABOR_ZINC_CODE A, PLAN_LABOR_ZINC_DTL B
+                  , (SELECT VALUE FROM PLAN_LABOR_ZINC_MANUAL WHERE YEAR = :year AND SCODE = 'PLZM001') C
                   WHERE A.YEAR = B.YEAR(+)
                   AND A.SCODE = B.MCODE(+)
                   AND A.YEAR = :year

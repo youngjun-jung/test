@@ -3,19 +3,18 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callRefindicatorproc = async (year, scode, annual, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, save, procid) => {
+exports.callSoproc = async (year, scode, month_01, month_02, month_03, month_04, month_05, month_06, month_07, month_08, month_09, month_10, month_11, month_12, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_INDICATOR_PROC(:year, :scode, :annual, :month_01, :month_02, :month_03, :month_04, :month_05, :month_06, :month_07, :month_08, :month_09, :month_10, :month_11, :month_12, :save, :procid, :returncode); 
+                SP_PLAN_SO_UPDATE_PROC(:year, :scode, :month_01, :month_02, :month_03, :month_04, :month_05, :month_06, :month_07, :month_08, :month_09, :month_10, :month_11, :month_12, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
                 scode: scode, // 매개변수
-                annual: annual, // 매개변수
                 month_01: month_01, // 매개변수
                 month_02: month_02, // 매개변수
                 month_03: month_03, // 매개변수
@@ -28,7 +27,6 @@ exports.callRefindicatorproc = async (year, scode, annual, month_01, month_02, m
                 month_10: month_10, // 매개변수
                 month_11: month_11, // 매개변수
                 month_12: month_12, // 매개변수
-                save: save, // 매개변수
                 procid: procid, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }

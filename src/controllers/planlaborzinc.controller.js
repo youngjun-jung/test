@@ -21,6 +21,7 @@ exports.getPlanlaborzincchk = async (req, res) => {
                   AND A.SCODE = B.MCODE(+)
                   AND A.YEAR = :year
                   AND B.PROCID(+) = :procid
+                  AND A.PROCID(+) = :procid
                   AND (A.SCODE = 'PLZC001' 
                       OR SUBSTR(A.SCODE, 1, 5) = (SELECT CASE WHEN A_CNT > 0 AND B_CNT = 0 AND C_CNT = 0 THEN 'PLZCA'
                                                               WHEN A_CNT > 0 AND B_CNT > 0 AND C_CNT = 0 THEN 'PLZCB'

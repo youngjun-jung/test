@@ -13,7 +13,7 @@ exports.getYearbackupchk = async (req, res) => {
   console.log("year: ", year);
   console.log("procid: ", procid);
 
-  query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, '(' || SUBSTR(TIMEMARK, 1, 8) || ') ' || COMMENTS COMMENTS
+  query = `SELECT TO_CHAR(ROWNUM) GUBUN, BACKUP_ID, '(' || SUBSTR(BACKUP_ID, 4, 4) || ')' || REPLACE(COMMENTS, 'Cu ', '') COMMENTS
           FROM (
                 SELECT BACKUP_ID, COMMENTS, TIMEMARK
                 FROM PLAN_BACKUP

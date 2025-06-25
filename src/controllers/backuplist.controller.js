@@ -15,15 +15,14 @@ exports.getBackuplistchk = async (req, res) => {
   console.log("procid: ", procid);
   console.log("todate: ", todate);
 
-  const query = `SELECT BACKUP_ID, '(' || SUBSTR(TIMEMARK, 1, 8) || ') ' || COMMENTS COMMENTS, PROCID
+  const query = `SELECT BACKUP_ID, '(' || SUBSTR(BACKUP_ID, 4, 4) || ')' || REPLACE(COMMENTS, 'Cu ', '') COMMENTS, PROCID
                 FROM PLAN_BACKUP
-                WHERE BACKUP_ID LIKE '%' || :year || '%'
-                AND USE_YN IN ('Z', 'Y')
+                WHERE USE_YN IN ('Z', 'Y')
                 AND PROCID LIKE (SELECT DECODE(GUBUN1, 'Y', '%', :procid) FROM ADM_USER WHERE USERID = :procid)
                 AND (TIMEMARK LIKE :todate || '%' OR TIMEMARK BETWEEN TO_CHAR(TO_DATE(:todate, 'YYYYMMDD') - 15, 'YYYYMMDD')||'000000' AND :todate || '999999')
                 ORDER BY BACKUP_ID DESC`;                 
 
- const binds = {year: year, procid: procid, todate: todate};
+ const binds = {procid: procid, todate: todate};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

@@ -13,20 +13,20 @@ exports.getPlanlaborzincchk = async (req, res) => {
   console.log("year: ", year);
   console.log("procid: ", procid);
 
-  const query = `SELECT A.YEAR, A.SCODE, A.USE_YN, ROUND(SUM(NVL(MG_VALUE * C.VALUE, 0) + NVL(IM_VALUE * C.VALUE, 0)), 0) MG_VALUE, ROUND(SUM(PD_VALUE * C.VALUE), 0) PD_VALUE
+  const query = `SELECT A.YEAR, A.SCODE, A.USE_YN, ROUND(SUM(NVL(MG_VALUE * DECODE(C.SCODE, A.SCODE, C.VALUE, 0), 0) + NVL(IM_VALUE * DECODE(C.SCODE, A.SCODE, C.VALUE, 0), 0)), 0) MG_VALUE, ROUND(SUM(PD_VALUE * DECODE(C.SCODE, A.SCODE, C.VALUE, 0)), 0) PD_VALUE
                   , (SELECT VALUE * 100 FROM PLAN_LABOR_MANUAL WHERE YEAR = :year AND SCODE = 'PLCM001' AND PROCID = :procid) VALUE
                   FROM PLAN_LABOR_ZINC_CODE A, PLAN_LABOR_ZINC_DTL B
-                  , (SELECT VALUE FROM PLAN_LABOR_ZINC_MANUAL WHERE YEAR = :year AND SCODE = 'PLZM001') C
+                  , (SELECT * FROM PLAN_LABOR_ZINC_MANUAL WHERE YEAR = :year) C
                   WHERE A.YEAR = B.YEAR(+)
                   AND A.SCODE = B.MCODE(+)
                   AND A.YEAR = :year
                   AND B.PROCID(+) = :procid
                   AND A.PROCID(+) = :procid
-                  AND (A.SCODE = 'PLZC001' 
+                  AND (A.SCODE = 'PLZC001'
                       OR SUBSTR(A.SCODE, 1, 5) = (SELECT CASE WHEN A_CNT > 0 AND B_CNT = 0 AND C_CNT = 0 THEN 'PLZCA'
                                                               WHEN A_CNT > 0 AND B_CNT > 0 AND C_CNT = 0 THEN 'PLZCB'
                                                               WHEN A_CNT > 0 AND B_CNT > 0 AND C_CNT > 0 THEN 'PLZCC'
-                                                              ELSE 'PLZC0' END 
+                                                              ELSE 'PLZC0' END
                                                   FROM (
                                                       SELECT SUM(DECODE(IDX, '0', 1, 0)) A_CNT
                                                       , SUM(DECODE(IDX, '1', 1, 0)) B_CNT

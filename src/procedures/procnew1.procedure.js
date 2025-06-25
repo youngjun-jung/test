@@ -3,14 +3,14 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callProcnewproc = async (year, procid, zin_in, zin_lo, zin_out, zin_out_in, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments) => {
+exports.callProcnewproc = async (year, procid, zin_in, zin_lo, zin_out, zin_out_in, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments, labor) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PROC_NEW1(:year, :procid, :zin_in, :zin_lo, :zin_out, :zin_out_in, :s_in, :s_dong, :s_on, :scode, :zinc_trans, :ca_trans, :comments, :returncode); 
+                SP_PROC_NEW1(:year, :procid, :zin_in, :zin_lo, :zin_out, :zin_out_in, :s_in, :s_dong, :s_on, :scode, :zinc_trans, :ca_trans, :comments, :labor, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
@@ -26,6 +26,7 @@ exports.callProcnewproc = async (year, procid, zin_in, zin_lo, zin_out, zin_out_
                 zinc_trans: zinc_trans, // 매개변수
                 ca_trans: ca_trans, // 매개변수
                 comments: comments, // 매개변수
+                labor: labor, // 매개변수
                 returncode: { dir: oracledb.BIND_OUT, type: oracledb.CLOB } // 출력 매개변수
             }
         );

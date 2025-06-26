@@ -14,7 +14,7 @@ exports.getPlanlosschk = async (req, res) => {
   console.log("year: ", year);
   console.log("procid: ", procid);
 
-  const query = `SELECT SNAME, SCODE, CNT, AMT, YEAR||MONTH MONTH
+  const query = `SELECT SNAME, SCODE, CNT, AMT, YEAR||MONTH MONTH, M_CNT
                  FROM PLAN_INVEN_VALUATION_LOSS
                  WHERE YEAR = :year
                  AND PROCID = :procid
@@ -45,10 +45,13 @@ exports.patchPlanlosschk = async (req, res) => {
     const zinccnt = receivedData.zinccnt;
     const zincamt = receivedData.zincamt;
     const jungcnt = receivedData.jungcnt;
+    const mjungcnt = receivedData.mjungcnt;
     const jungamt = receivedData.jungamt;
     const socnt = receivedData.socnt;
+    const msocnt = receivedData.msocnt;
     const soamt = receivedData.soamt;
     const cathcnt = receivedData.cathcnt;
+    const mcathcnt = receivedData.mcathcnt;
     const cathamt = receivedData.cathamt;
     const scnt = receivedData.scnt;
     const samt = receivedData.samt;
@@ -61,10 +64,13 @@ exports.patchPlanlosschk = async (req, res) => {
     logger.info(`req zinccnt : ${zinccnt}`);
     logger.info(`req zincamt : ${zincamt}`);
     logger.info(`req jungcnt : ${jungcnt}`);
+    logger.info(`req mjungcnt : ${mjungcnt}`);
     logger.info(`req jungamt : ${jungamt}`);
     logger.info(`req socnt : ${socnt}`);
+    logger.info(`req msocnt : ${msocnt}`);
     logger.info(`req soamt : ${soamt}`);
     logger.info(`req cathcnt : ${cathcnt}`);
+    logger.info(`req mcathcnt : ${mcathcnt}`);
     logger.info(`req cathamt : ${cathamt}`);
     logger.info(`req scnt : ${scnt}`);
     logger.info(`req samt : ${samt}`);

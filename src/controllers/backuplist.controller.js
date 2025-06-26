@@ -20,7 +20,7 @@ exports.getBackuplistchk = async (req, res) => {
                 WHERE USE_YN IN ('Z', 'Y')
                 AND PROCID LIKE (SELECT DECODE(GUBUN1, 'Y', '%', :procid) FROM ADM_USER WHERE USERID = :procid)
                 AND (TIMEMARK LIKE :todate || '%' OR TIMEMARK BETWEEN TO_CHAR(TO_DATE(:todate, 'YYYYMMDD') - 15, 'YYYYMMDD')||'000000' AND :todate || '999999')
-                ORDER BY SUBSTR(BACKUP_ID, 7, 6) DESC`;                 
+                ORDER BY SUBSTR(BACKUP_ID, 8, 6) DESC`;                 
 
  const binds = {procid: procid, todate: todate};
 

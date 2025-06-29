@@ -4,9 +4,11 @@ const logger = require('../../logger');
 
 // 로그인 관련 비즈니스 로직
 exports.getLoginchk = async (req, res) => {
-   const query = 'select userid, username, passwd FROM adm_user where userid = :userid';
-   //const binds = {userid: 'jminzzang'};
-   const binds = ['jminzzang1'];
+
+   const query = 'select userid, username, passwd, "관리자" groupnm FROM adm_user where userid = :userid';
+
+   const binds = {userid: id};
+
   
     try {
       const data = await executeQuery(query, binds); // 데이터 조회
@@ -38,9 +40,9 @@ exports.postLoginchk = async (req, res) => {
 
     const returnCode = data.returncode    
  
-    if (!data || Object.keys(data).length === 0) {
+    if (!data || Object.keys(data).length === 0|| returnCode !== 'Y') {
       logger.error('[404]Error User not found');
-      res.json({ success: false, message: 'DB 조회 실패', error: 'Procedure Error' });
+      res.json({ success: false, message: '사용자 정보 없음', error: 'Procedure Error' });
     }
     else {
       res.json({ success: true, data }); // JSON 형식으로 응답

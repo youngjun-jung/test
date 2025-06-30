@@ -3,6 +3,7 @@
 networks:
   node-network:
     driver: bridge
+    external: true
 
 services:
   yp1:

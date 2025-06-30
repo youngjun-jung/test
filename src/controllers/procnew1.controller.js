@@ -22,6 +22,7 @@ exports.postProcnew1chk = async (req, res) => {
     const comments = receivedData.comments;
     const zin_out_in = receivedData.zin_out_in;
     const labor = receivedData.labor;
+    const chk = receivedData.chk;
 
     logger.info(`req year : ${year}`);
     logger.info(`req procid : ${procid}`);
@@ -37,9 +38,10 @@ exports.postProcnew1chk = async (req, res) => {
     logger.info(`req ca_trans : ${ca_trans}`);
     logger.info(`req comments : ${comments}`);
     logger.info(`req labor : ${labor}`);
+    logger.info(`req chk : ${chk}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, zin_out_in, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments, labor);
+    const data = await executeProcedure.callProcnewproc(year, procid, zin_in, zin_lo, zin_out, zin_out_in, s_in, s_dong, s_on, scode, zinc_trans, ca_trans, comments, labor, chk);
 
     //logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

@@ -7,6 +7,8 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const path = require('path');
 
+const menuvueRoutes = require('./src/routes/menuvue.routes');
+
 const loginRoutes = require('./src/routes/login.routes');
 const updateRoutes = require('./src/routes/update.routes');
 const menuRoutes = require('./src/routes/menu.routes');
@@ -212,6 +214,8 @@ app.use(bodyParser.json());
             app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiSpec));
 
         });
+
+app.use('/api/menuvue', menuvueRoutes); // 메뉴 API 경로        
 
 // 라우트 설정1
     // 시스템

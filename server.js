@@ -2,7 +2,12 @@ const express = require('express');
 const app = require('./app');
 const logger = require('./logger'); 
 const cors = require('cors');
-app.use(cors());
+
+// CORS 설정 (예: Vue가 8081 포트에서 동작한다면)
+app.use(cors({
+  origin: 'http://211.35.173.34:8081', // 실제 Vue 서비스 도메인/포트로 변경
+  credentials: true // 인증(쿠키 등) 필요시
+}));
 
 const PORT = process.env.PORT || 3000;
 

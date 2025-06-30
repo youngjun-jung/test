@@ -20,6 +20,7 @@ const errorRoutes = require('./src/routes/error.routes');
 const updateFileListRoutes = require('./src/routes/updatefilelist.routes');
 const currentVersionRoutes = require('./src/routes/currentversion.routes');
 const tableinfoRoutes = require('./src/routes/tableinfo.routes.js');
+const reportsimulscenarioRoutes = require('./src/routes/reportsimulscenario.routes');
 
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
@@ -224,6 +225,8 @@ app.use('/api/program/update/:gubun', updateRoutes); // 파일 업데이트 API 
 app.use('/api/program/version/current', currentVersionRoutes); // 버전 체크
 app.use('/api/program/version/updatelist', updateFileListRoutes); // 업데이트 파일 체크
 app.use('/api/program/tableinfo', tableinfoRoutes); // 테이블 정보 경로
+
+app.use('/api/report/simul/scenario', reportsimulscenarioRoutes); // 시뮬레이션 시나리오 설정
 
     // 실적 자료
 app.use('/api/sale', saleRoutes); // 판매량 정보 경로

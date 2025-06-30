@@ -4,6 +4,14 @@ const logger = require('./logger');
 const cors = require('cors');
 app.use(cors());
 
+// ★ CORS 미들웨어 추가
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://211.35.173.34:4002');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 const PORT = process.env.PORT || 3000;
 
 var figlet = require("figlet");

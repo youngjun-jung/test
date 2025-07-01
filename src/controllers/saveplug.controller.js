@@ -26,7 +26,7 @@ exports.getSaveplugchk = async (req, res) => {
                 AND PROCID LIKE '%' 
                 AND SALE_YN = :sale_yn
                 AND USE_YN = 'Y'
-                ORDER BY PLUG_ID DESC`;                 
+                ORDER BY IDX DESC`;                 
 
   const binds = {plugid: plugid, gubun: gubun, sale_yn: sale_yn};
 

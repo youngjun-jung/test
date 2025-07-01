@@ -3,18 +3,19 @@ const logger = require('../../logger');
 const dbConfig = require('../config/dbconfig');
 
 // 프로시저 호출 함수
-exports.callSaveplugidproc = async (year, gubun, chk, comments, procid) => {
+exports.callSaveplugidproc = async (year, gubun, line, chk, comments, procid) => {
     let connection;
     try {
         connection = await oracledb.getConnection(dbConfig);
 
         const result = await connection.execute(
             `BEGIN 
-                SP_PLAN_SAVE_PLUGID_PROC(:year, :gubun, :chk, :comments, :procid, :returncode); 
+                SP_PLAN_SAVE_PLUGID_PROC(:year, :gubun, :line, :chk, :comments, :procid, :returncode); 
             END;`,
             {
                 year: year, // 매개변수
                 gubun: gubun, // 매개변수
+                line: line, // 매개변수
                 chk: chk, // 매개변수
                 comments: comments, // 매개변수
                 procid: procid, // 매개변수

@@ -11,18 +11,20 @@ exports.postSaveplugidchk = async (req, res) => {
 
     const year = receivedData.year;
     const gubun = receivedData.gubun;
+    const line = receivedData.line;
     const chk = receivedData.chk;
     const comments = receivedData.comments;
     const procid = receivedData.procid;
 
     logger.info(`req year : ${year}`);
     logger.info(`req gubun : ${gubun}`);
+    logger.info(`req line : ${line}`);
     logger.info(`req chk : ${chk}`);
     logger.info(`req comments : ${comments}`);
     logger.info(`req procid : ${procid}`);
 
     // 저장 프로시저 호출
-    const data = await executeProcedure.callSaveplugidproc(year, gubun, chk, comments, procid);
+    const data = await executeProcedure.callSaveplugidproc(year, gubun, line, chk, comments, procid);
 
     logger.info(`req data : ${JSON.stringify(data, null, 2)}`);
 

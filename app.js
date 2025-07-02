@@ -169,6 +169,10 @@ const simulplannewtotalfinalRoutes = require('./src/routes/simulplannewtotalfina
 const simulprocnew1Routes = require('./src/routes/simulprocnew1.routes');
 const simulprocnew2Routes = require('./src/routes/simulprocnew2.routes');  
 
+// 신규 전력비
+const factoryloadaggregationresultRoutes = require('./src/routes/factoryloadaggregationresult.routes');  
+const elecnewrectifierRoutes = require('./src/routes/elecnewrectifier.routes'); 
+
 // ========= Backup target =========
 const backplugRoutes = require('./src/routes/backplug.routes');
 const backotherexpensestRoutes = require('./src/routes/backotherexpensest.routes');
@@ -394,6 +398,10 @@ app.use('/api/plantotalfinalmenual', plantotalfinalmenualRoutes); // 월별 실�
 app.use('/api/simulplannewtotalfinal', simulplannewtotalfinalRoutes); // 최종 계산 경로  
 app.use('/api/simulprocnew1', simulprocnew1Routes); // 전체 처리 경로
 app.use('/api/simulprocnew2', simulprocnew2Routes); // 전체 처리 경로
+
+// 신규 전력비
+app.use('/api/factoryloadaggregationresult', factoryloadaggregationresultRoutes); // 전해전류계획
+app.use('/api/elecnewrectifier', elecnewrectifierRoutes); // 정류기  
 
 // ========= Backup target =========
 app.use('/api/backplug', backplugRoutes); // plug 정보 경로

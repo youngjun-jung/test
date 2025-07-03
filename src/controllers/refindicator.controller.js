@@ -60,6 +60,31 @@ exports.getRefindicatorchk = async (req, res) => {
                 , (SELECT SUM(DECODE(MONTH, 11, OPERATION_DAYS_6, 0)) FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid) DAY_11
                 , (SELECT SUM(DECODE(MONTH, 12, OPERATION_DAYS_6, 0)) FROM PLAN_CALENDAR WHERE YEAR = A.YEAR AND PROCID = :procid) DAY_12
                 , (SELECT TYPE_GUBUN FROM PLAN_TYPE_GUBUN_CODE WHERE YEAR = A.YEAR AND USE_YN = 'Y' AND ROWNUM = 1) TYPE_GUBUN
+                , COALESCE(
+                    (
+                        SELECT
+                            CASE
+                                -- 조건 C: 'PERC001', 'PERC002', 'PERC003'의 XSUM이 모두 0보다 큰 경우
+                                WHEN MAX(CASE WHEN SCODE = 'PERC001' AND XSUM > 0 THEN 1 ELSE 0 END) = 1
+                                 AND MAX(CASE WHEN SCODE = 'PERC002' AND XSUM > 0 THEN 1 ELSE 0 END) = 1
+                                 AND MAX(CASE WHEN SCODE = 'PERC003' AND XSUM > 0 THEN 1 ELSE 0 END) = 1
+                                THEN 'C'
+                                -- 조건 B: 'PERC001', 'PERC002'의 XSUM이 0보다 큰 경우
+                                WHEN MAX(CASE WHEN SCODE = 'PERC001' AND XSUM > 0 THEN 1 ELSE 0 END) = 1
+                                 AND MAX(CASE WHEN SCODE = 'PERC002' AND XSUM > 0 THEN 1 ELSE 0 END) = 1
+                                THEN 'B'
+                                -- 조건 A: 'PERC001'의 XSUM이 0보다 큰 경우
+                                WHEN MAX(CASE WHEN SCODE = 'PERC001' AND XSUM > 0 THEN 1 ELSE 0 END) = 1
+                                THEN 'A'
+                                ELSE NULL
+                            END
+                        FROM PLAN_ELEC_RECTIFIER_DTL
+                        WHERE YEAR = A.YEAR
+                          AND PROCID = :procid
+                          AND GUBUN = '0' -- 생산량
+                    ), 
+                    'X'
+                ) AS LINETYPE                
                   FROM PLAN_REF_INDICATOR A
                   WHERE YEAR = :year
                   AND USE_YN = 'Y'

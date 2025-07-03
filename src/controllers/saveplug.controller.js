@@ -8,27 +8,32 @@ exports.getSaveplugchk = async (req, res) => {
   // 요청 본문에서 JSON 데이터 추출
   const receivedData = req.query;
 
+  const year = receivedData.year;
   const plugid = receivedData.plugid;
   const procid = receivedData.procid;
   const gubun = receivedData.gubun;
+  const line = receivedData.line;
   const sale_yn = receivedData.sale_yn;
 
+  console.log("year: ", year);
   console.log("plugid: ", plugid);
   console.log("procid: ", procid);
   console.log("gubun: ", gubun);
+  console.log("line: ", line);
   console.log("sale_yn: ", sale_yn);
 
   const query = `SELECT PLUG_ID, COMMENTS, TIMEMARK, PROCID, USE_YN, DELETETIME, DELETEID, GUBUN
-                , (SELECT TO_CHAR(ROUND(SUM(XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR), 2)) FROM PLAN_PLUG_DTL WHERE PLUG_ID = A.PLUG_ID AND SCODE = 'PPP0211') CNT
+                , (SELECT TO_CHAR(ROUND(SUM(XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR), 2)) FROM PLAN_PLUG_DTL WHERE YEAR = :year AND PLUG_ID = A.PLUG_ID AND SCODE = 'PPP0211') CNT
                 FROM PLAN_PLUG A
                 WHERE PLUG_ID LIKE '%' || :plugid || '%'
                 AND GUBUN = :gubun
+                AND LINETYPE = :line
                 AND PROCID LIKE '%' 
                 AND SALE_YN = :sale_yn
                 AND USE_YN = 'Y'
                 ORDER BY IDX DESC`;                 
 
-  const binds = {plugid: plugid, gubun: gubun, sale_yn: sale_yn};
+  const binds = {year: year, plugid: plugid, gubun: gubun, line: line, sale_yn: sale_yn};
 
   try {
     const data = await executeQuery(query, binds); // 데이터 조회

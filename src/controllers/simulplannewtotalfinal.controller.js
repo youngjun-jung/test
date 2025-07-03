@@ -5,7 +5,7 @@ const logger = require('../../logger');
   // 비즈니스 로직
 exports.getSimulplannewtotalfinalchk = async (req, res) => {
 
-  // 요청 본문에서 JSON 데이터 추출
+  // 요청 본문에서 JSON 데이터 추출1
   const receivedData = req.query;
 
   const year = receivedData.year;
@@ -58,7 +58,7 @@ exports.getSimulplannewtotalfinalchk = async (req, res) => {
   }
 
   query = `SELECT YEAR, SCODE, XA, XB, XC
-          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '황산생산' AND PROCID = :procid) - B.VALUE S_CNT
+          , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '황산생산' AND PROCID = :procid) S_CNT
           , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN +XP + XQ + XR FROM PLUG WHERE YEAR = A.YEAR AND XB LIKE '아연괴생산' AND PROCID = :procid) ZINC_CNT
           , (SELECT VALUE FROM PLAN_TRANSFER_ZINC WHERE YEAR = A.YEAR AND SCODE = 'PTZ001' AND PROCID = :procid) ZINC_TRANS
           , (SELECT XD + XE + XF + XH + XI + XJ + XL + XM + XN + XP + XQ + XR FROM PLUG WHERE XB = '정광' AND YEAR = A.YEAR AND PROCID = :procid) ZINC_CNT2
@@ -77,7 +77,6 @@ exports.getSimulplannewtotalfinalchk = async (req, res) => {
           , (SELECT VALUE FROM PLANNING_MONTHLY_INVENTORY_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PNMIM0301') S_OUT 
           , (SELECT M_VALUE FROM PLANNING_MONTHLY_INVENTORY_MANUAL WHERE YEAR = A.YEAR AND SCODE = 'PNMIM0301') S_M 
           FROM PLAN_ELEC_RECTIFIER_DTL A
-          , (SELECT SUM(MONTH_01 + MONTH_02 + MONTH_03 + MONTH_04 + MONTH_05 + MONTH_06 + MONTH_07 + MONTH_08 + MONTH_09 + MONTH_10 + MONTH_11 + MONTH_12) AS VALUE FROM PLAN_SELF_CONSUMPTION WHERE YEAR = :year  AND PROCID = :procid AND MCODE = 'SC014') B
           WHERE YEAR = :year
           AND GUBUN = '0'
           AND PROCID = :procid

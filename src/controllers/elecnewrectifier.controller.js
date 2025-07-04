@@ -8,25 +8,131 @@ exports.getElecnewrectifierchk = async (req, res) => {
   const receivedData = req.query;
 
   const year = receivedData.year;
-  const gubun = receivedData.gubun;
   const procid = receivedData.procid;
 
   console.log("year: ", year);
-  console.log("gubun: ", gubun);
   console.log("procid: ", procid);
 
-  query = `SELECT X.YEAR, X.MNAME, X.SNAME
-          , NVL(MONTH_01, 0) MONTH_01, NVL(MONTH_02, 0) MONTH_02, NVL(MONTH_03, 0) MONTH_03, NVL(MONTH_04, 0) MONTH_04
-          , NVL(MONTH_05, 0) MONTH_05, NVL(MONTH_06, 0) MONTH_06, NVL(MONTH_07, 0) MONTH_07, NVL(MONTH_08, 0) MONTH_08
-          , NVL(MONTH_09, 0) MONTH_09, NVL(MONTH_10, 0) MONTH_10, NVL(MONTH_11, 0) MONTH_11, NVL(MONTH_12, 0) MONTH_12
-          , NVL(MONTH_0, 0) MONTH_0, NVL(MONTH_1, 0) MONTH_1, NVL(MONTH_2, 0) MONTH_2, NVL(MONTH_3, 0) MONTH_3, NVL(MONTH_4, 0) MONTH_4
-          FROM PLAN_MONTHLY_PRODUCT_COST_CODE X, PLAN_MONTHLY_PRODUCT_COST A
-          WHERE X.SCODE = A.SCODE(+)
-          AND X.YEAR = A.YEAR(+)
-          AND X.YEAR = :year
-          AND X.USE_YN = 'Y'
-          AND A.PROCID(+) = :procid
-          ORDER BY X.IDX`; 
+  query = `SELECT :year YEAR, MONTH
+          , SUBSTR(SCODE, 8, 1) SCODE
+          , SUM(DECODE(SCODE, 'PNERC90101', VALUE, 0)) TOT_1
+          , SUM(DECODE(SCODE, 'PNERC90102', VALUE, 0)) TOT_2
+          , SUM(DECODE(SCODE, 'PNERC90103', VALUE, 0)) TOT_3
+          , SUM(DECODE(SCODE, 'PNERC10101', VALUE, 0)) NT_1
+          , SUM(DECODE(SCODE, 'PNERC10102', VALUE, 0)) NT_2
+          , SUM(DECODE(SCODE, 'PNERC10103', VALUE, 0)) NT_3
+          , DECODE(SUM(DECODE(SCODE, 'PNERC90103', VALUE, 0)), 0, 0, SUM(DECODE(SCODE, 'PNERC10103', VALUE, 0)) / SUM(DECODE(SCODE, 'PNERC90103', VALUE, 0))) NT_RATE
+          , SUM(DECODE(SCODE, 'PNERC20101', VALUE, 0)) DT_1
+          , SUM(DECODE(SCODE, 'PNERC20102', VALUE, 0)) DT_2
+          , SUM(DECODE(SCODE, 'PNERC20103', VALUE, 0)) DT_3
+          , SUM(DECODE(SCODE, 'PNERC30101', VALUE, 0)) PT_1
+          , SUM(DECODE(SCODE, 'PNERC30102', VALUE, 0)) PT_2
+          , SUM(DECODE(SCODE, 'PNERC30103', VALUE, 0)) PT_3
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG
+            WHERE YEAR = :year
+            AND SCODE = 'PNERPC002'
+            AND PROCID = :procid
+            ) ONE_F_RATE   
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG_MANUAL
+            WHERE YEAR = :year
+            AND SCODE = 'PERPM001'
+            AND PROCID = :procid
+            ) ONE_F
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG_MANUAL
+            WHERE YEAR = :year
+            AND SCODE = 'PERPM002'
+            AND PROCID = :procid
+            ) ONE_RATE   
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG
+            WHERE YEAR = :year
+            AND SCODE = 'PNERPC001'
+            AND PROCID = :procid
+            ) ONE_RATE_T                          
+          FROM (
+                SELECT '01' MONTH, SCODE, MONTH_01 VALUE FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '02' MONTH, SCODE, MONTH_02 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '03' MONTH, SCODE, MONTH_03 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '04' MONTH, SCODE, MONTH_04 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '05' MONTH, SCODE, MONTH_05 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '06' MONTH, SCODE, MONTH_06 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '07' MONTH, SCODE, MONTH_07 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '08' MONTH, SCODE, MONTH_08 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '09' MONTH, SCODE, MONTH_09 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '10' MONTH, SCODE, MONTH_10 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '11' MONTH, SCODE, MONTH_11 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '12' MONTH, SCODE, MONTH_12 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                ) A
+          WHERE SUBSTR(SCODE, 8, 1) = '1'     
+          GROUP BY MONTH, SUBSTR(SCODE, 8, 1)
+          UNION ALL
+          SELECT :year YEAR, MONTH
+          , SUBSTR(SCODE, 8, 1) SCODE
+          , SUM(DECODE(SCODE, 'PNERC90201', VALUE, 0)) TOT_1
+          , SUM(DECODE(SCODE, 'PNERC90202', VALUE, 0)) TOT_2
+          , SUM(DECODE(SCODE, 'PNERC90203', VALUE, 0)) TOT_3
+          , SUM(DECODE(SCODE, 'PNERC10201', VALUE, 0)) NT_1
+          , SUM(DECODE(SCODE, 'PNERC10202', VALUE, 0)) NT_2
+          , SUM(DECODE(SCODE, 'PNERC10203', VALUE, 0)) NT_3
+          , DECODE(SUM(DECODE(SCODE, 'PNERC90203', VALUE, 0)), 0, 0, SUM(DECODE(SCODE, 'PNERC10203', VALUE, 0)) / SUM(DECODE(SCODE, 'PNERC90203', VALUE, 0))) NT_RATE
+          , SUM(DECODE(SCODE, 'PNERC20201', VALUE, 0)) DT_1
+          , SUM(DECODE(SCODE, 'PNERC20202', VALUE, 0)) DT_2
+          , SUM(DECODE(SCODE, 'PNERC20203', VALUE, 0)) DT_3
+          , SUM(DECODE(SCODE, 'PNERC30201', VALUE, 0)) PT_1
+          , SUM(DECODE(SCODE, 'PNERC30202', VALUE, 0)) PT_2
+          , SUM(DECODE(SCODE, 'PNERC30203', VALUE, 0)) PT_3
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG
+            WHERE YEAR = :year
+            AND SCODE = 'PNERPC102'
+            AND PROCID = :procid
+            ) ONE_F_RATE   
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG_MANUAL
+            WHERE YEAR = :year
+            AND SCODE = 'PERPM101'
+            AND PROCID = :procid
+            ) ONE_F
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG_MANUAL
+            WHERE YEAR = :year
+            AND SCODE = 'PERPM102'
+            AND PROCID = :procid
+            ) ONE_RATE   
+          , (SELECT DECODE(A.MONTH, '01', MONTH_01, '02', MONTH_02, '03', MONTH_03, '04', MONTH_04, '05', MONTH_05, '06', MONTH_06
+                                  , '07', MONTH_07, '08', MONTH_08, '09', MONTH_09, '10', MONTH_10, '11', MONTH_11, '12', MONTH_12, 0)
+            FROM PLAN_NEW_ELEC_RECTIFIER_PLUG
+            WHERE YEAR = :year
+            AND SCODE = 'PNERPC101'
+            AND PROCID = :procid
+            ) ONE_RATE_T                          
+          FROM (
+                SELECT '01' MONTH, SCODE, MONTH_01 VALUE FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '02' MONTH, SCODE, MONTH_02 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '03' MONTH, SCODE, MONTH_03 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '04' MONTH, SCODE, MONTH_04 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '05' MONTH, SCODE, MONTH_05 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '06' MONTH, SCODE, MONTH_06 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '07' MONTH, SCODE, MONTH_07 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '08' MONTH, SCODE, MONTH_08 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '09' MONTH, SCODE, MONTH_09 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '10' MONTH, SCODE, MONTH_10 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '11' MONTH, SCODE, MONTH_11 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                UNION ALL SELECT '12' MONTH, SCODE, MONTH_12 FROM PLAN_NEW_ELEC_RECTIFIER WHERE YEAR = :year AND PROCID = :procid 
+                ) A
+          WHERE SUBSTR(SCODE, 8, 1) = '2'     
+          GROUP BY MONTH, SUBSTR(SCODE, 8, 1)
+          ORDER BY MONTH, SCODE`; 
 
   binds = {year: year, procid: procid};                       
   

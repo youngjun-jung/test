@@ -23,8 +23,6 @@ const updateFileListRoutes = require('./src/routes/updatefilelist.routes');
 const currentVersionRoutes = require('./src/routes/currentversion.routes');
 const tableinfoRoutes = require('./src/routes/tableinfo.routes.js');
 const reportsimulscenarioRoutes = require('./src/routes/reportsimulscenario.routes');
-const reportsimulproclistRoutes = require('./src/routes/reportsimulproclist.routes');
-
 
 const exchangeRoutes = require('./src/routes/exchange.routes');
 const lmeRoutes = require('./src/routes/lme.routes');
@@ -201,6 +199,8 @@ const backelecdivisioncostRoutes = require('./src/routes/backelecdivisioncost.ro
 const backelecdivisionfinalRoutes = require('./src/routes/backelecdivisionfinal.routes');
 const backelecrectifierRoutes = require('./src/routes/backelecrectifier.routes');
 const backelecrectifierplanRoutes = require('./src/routes/backelecrectifierplan.routes');
+
+const backfactoryloadaggregationresultRoutes = require('./src/routes/backfactoryloadaggregationresult.routes');
 // ================================= 
 
 const app = express();
@@ -236,8 +236,7 @@ app.use('/api/program/version/current', currentVersionRoutes); // 버전 체크
 app.use('/api/program/version/updatelist', updateFileListRoutes); // 업데이트 파일 체크
 app.use('/api/program/tableinfo', tableinfoRoutes); // 테이블 정보 경로
 
-app.use('/api/report/simul/scenario', reportsimulscenarioRoutes); // 시뮬레이션 시나리오 조회
-app.use('/api/report/simul/proclist', reportsimulproclistRoutes); // 시뮬레이션 시나리오 설정
+app.use('/api/report/simul/scenario', reportsimulscenarioRoutes); // 시뮬레이션 시나리오 설정
 
     // 실적 자료
 app.use('/api/sale', saleRoutes); // 판매량 정보 경로
@@ -432,6 +431,7 @@ app.use('/api/backelecdivisioncost', backelecdivisioncostRoutes); // 전력료 �
 app.use('/api/backelecdivisionfinal', backelecdivisionfinalRoutes); // 전력료 최종계산 경로
 app.use('/api/backelecrectifier', backelecrectifierRoutes); // 정류기 계산 경로
 app.use('/api/backelecrectifierplan', backelecrectifierplanRoutes); // 정류기 요금차감 경로
+
 // ================================= 
 
 module.exports = app;
